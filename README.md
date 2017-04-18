@@ -75,3 +75,7 @@ I used [RStudio](http://www.rstudio.com/products/rstudio/) on MacOS and Ubuntu 1
 Adam H Sparks, Associate Professor, Centre for Crop Health University of Southern Queensland Toowoomba, Queensland 4350
 
 (+61) (7) 4831 1948 e. <adam.sparks@usq.edu.au> <https://staffprofile.usq.edu.au/Profile/Adam-Sparks>
+
+### Credits
+
+This research compendium was based on <https://github.com/benmarwick/researchcompendium> but not forked from because it was already under development when I found Ben's.
