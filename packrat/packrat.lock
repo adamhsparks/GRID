@@ -34,13 +34,6 @@ Hash: b6ca0a80f543e164e7f7a3f8d7f2f856
 Requires: R.utils, curl, data.table, dplyr, fields, plyr, purrr, readr,
     rgdal, sp
 
-Package: Hmisc
-Source: CRAN
-Version: 4.0-2
-Hash: 4d3704cb29c9fd363837f2db54b1eb57
-Requires: Formula, acepack, base64enc, data.table, ggplot2, gridExtra,
-    gtable, htmlTable, htmltools, latticeExtra, viridis
-
 Package: R.methodsS3
 Source: CRAN
 Version: 1.7.1
@@ -68,12 +61,6 @@ Source: CRAN
 Version: 1.1-2
 Hash: c0d56cd15034f395874c870141870c25
 
-Package: RSAGA
-Source: CRAN
-Version: 0.94-5
-Hash: f71099a75f439d5380025384d0fe12c3
-Requires: gstat, plyr, shapefiles
-
 Package: Rcpp
 Source: CRAN
 Version: 0.12.10
@@ -93,13 +80,6 @@ Package: acepack
 Source: CRAN
 Version: 1.4.1
 Hash: 5ed3b04bc1fa1a934188fc6022d3ba7c
-
-Package: aqp
-Source: CRAN
-Version: 1.10
-Hash: bf1ad96d03e9591434d8149971513a0d
-Requires: Hmisc, RColorBrewer, digest, plotrix, plyr, reshape, scales,
-    sp, stringr
 
 Package: ash
 Source: CRAN
@@ -201,12 +181,6 @@ Source: CRAN
 Version: 0.6.12
 Hash: e53fb8c58673df868183697e39a6a4d6
 
-Package: dismo
-Source: CRAN
-Version: 1.1-4
-Hash: 0d86f3c4674528fb475c104b458a0b31
-Requires: raster, sp
-
 Package: doParallel
 Source: CRAN
 Version: 1.0.10
@@ -258,13 +232,6 @@ Source: CRAN
 Version: 1.4
 Hash: b2a47a2b91737978cf50ba95825a9cd1
 
-Package: ggalt
-Source: CRAN
-Version: 0.4.0
-Hash: 0b7de0aaa7396d096fc51a3a14d4cc50
-Requires: RColorBrewer, ash, dplyr, extrafont, ggplot2, gtable, maps,
-    plotly, proj4, scales, tibble
-
 Package: ggplot2
 Source: CRAN
 Version: 2.2.1
@@ -276,12 +243,6 @@ Source: CRAN
 Version: 2.2.1
 Hash: 8f54b57d4b0598ed5b27e0eafe86a670
 Requires: gtable
-
-Package: gstat
-Source: CRAN
-Version: 1.1-5
-Hash: 0ef4156b7630806ffba9aef1d1fb4b40
-Requires: FNN, sp, spacetime, zoo
 
 Package: gtable
 Source: CRAN
@@ -303,23 +264,11 @@ Source: CRAN
 Version: 0.3
 Hash: 3fca8a1c97e6cfb297fe3f4690f82c58
 
-Package: htmlTable
-Source: CRAN
-Version: 1.9
-Hash: b2a584fec4ff8c6206b01a55bed18e55
-Requires: checkmate, htmlwidgets, knitr, magrittr, stringr
-
 Package: htmltools
 Source: CRAN
 Version: 0.3.5
 Hash: 3411e0671a44177109dc1a9e4a6bd2a4
 Requires: Rcpp, digest
-
-Package: htmlwidgets
-Source: CRAN
-Version: 0.8
-Hash: e7a3c80acddc2412f96d616949e40bb8
-Requires: htmltools, jsonlite, yaml
 
 Package: httr
 Source: CRAN
@@ -364,12 +313,6 @@ Source: CRAN
 Version: 0.2.0
 Hash: 3d6e7608e65bbf5cb170dab1e3c9ed8b
 
-Package: lubridate
-Source: CRAN
-Version: 1.6.0
-Hash: b90f4cbefe0b3c545dd68b22c66a8a12
-Requires: stringr
-
 Package: magrittr
 Source: CRAN
 Version: 1.5
@@ -412,22 +355,6 @@ Source: CRAN
 Version: 0.4-11
 Hash: 7fb7f9a871c381ec3a5b5799b4453faf
 
-Package: plotKML
-Source: CRAN
-Version: 0.5-6
-Hash: c779ce2a8e4d57fa50d2bf8996bca9a6
-Requires: RColorBrewer, RSAGA, XML, aqp, classInt, colorRamps,
-    colorspace, dismo, gstat, pixmap, plotrix, plyr, raster, rgdal,
-    scales, sp, spacetime, stringr, zoo
-
-Package: plotly
-Source: CRAN
-Version: 4.5.6
-Hash: f55e6b78f2701911b98cb23d7e3d2bcb
-Requires: base64enc, digest, dplyr, ggplot2, hexbin, htmlwidgets, httr,
-    jsonlite, lazyeval, magrittr, purrr, scales, tibble, tidyr,
-    viridisLite
-
 Package: plotrix
 Source: CRAN
 Version: 3.6-4
@@ -467,12 +394,6 @@ Version: 1.1.0
 Hash: 3506086f41d307f5a78ee64e010536fa
 Requires: BH, R6, Rcpp, hms, tibble
 
-Package: reshape
-Source: CRAN
-Version: 0.8.6
-Hash: 1f1ab97e8341bf4dcf16d60d8434b530
-Requires: plyr
-
 Package: reshape2
 Source: CRAN
 Version: 1.4.2
@@ -489,12 +410,6 @@ Package: rgdal
 Source: CRAN
 Version: 1.2-6
 Hash: 1ab4a3758d2ad5c8317fcf87f34c6868
-Requires: sp
-
-Package: rgeos
-Source: CRAN
-Version: 0.3-23
-Hash: 7f7ce992b079e8de185c20dfe1ae71c8
 Requires: sp
 
 Package: rmarkdown
@@ -533,12 +448,6 @@ Source: CRAN
 Version: 1.2-4
 Hash: 4ffcf86fffee89e7b859f760528dd545
 
-Package: spacetime
-Source: CRAN
-Version: 1.2-0
-Hash: b5ea7a13b32f07b34e29e07c5928e82a
-Requires: intervals, sp, xts, zoo
-
 Package: spam
 Source: CRAN
 Version: 1.4-0
@@ -567,12 +476,6 @@ Version: 1.3.0
 Hash: 8de64ed3345488e66b676875ed1ebdce
 Requires: Rcpp, lazyeval
 
-Package: tidyr
-Source: CRAN
-Version: 0.6.1
-Hash: 18d0eb5251ee17447cb84df1a7f010b2
-Requires: Rcpp, dplyr, lazyeval, magrittr, stringi, tibble
-
 Package: viridis
 Source: CRAN
 Version: 0.4.0
@@ -594,12 +497,6 @@ Source: CRAN
 Version: 1.1.1
 Hash: 19ad10ef8e73cb435eb49f9d5d259980
 Requires: BH, Rcpp
-
-Package: xts
-Source: CRAN
-Version: 0.9-7
-Hash: fb3f81d7a2fa2323879b6b49722ddc5e
-Requires: zoo
 
 Package: yaml
 Source: CRAN
