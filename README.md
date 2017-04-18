@@ -10,7 +10,7 @@ Research compendium for a report on interpolating GSOD weather data
 
 <http://dx.doi.org/xxxxxxx>
 
-The files at the URL above will generate the results as found in the publication. The files hosted at github.com/adamhsparks/GRID are the development versions and may have changed since the report was published
+The files at the URL above will generate the results as found in the publication. The files hosted at <https://github.com/adamhsparks/GRID> are the development versions and may have changed since the report was published
 
 ### Authors of this repository:
 
