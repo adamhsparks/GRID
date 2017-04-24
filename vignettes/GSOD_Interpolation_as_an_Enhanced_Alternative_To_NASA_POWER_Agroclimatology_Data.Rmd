@@ -43,7 +43,7 @@ connection and processor speed to download and clean the data. The resulting
 comma separated values (CSV) file is roughly 465mb.
 
 ```{r get_GSOD, eval=TRUE, echo=TRUE, message=FALSE}
-GSOD <- get_GSOD(years = 2010:2011, max_missing = 5, agroclimatology = TRUE)
+GSOD <- GSODR::get_GSOD(years = 2010:2011, max_missing = 5, agroclimatology = TRUE)
 ```
 
 Inspect the data frame of the GSOD data and plot the station locations included in the data.
