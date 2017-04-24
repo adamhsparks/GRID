@@ -350,8 +350,8 @@ Hash: 4a0a1b1764bfe2c41c6fc21790408caf
 
 Package: markdown
 Source: CRAN
-Version: 0.7.7
-Hash: fea2343a1119d61b0cc5c0a950d103a3
+Version: 0.8
+Hash: 045d7c594d503b41f1c28946d076c8aa
 Requires: mime
 
 Package: mime
