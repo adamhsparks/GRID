@@ -127,6 +127,7 @@ Requires: backports
 Package: class
 Source: CRAN
 Version: 7.3-14
+Hash: 98330808284e70f0bce1f8ff419d4032
 Requires: MASS
 
 Package: classInt
@@ -201,7 +202,7 @@ Requires: foreach, iterators
 Package: dplyr
 Source: CRAN
 Version: 0.5.0
-Hash: d4584cf3b823cb2522fe1f3e9b35208a
+Hash: 673660fd0b947477dab1044abc8b2c95
 Requires: BH, DBI, R6, Rcpp, assertthat, lazyeval, magrittr, tibble
 
 Package: e1071
@@ -242,6 +243,7 @@ Requires: codetools, iterators
 Package: foreign
 Source: CRAN
 Version: 0.8-67
+Hash: 34615798e8a5c7bb2f69f4efc3e17b71
 
 Package: formatR
 Source: CRAN
@@ -285,7 +287,7 @@ Hash: 3fca8a1c97e6cfb297fe3f4690f82c58
 Package: htmltools
 Source: CRAN
 Version: 0.3.5
-Hash: 8ce2a95f7a04678d93f736cddf5bcd78
+Hash: 3411e0671a44177109dc1a9e4a6bd2a4
 Requires: Rcpp, digest
 
 Package: httr
@@ -386,7 +388,7 @@ Hash: 7bd0b418715ed4b889f740748a3d0752
 Package: plyr
 Source: CRAN
 Version: 1.8.4
-Hash: d74ad9db0818b649dfba98e953a6063a
+Hash: c9ddbdcfd74ff964e3e7d0b692a8dd70
 Requires: Rcpp
 
 Package: praise
@@ -402,25 +404,25 @@ Hash: 0582c4cb021176fb212092068803f4b5
 Package: purrr
 Source: CRAN
 Version: 0.2.2
-Hash: 7a118f8e6966883805b2a04d6e3e68bf
+Hash: 9f218b40dee7fe7f942039f974bd98b8
 Requires: BH, Rcpp, dplyr, lazyeval, magrittr
 
 Package: raster
 Source: CRAN
 Version: 2.5-8
-Hash: 17f4a220a1ba79105a83dc6f34781163
+Hash: f50bf34a11c4b10fdf1f1346dfd6f353
 Requires: Rcpp, sp
 
 Package: readr
 Source: CRAN
 Version: 1.1.0
-Hash: f9543ecfa47ad8ddd43d3d6e3e364ca6
+Hash: 3506086f41d307f5a78ee64e010536fa
 Requires: BH, R6, Rcpp, hms, tibble
 
 Package: reshape2
 Source: CRAN
 Version: 1.4.2
-Hash: bcc75fcb5b4f29a7cb9861994bda9717
+Hash: 790c06c11c84041b814139d731a872b9
 Requires: Rcpp, plyr, stringr
 
 Package: rex
@@ -432,7 +434,7 @@ Requires: lazyeval, magrittr
 Package: rgdal
 Source: CRAN
 Version: 1.2-6
-Hash: 9fde28d58ec6757c1baa5b5d99563209
+Hash: 1ab4a3758d2ad5c8317fcf87f34c6868
 Requires: sp
 
 Package: rmarkdown
@@ -445,7 +447,7 @@ Requires: base64enc, caTools, evaluate, htmltools, jsonlite, knitr,
 Package: roxygen2
 Source: CRAN
 Version: 6.0.1
-Hash: e04bdd312866e3d40223f870b40bf3bb
+Hash: 7a75b821e00443c60a239fa4070b4117
 Requires: R6, Rcpp, brew, commonmark, desc, digest, stringi, stringr,
     xml2
 
@@ -458,7 +460,7 @@ Requires: backports
 Package: scales
 Source: CRAN
 Version: 0.4.1
-Hash: 21f4f4c10fe7cc9cc51997907f000446
+Hash: 2d008b6e3fb9938255669ddf3c85f1f3
 Requires: RColorBrewer, Rcpp, dichromat, labeling, munsell, plyr
 
 Package: shapefiles
@@ -498,7 +500,7 @@ Requires: R6, crayon, digest, magrittr, praise
 Package: tibble
 Source: CRAN
 Version: 1.3.0
-Hash: 8dc3b76661cb3a3a9f61766f80cac7ea
+Hash: 8de64ed3345488e66b676875ed1ebdce
 Requires: Rcpp, lazyeval
 
 Package: viridis
@@ -520,7 +522,7 @@ Hash: 774eb7be9087cdc24b53b74e5359cfac
 Package: xml2
 Source: CRAN
 Version: 1.1.1
-Hash: 3d0b6841737e216099819b60c3be778d
+Hash: 19ad10ef8e73cb435eb49f9d5d259980
 Requires: BH, Rcpp
 
 Package: yaml
