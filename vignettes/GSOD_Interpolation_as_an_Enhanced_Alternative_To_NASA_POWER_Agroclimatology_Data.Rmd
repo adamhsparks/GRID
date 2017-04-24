@@ -42,18 +42,18 @@ only. This process will take several minutes or hours depending on Internet
 connection and processor speed to download and clean the data. The resulting
 comma separated values (CSV) file is roughly 465mb.
 
-```{r get_GSOD, eval=TRUE, echo=TRUE, message=FALSE}
+```{r get_GSOD, eval=TRUE, echo=TRUE, message=FALSE, eval=FALSE}
 GSOD <- GSODR::get_GSOD(years = 2010:2011, max_missing = 5, agroclimatology = TRUE)
 ```
 
 Inspect the data frame of the GSOD data and plot the station locations included in the data.
 
-```{r import GSOD, eval=TRUE, echo=TRUE, message=FALSE}
+```{r import GSOD, eval=TRUE, echo=TRUE, message=FALSE, eval=FALSE}
 summary(GSOD)
 
 ```
 
-```{r plot_stations, eval=TRUE, echo=TRUE, fig.cap="Locations of station data in dataset", fig.fullwidth = TRUE, dev.args=list(pointsize=6)}
+```{r plot_stations, eval=TRUE, echo=TRUE, fig.cap="Locations of station data in dataset", fig.fullwidth = TRUE, dev.args=list(pointsize=6), eval=FALSE}
 # plot station locations
 ggplot(data = GSOD, aes(y = LAT, x = LON)) +
   geom_point() +
@@ -72,7 +72,7 @@ the interpolation as an elevation covariate. Set data type to INT2S since the
 NASA/POWER. Since the DEM covers more area than the agroclimatology data from
 the `GSODR` package, crop the DEM to match the extent before plotting.
 
-```{r Alt, echo=TRUE, fig.cap="Elevation plot of 1deg SRTM data", fig.fullwidth = TRUE, dev.args=list(pointsize=6), cache=TRUE}
+```{r Alt, echo=TRUE, fig.cap="Elevation plot of 1deg SRTM data", fig.fullwidth = TRUE, dev.args=list(pointsize=6), eval=FALSE}
 # set up workspace
 tf.zip <- tempfile()
 
@@ -130,7 +130,7 @@ dataset. It is suggested to use a computer dedicated just to this task, while it
 will run on a fairly modest desktop, the computer may become unresponsive while
 performing this operation.
 
-```{r tps_interpolation, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, cache=FALSE}
+```{r tps_interpolation, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, eval=FALSE}
 cl <- makeCluster(detectCores() - 2)
 registerDoParallel(cl)
 YEARMODA <- 20100101 # set this to c(2010:2011) to run all days, all years. Only one day here as example

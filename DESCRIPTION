@@ -12,12 +12,13 @@ Description:
 Depends:
     R (>= 3.2.0)
 License: MIT + file LICENSE
-Suggests:
+Imports:
     dplyr,
     fields,
     GSODR,
     packrat,
-    raster,
+    raster
+Suggests:
     covr,
     foreach,
     doParallel,
