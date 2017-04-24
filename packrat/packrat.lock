@@ -1,6 +1,6 @@
 PackratFormat: 1.4
 PackratVersion: 0.4.8.1
-RVersion: 3.3.3
+RVersion: 3.4.0
 Repos: BioCsoft=http://bioconductor.org/packages/2.13/bioc,
     BioCann=http://bioconductor.org/packages/2.13/data/annotation,
     BioCexp=http://bioconductor.org/packages/2.13/data/experiment,
