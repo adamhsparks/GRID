@@ -1,6 +1,12 @@
 ^packrat/
-^\.Rprofile$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^docs$
+^data-raw$
+^appveyor\.yml$
 ^\.travis\.yml$
+^codecov\.yml$
+^docs$
+^CONDUCT\.md$
+^LICENSE\.md$
+^README\.Rmd$
+^README-.*\.png$
