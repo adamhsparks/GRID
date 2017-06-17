@@ -11,6 +11,8 @@ vignette: >
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(checkpoint)
+checkpoint("2017-06-15", use.knitr = TRUE)
 ```
 
 # Introduction
