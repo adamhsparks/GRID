@@ -16,6 +16,7 @@ checkpoint("2017-06-15", use.knitr = TRUE)
 ```
 
 # Introduction
+
 Global Surface Summary of the Day - GSOD data,
 [(link)](https://data.noaa.gov/dataset/global-surface-summary-of-the-day-gsod)
 is free, ground-based (or bouy) weather station data with global
@@ -24,6 +25,7 @@ alternative to NASA/POWER for agroclimatology work. This document describes how
 to reproduce these data using freely available data, software and methodologies.
 
 # Install and Load the Necessary R Packages
+
 ```{r InstallPackages, echo=TRUE, message=FALSE, eval=FALSE}
 library(GSODR)
 library(doParallel)
@@ -135,7 +137,7 @@ performing this operation.
 ```{r tps_interpolation, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, eval=FALSE}
 cl <- makeCluster(detectCores() - 2)
 registerDoParallel(cl)
-YEARMODA <- 20100101 # set this to c(2010:2011) to run all days, all years. Only one day here as example
+YEARMODA <- 20100101 # set this to c(2010:2011) to run all days, two years.
 itx <- iter(YEARMODA)
 ity <- iter(c("TEMP", "MIN", "MAX"))
 i <- NULL

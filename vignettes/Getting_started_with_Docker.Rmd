@@ -1,0 +1,47 @@
+---
+title: "Getting started with Docker"
+author: "Adam H Sparks"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with Docker}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Instructions for macOS and Windows
+
+1. Download DockerToolbox
+
+2. Follow installation instructions presented by installer
+
+3. For macOS, open a terminal window and type
+```
+$ $ docker-machine start # Start virtual machine for docker
+$ docker-machine env  # It's helps to get environment variables
+$ eval "$(docker-machine env default)" # Set environment variables
+```
+
+## Running RStudio server
+
+See <https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image> for
+instructions on running RStudio server from Docker
+
+> From the docker window, run:
+> `sudo docker run -d -p 8787:8787 rocker/rstudio`
+That will take a while to download the image the first time you run it.
+Linux users might want to add their user to the docker group to avoid having to
+use sudo. To do so, just run `sudo usermod -a -G docker <username>`. You may
+need to login again to refresh your group membership. (Mac and Windows users do
+not need to use sudo.)
+Once the download is finished RStudio-Server will launch invisibly. To connect
+to it, open a browser and enter in the ip address noted above followed by
+`:8787`, e.g. http://192.168.59.103:8787, and you should be greeted by the
+RStudio welcome screen. Log in using:
+
+> - username: rstudio
+
+> - password: rstudio
+
+> and you should be able to work with RStudio in your browser in much the same way
+as you would on your desktop.
