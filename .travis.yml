@@ -17,11 +17,11 @@ env:
     not_cran: false
     r_check_args: "--no-manual --as--cran"
 
-before_install:
-- sudo apt-get install -y libgdal-dev libproj-dev
-
 install:
  - mkdir $HOME/.checkpoint
+
+before_install:
+- sudo apt-get install -y libgdal-dev libproj-dev
 
 after_failure:
   - ./pkg-build.sh dump_logs
