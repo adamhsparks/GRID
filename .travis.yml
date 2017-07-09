@@ -17,6 +17,10 @@ env:
     not_cran: false
     r_check_args: "--no-manual --as--cran"
 
+r_binary_packages:
+ - knitr
+ - rmarkdown
+
 install:
  - mkdir $HOME/.checkpoint
 
