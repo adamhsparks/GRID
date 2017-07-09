@@ -16,6 +16,9 @@ env:
 before_install:
 - sudo apt-get install -y libgdal-dev libproj-dev
 
+install:
+ - mkdir $HOME/.checkpoint
+
 after_failure:
   - ./pkg-build.sh dump_logs
 
