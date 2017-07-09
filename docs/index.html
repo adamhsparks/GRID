@@ -29,10 +29,28 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="/index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="articles/index.html">Articles</a>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/Getting_started_with_Docker.html">Getting started with Docker</a>
+    </li>
+    <li>
+      <a href="articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GSOD Interpolation as an Improved Alternative To NASA POWER Agroclimatology Data</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -87,11 +105,9 @@
 <a href="#the-supplementary-files" class="anchor"></a>The supplementary files</h3>
 <p>The <code>inst/</code> directory contains:</p>
 <ul>
-<li>the manuscript as submitted (in MS Word format) and its Rmd source file (in the <code>paper/</code> directory)<br>
-</li>
-<li>supplementary information source files (in R markdown format) and executed versions<br>
-</li>
-<li>all the figures that are included in the paper (in the <code>figures/</code> directory)</li>
+<li><p>the manuscript as submitted (in MS Word format) and its Rmd source file (in the <code>paper/</code> directory)</p></li>
+<li><p>supplementary information source files (in R markdown format) and executed versions</p></li>
+<li><p>all the figures that are included in the paper (in the <code>figures/</code> directory)</p></li>
 </ul>
 </div>
 <div id="the-r-package" class="section level3">
@@ -101,21 +117,16 @@
 <p>To download the package source as you see it on GitHub, for offline browsing, use this line at the shell prompt (assuming you have Git installed on your computer):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">git clone https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>adamhsparks<span class="op">/</span>GRID.git</code></pre></div>
 <p>Once the download is complete, open the <code>GRID.Rproj</code> in RStudio to begin working with the package and compendium files.</p>
-<p>The package has a number of dependencies on other R packages, and programs outside of R. These are listed at the bottom of this README. Installing these can be time-consuming and complicated, so we’ve done two things to simpify access to the compendium. First is the <code>packrat/</code> directory, which contains the source code for all the packages we depend on. If all works well, these will be installed on your computer when you open <code>GRID.Rproj</code> in RStudio. <!--- Second is our Docker image that includes all the necessary software, code and data to run our analysis. The Docker image may give a quicker entry point to the project, and is more self-contained, so might save some fiddling with installing things.   
-
-
-### The Docker image 
-
-A Docker image is a lightweight GNU/Linux virtual computer that can be run as a piece of software on Windows and OSX (and other Linux systems). To capture the complete computational environment used for this project we have a Dockerfile that specifies how to make the Docker image that we developed this project in. The Docker image includes all of the software dependencies needed to run the code in this project, as well as the R package and other compendium files. To launch the Docker image for this project, first, [install Docker](https://docs.docker.com/installation/) on your computer. At the Docker prompt, enter:
-
-    docker run -dp 8787:8787 adamhsparks/GRID
-
-This will start a server instance of RStudio. Then open your web browser at localhost:8787 or or run `docker-machine ip default` in the shell to find the correct IP address, and log in with rstudio/rstudio.
-
-Once logged in, use the Files pane (bottom right) to navigate to `/` (the root directory), then open the folder for this project, and open the `.Rproj` file for this project. Once that's open, you'll see the `analysis/paper` directory in the Files pane where you can find the R markdown document, and knit them to produce the results in the paper. More information about using RStudio in Docker is avaiable at the [Rocker](https://github.com/rocker-org) [wiki](https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image) pages.
- 
-We developed and tested the package on this Docker container, so this is the only platform that We're confident it works on, and so recommend to anyone wanting to use this package to generate the vignette, etc. 
----></p>
+<p>The package has a number of dependencies on other R packages, and programs outside of R. These are listed at the bottom of this README. Installing these can be time-consuming and complicated, so we’ve done two things to simpify access to the compendium. First is that we have used <a href="https://cran.r-project.org/web/packages/checkpoint/index.html"><em>checkpoint</em></a>, which will install packages as they existed on CRAN at a specific date as a part of your local library. If all works well, these will be installed on your computer when you open <code>GRID.Rproj</code> in RStudio. Second is our Docker image that includes all the necessary software, code and data to run our analysis. The Docker image may give a quicker entry point to the project, and is more self-contained, so might save some fiddling with installing things.</p>
+</div>
+<div id="the-docker-image" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-docker-image" class="anchor"></a>The Docker image</h3>
+<p>A Docker image is a lightweight GNU/Linux virtual computer that can be run as a piece of software on Windows and OSX (and other Linux systems). To capture the complete computational environment used for this project we have a Dockerfile that specifies how to make the Docker image that we developed this project in. The Docker image includes all of the software dependencies needed to run the code in this project, as well as the R package and other compendium files. To launch the Docker image for this project, first, <a href="https://docs.docker.com/installation/">install Docker</a> on your computer. At the Docker prompt, enter:</p>
+<p><code>$ docker run -dp 8787:8787 adamhsparks/GRID</code></p>
+<p>This will start a server instance of RStudio. Then open your web browser at localhost:8787 or or run <code>docker-machine ip default</code> in the shell to find the correct IP address, and log in with rstudio/rstudio.</p>
+<p>Once logged in, use the Files pane (bottom right) to navigate to <code>/</code> (the root directory), then open the folder for this project, and open the <code>.Rproj</code> file for this project. Once that’s open, you’ll see the <code>analysis/paper</code> directory in the Files pane where you can find the R markdown document, and knit them to produce the results in the paper. More information about using RStudio in Docker is avaiable at the <a href="https://github.com/rocker-org">Rocker</a> <a href="https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image">wiki</a> pages.</p>
+<p>We developed and tested the package on this Docker container, so this is the only platform that We’re confident it works on, and so recommend to anyone wanting to use this package to generate the vignette, etc.</p>
 </div>
 <div id="licenses" class="section level3">
 <h3 class="hasAnchor">
@@ -127,7 +138,7 @@ We developed and tested the package on this Docker container, so this is the onl
 <div id="dependencies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#dependencies" class="anchor"></a>Dependencies</h3>
-<p>I used <a href="http://www.rstudio.com/products/rstudio/">RStudio</a> on MacOS and Ubuntu 16.04 LTS.</p>
+<p>We used <a href="http://www.rstudio.com/products/rstudio/">RStudio</a> on MacOS and Ubuntu 16.04 LTS.</p>
 </div>
 <div id="contact" class="section level3">
 <h3 class="hasAnchor">
@@ -139,13 +150,15 @@ We developed and tested the package on this Docker container, so this is the onl
 <h3 class="hasAnchor">
 <a href="#credits" class="anchor"></a>Credits</h3>
 <p>This research compendium was based on <a href="https://github.com/benmarwick/researchcompendium" class="uri">https://github.com/benmarwick/researchcompendium</a> but not forked from because it was already under development when I found Ben’s.</p>
+<p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Links</h2>
+    <h2 class="hasAnchor">
+<a href="#sidebar" class="anchor"></a>Links</h2>
 <ul class="list-unstyled">
 <li>Browse source code at <br><a href="https://github.com/ropensci/GRID">https://​github.com/​ropensci/​GRID</a>
 </li>
@@ -153,7 +166,7 @@ We developed and tested the package on this Docker container, so this is the onl
 </li>
 </ul>
 <h2>License</h2>
-<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE">LICENSE</a></p>
+<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE.html">LICENSE</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Adam Sparks <br><small class="roles"> Author, maintainer </small> </li>
@@ -161,12 +174,10 @@ We developed and tested the package on this Docker container, so this is the onl
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/adamhsparks/GRID/commits/master"><img src="https://img.shields.io/badge/last%20change-2017--04--25-brightgreen.svg" alt="Last-changedate"></a></li>
-<li><a href="https://cran.r-project.org/"><img src="https://img.shields.io/badge/R%3E%3D-3.4.0-brightgreen.svg" alt="minimal R version"></a></li>
+<li><a href="https://github.com/adamhsparks/GRID/commits/master"><img src="https://img.shields.io/badge/last%20change-2017--07--09-brightgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="http://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="Licence"></a></li>
 <li><a href="https://travis-ci.org/adamhsparks/GRID"><img src="https://travis-ci.org/adamhsparks/GRID.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://codecov.io/github/adamhsparks/GRID?branch=master"><img src="https://codecov.io/github/adamhsparks/GRID/coverage.svg?branch=master" alt="codecov.io"></a></li>
-<li><a href="https://orcid.org/0000-0002-0061-8359"><img src="https://img.shields.io/badge/ORCiD-0000--0002--0061--8359-green.svg" alt="ORCiD"></a></li>
 </ul>
 </div>
 

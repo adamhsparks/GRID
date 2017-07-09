@@ -1,4 +1,3 @@
-^packrat/
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
