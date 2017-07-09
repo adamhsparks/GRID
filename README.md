@@ -1,7 +1,7 @@
 GRID, GSOD(R) Interoplated Data
 ================
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2017--07--08-brightgreen.svg)](https://github.com/adamhsparks/GRID/commits/master) [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/) [![Travis-CI Build Status](https://travis-ci.org/adamhsparks/GRID.svg?branch=master)](https://travis-ci.org/adamhsparks/GRID) [![codecov.io](https://codecov.io/github/adamhsparks/GRID/coverage.svg?branch=master)](https://codecov.io/github/adamhsparks/GRID?branch=master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2017--07--09-brightgreen.svg)](https://github.com/adamhsparks/GRID/commits/master) [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/) [![Travis-CI Build Status](https://travis-ci.org/adamhsparks/GRID.svg?branch=master)](https://travis-ci.org/adamhsparks/GRID) [![codecov.io](https://codecov.io/github/adamhsparks/GRID/coverage.svg?branch=master)](https://codecov.io/github/adamhsparks/GRID?branch=master)
 
 Research compendium for a report on interpolating GSOD weather data
 -------------------------------------------------------------------
