@@ -1,7 +1,4 @@
 
-
-
-
 #' Download NASA/POWER temperature and relative humidity variables and write to local disk
 #'
 #' @param x Longitude in decimal degrees for cell to download
@@ -15,7 +12,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_nasa(x = -179.5, y = 89.5)
+#' get_nasa(lon = -179.5, lat = 89.5)
 #' }
 #'
 #' @author Jorrel Khalil S. Aunario, jaunario@gmail.com
@@ -42,8 +39,9 @@ get_nasa <-
     }
 
     src <- ""
-    if (length(x) != 1 | length(y) != 1) {
-      message("Warning: Either x or y has length > 1. Using first only.",
+    if (length(lon) != 1 | length(lat) != 1) {
+      message("Warning: Either `lon`` or `lat`` has length > 1. Using first\n",
+              "only.\n",
               appendLF = TRUE)
       lon <- lon[1]
       lat <- lat[1]
@@ -65,8 +63,8 @@ get_nasa <-
       paste(paste(
         "nasa",
         sprintf("%06i", cell),
-        sprintf("%05.1f", x),
-        sprintf("%05.1f", y),
+        sprintf("%05.1f", lon),
+        sprintf("%05.1f", lat),
         format(stdate, "%Y.%m.%d"),
         format(endate, "%Y.%m.%d"),
         sep = "_"
@@ -76,9 +74,9 @@ get_nasa <-
     dlurl <-
       paste(
         "https://power.larc.nasa.gov/cgi-bin/cgiwrap/solar/agro.cgi?email=agroclim%2540larc.nasa.gov&amp;step=1&amp;lat=",
-        y,
+        lat,
         "&lon=",
-        x,
+        lon,
         "&ms=",
         lubridate::month(stdate),
         "&ds=",
@@ -104,7 +102,7 @@ get_nasa <-
 
     if (!file.exists(paste(dsn, fname, sep = "/"))) {
       message(dlurl, appendLF = TRUE)
-      dlines <- unlist(strsplit(RCurl::getURL(url = dlurl), "\n"))
+      dlines <- unlist(strsplit(curl::curl_fetch_memory(url = dlurl), "\n"))
       if (!is.null(dsn))
         writeLines(dlines, paste(dsn, fname, sep = "/"))
       src <- dlurl
