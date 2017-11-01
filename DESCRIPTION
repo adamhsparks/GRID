@@ -2,10 +2,12 @@ Package: GRID
 Type: Package
 Title: GSOD Interpolated Data in R
 Version: 0.0.1-1
-Authors@R: c(person("Adam", "Sparks", role = c("aut", "cre"),
-    email = "adamhsparks@gmail.com"),
-    person("Andrew", "Nelson", role = "aut",
-    email = "dr.andy.nelson@gmail.com"))
+Authors@R: c(person(given = "Adam H.", family = "Sparks",
+    role = c("aut", "cre"), email = "adamhsparks@gmail.com"),
+    person(given = "Andrew", family = "Nelson", role = "aut",
+    email = "dr.andy.nelson@gmail.com"),
+    person(given = "Jorrel Khalil S.", family = "Aunario",
+    role = "aut", email = "jaunario@gmail.com"))
 URL: https://github.com/ropensci/GRID
 BugReports: https://github.com/ropensci/GRID/issues
 Description: Interpolate GSOD weather data provided by GSODR.
