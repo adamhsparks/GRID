@@ -20,6 +20,7 @@ Imports:
     GSODR,
     knitr,
     lubridate,
+    readr,
     raster,
     rmarkdown
 Suggests:
