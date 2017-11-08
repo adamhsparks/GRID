@@ -1,0 +1,109 @@
+---
+title: "1 - Fetch GSOD Agroclimatology Data"
+author: "Adam H. Sparks - Centre for Crop Health, USQ"
+date: "`r Sys.Date()`"
+output:
+    rmarkdown::html_vignette:
+      toc: true
+vignette: >
+  %\VignetteIndexEntry{GRID}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r check_packages, echo=FALSE, messages=FALSE, warning=FALSE}
+required <- c("raster", "fields", "foreach", "parallel")
+
+if (!all(unlist(lapply(required, function(pkg)
+  requireNamespace(pkg, quietly = TRUE)))))
+  knitr::opts_chunk$set(
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>",
+  fig.align = "center",
+  fig.width = 7,
+  fig.height = 7,
+  fig.align = "center"
+  )
+```
+
+# Daily Weather Data Cleaning, Thin Plate Splining and Interpolation
+
+GSOD temperature data are checked for consistency using `boxplot.stats()` to
+identify and remove daily outliers for both TMAX and TMIN, separately.
+
+Once the GSOD data are cleaned, thin plate splining, the `Tps()` function, from
+ _fields_ is used to create an object that can then be used to create
+an interpolated surface of temperatures using the SRTM DEM with the
+`interpolate()` function from _raster_.
+
+Use _foreach_ to iterate through the data paralellising the process.
+
+1. check for outliers in GSOD data and remove them,
+
+2. interpolate creating a global surface from the values,
+
+3. write GeoTIFF files to disk for every day, every weather variable specified.
+
+This is an extremly processor and time-intensive process for the entire global
+dataset. It is suggested to use a computer dedicated just to this task, while it
+will run on a fairly modest desktop, the computer may become unresponsive while
+performing this operation.
+
+```{r tps_interpolation, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, eval=FALSE}
+cl <- makeCluster(detectCores() - 2)
+registerDoParallel(cl)
+YEARMODA <- 20100101 # set this to c(2010:2011) to run all days, two years.
+itx <- iter(YEARMODA)
+ity <- iter(c("TEMP", "MIN", "MAX"))
+i <- NULL
+j <- NULL
+
+foreach(i = itx, .packages = c("fields", "raster", "foreach")) %dopar% {
+  foreach(t = ity) %do% {
+    j <- GSOD[GSOD$YEARMODA == i, ][, c(8:9, 11, 19, 33, 35)]
+    j <- j[complete.cases(j), ]
+    
+    # create object with x, y and weather var
+    gsod_temp <- na.omit(data.frame(j$LON, j$LAT, j$ELEV_M_SRTM_90m,
+                                    as.numeric(paste0(j[[t]]))))
+    
+    # remove outliers
+    temp_bxs <- boxplot.stats(gsod_temp[, 4])
+    temp <- gsod_temp[!gsod_temp[, 4] %in% temp_bxs$out, ]
+    
+    # create correction dataset
+    temp_vals <- temp[, 4]
+    names(temp_vals) <- NULL
+    temp_xyz <- temp[, 1:3]
+    
+    # create thin plate spline object
+    tps_temp <- fields::Tps(temp_xyz[, c("j.LON", "j.LAT", "j.ELEV_M_SRTM_90m")],
+                            temp_vals, lon.lat = TRUE)
+    
+    # interpolate thin plate spline object and write to disk
+    tps_pred_temp <- interpolate(z, tps_temp, xyOnly = FALSE)
+    
+    writeRaster(tps_pred_temp,
+                filename = paste0("~/GTiff/GSOD_SRTM.90m_", t, "_", i, ".tiff"),
+                format = "GTiff", dataType = "INT2S",
+                options = c("COMPRESS=LZW", "TFW=YES"),
+                overwrite = TRUE)
+  }
+}
+
+stopCluster(cl)
+
+```
+
+******
+
+# Appendices
+
+## R Session Information
+
+```{r system information, echo=FALSE}
+
+devtools::session_info()
+
+```

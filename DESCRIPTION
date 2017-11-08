@@ -25,6 +25,7 @@ Imports:
     rmarkdown
 Suggests:
     covr,
+    devtools,
     foreach,
     doParallel,
     ggplot2,

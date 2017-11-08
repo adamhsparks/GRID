@@ -1,0 +1,109 @@
+---
+title: "3 - Fetch Digital Elevation Data"
+author: "Adam H Sparks - Centre for Crop Health, USQ"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Fetch Fetch Digital Elevation Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r check_packages, echo=FALSE, messages=FALSE, warning=FALSE}
+required <- c("raster", "rgdal", "rgeos", "ggplot2", "virids")
+
+if (!all(unlist(lapply(required, function(pkg)
+  requireNamespace(pkg, quietly = TRUE)))))
+  knitr::opts_chunk$set(
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>",
+  fig.align = "center",
+  fig.width = 7,
+  fig.height = 7,
+  fig.align = "center"
+  )
+```
+
+# Fetch, Import and Process Elevation Data
+
+Download Shuttle Radar Topography Mission (SRTM) digital elevation model (DEM)
+data from the Worldclim Database [(link)](http://www.worldclim.org/) to use in
+the interpolation as an elevation covariate. Set data type to INT2S since the
+.bil file is unsigned, set -9999 to NA, then aggregate to 1 arc-degree to match
+NASA - POWER. Since the DEM covers more area than the agroclimatology data from
+the _GSODR_ package, crop the DEM to match the extent before plotting.
+
+```{r Alt, echo=TRUE, fig.cap="Elevation plot of 1deg SRTM data", fig.fullwidth = TRUE, dev.args=list(pointsize=6), eval=TRUE}
+# set up workspace
+tf.zip <- tempfile()
+
+download.file(
+  "http://biogeo.ucdavis.edu/data/climate/worldclim/1_4/grid/cur/alt_10m_bil.zip",
+  destfile = tf.zip,
+  mode = "wb"
+)
+unzip(tf.zip, exdir = tempdir()) # unzip downloaded file
+z <-
+  raster(paste0(tempdir(), "/alt.bil")) # import elevation raster object
+dataType(z) <- "INT2S"
+
+# aggregate the SRTM data
+z <-
+  aggregate(z, 6) # aggregate up to 1deg to match NASA - POWER resolution
+z[z == -9999] <- NA # set -9999 to NA
+
+z # inspect the object
+
+# crop SRTM data at -60/60 for agroclimatology only
+z <- crop(z, 
+          c(
+            xmin = -180,
+            xmax = 180,
+            ymin = -60,
+            ymax = 60
+          )
+)
+
+z_spdf <- as(z, "SpatialPixelsDataFrame")
+z_df <- as.data.frame(z_spdf)
+colnames(z_df) <- c("value", "x", "y")
+```
+
+## Plot the DEM
+
+```{r, eval = FALSE}
+ggplot() +
+  geom_tile(data = z_df, aes(x = x, y = y, fill = value)) +
+  scale_fill_viridis() +
+  xlab("LON") +
+  ylab("LAT") +
+  theme_bw() +
+  coord_map()
+```
+
+### Save the Spatial File to Disk
+
+Using the _rgdal_ GeoPackage driver, we will save the file to disk for use in
+interpolating the data, using the spatial data frame object.
+
+```{r save_file, eval=TRUE}
+rgdal::writeOGR(
+  z_spdf,
+  dsn = "~/Data/",
+  layer = "SRTM_DEM",
+  driver = "GPKG"
+)
+```
+
+******
+
+# Appendices
+
+## R Session Information
+
+```{r system information, echo=FALSE}
+
+devtools::session_info()
+
+```
