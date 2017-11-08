@@ -29,6 +29,7 @@ library(GSODR)
 library(doParallel)
 library(foreach)
 library(ggplot2)
+library(purrr)
 library(raster)
 library(rastervis)
 library(readr)
@@ -39,18 +40,24 @@ library(rgdal)
 
 Using the `get_GSOD()` function from _GSODR_, download and reformat
 Global Surface Summary of the Day (GSOD) weather data from the US National
-Climatic Data Center (NCDC) for the year 2010 between latitudes -60 and 60
-only. This process will take several minutes or hours depending on Internet
-connection and processor speed to download and clean the data. The resulting
-comma separated values (CSV) file is roughly 465mb.
+Climatic Data Center (NCDC) for the years 1980 to 2016 between latitudes -60
+and 60 only by using the `agroclimatology` argument in `get_GSOD()`. This
+process will take several hours depending on Internet connection and processor
+speed to download and clean the data. The resulting comma separated values (CSV) files vary in size from a few hundred megabytes to half a gigabyte.
 
 ```{r get_GSOD, eval=TRUE, echo=TRUE, message=FALSE, eval=FALSE}
-GSOD <- GSODR::get_GSOD(years = 2010:2011, max_missing = 5, agroclimatology = TRUE)
+year_list <- as.list(seq(from = 1980, to = 2016, by = 1))
+
+map(years, get_GSOD,
+    years = 2010:2011,
+    max_missing = 5,
+    agroclimatology = TRUE,
+    filename = paste0(year_list))
 ```
 
 Inspect the data frame of the GSOD data and plot the station locations included in the data.
 
-```{r import GSOD, eval=TRUE, echo=TRUE, message=FALSE, eval=FALSE}
+```{r import GSOD, eval=FALSE, echo=TRUE, message=FALSE, eval=FALSE}
 summary(GSOD)
 
 ```
