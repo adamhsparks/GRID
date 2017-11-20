@@ -4,7 +4,7 @@ Fetch GSOD Data
 Fetch and Import GSOD Weather Data
 ==================================
 
-Using the `get_GSOD()` function from *GSODR*, download and reformat Global Surface Summary of the Day (GSOD) weather data from the US National Centers for Environmental Information (NCEI) for the years 1980 to 2016 between latitudes -60 and 60 only by using the `agroclimatology` argument in `get_GSOD()`. This process will take several hours depending on Internet connection and processor speed to download and clean the data. The resulting comma separated values (CSV) files vary in size from a few hundred megabytes to more than half a gigabyte.
+Using the `get_GSOD()` function from *GSODR*, download and reformat Global Surface Summary of the Day (GSOD) weather data from the US National Centers for Environmental Information (NCEI) for the years 1980 to 2016 between latitudes -60 and 60 only by using the `agroclimatology` argument in `get_GSOD()`. This process will take several hours depending on Internet connection and processor speed to download and clean the data. The resulting comma separated values (CSV) files vary in size from a few hundred megabytes to more than half a gigabyte.  However, by saving them as .bz2 files, it saves several gigabytes of storage space. Note that `fname` below ends in a .bz2 file extension so `readr::write_csv` automatically compresses the files.
 
 ``` r
 get_write <- function(year_list, dsn) {
