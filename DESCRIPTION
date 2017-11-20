@@ -29,6 +29,7 @@ Suggests:
     foreach,
     doParallel,
     ggplot2,
+    parallel,
     roxygen2 (>= 6.0.1),
     testthat,
     viridis
