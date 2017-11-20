@@ -33,10 +33,10 @@ body {
                              <span class="dt">max_missing =</span> <span class="dv">5</span>,
                              <span class="dt">agroclimatology =</span> <span class="ot">TRUE</span>)
 
-  fname &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;GSOD_&quot;</span>, weather[<span class="dv">1</span>, <span class="st">&quot;YEAR&quot;</span>], <span class="st">&quot;.csv&quot;</span>)
+  fname &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;GSOD_&quot;</span>, weather[<span class="dv">1</span>, <span class="st">&quot;YEAR&quot;</span>], <span class="st">&quot;.bz2&quot;</span>)
 
   readr::<span class="kw">write_csv</span>(weather, <span class="dt">path =</span> <span class="kw">file.path</span>(dsn, fname), <span class="dt">na =</span> <span class="st">&quot;NA&quot;</span>)
-  
+
   <span class="co"># clean up and free up RAM/swap as this never completed in the first attempt</span>
   <span class="kw">rm</span>(weather)
   <span class="kw">gc</span>()

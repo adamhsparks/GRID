@@ -12,10 +12,10 @@ get_write <- function(year_list, dsn) {
                              max_missing = 5,
                              agroclimatology = TRUE)
 
-  fname <- paste0("GSOD_", weather[1, "YEAR"], ".csv")
+  fname <- paste0("GSOD_", weather[1, "YEAR"], ".bz2")
 
   readr::write_csv(weather, path = file.path(dsn, fname), na = "NA")
-  
+
   # clean up and free up RAM/swap as this never completed in the first attempt
   rm(weather)
   gc()
