@@ -6,12 +6,7 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-```
-```{r check_packages, echo=FALSE, messages=FALSE, warning=FALSE}
-required <- c("raster", "rgdal", "rgeos", "ggplot2", "virids")
 
-if (!all(unlist(lapply(required, function(pkg)
-  requireNamespace(pkg, quietly = TRUE)))))
   knitr::opts_chunk$set(
   eval = FALSE,
   collapse = TRUE,

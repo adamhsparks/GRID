@@ -1,12 +1,8 @@
 ---
-title: "2 - Fetch NASA POWER Agroclimatology"
+title: "Fetch NASA POWER Agroclimatology"
 author: "Adam H Sparks - Centre for Crop Health, USQ"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Fetch NASA POWER Agroclimatology}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+author: "Adam H Sparks - Centre for Crop Health, USQ"
+output: github_document
 ---
 
 To fetch NASA POWER data for the years and cells where we have weather stations
