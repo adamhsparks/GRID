@@ -35,6 +35,10 @@ NASA - POWER. Since the DEM covers more area than the agroclimatology data from
 the _GSODR_ package, crop the DEM to match the extent before plotting.
 
 ```{r Alt, echo=TRUE, fig.cap="Elevation plot of 1deg SRTM data", fig.fullwidth = TRUE, dev.args=list(pointsize=6), eval=TRUE}
+
+library(raster)
+library(ggplot2)
+library(rgdal)
 # set up workspace
 tf.zip <- tempfile()
 
@@ -49,8 +53,7 @@ z <-
 dataType(z) <- "INT2S"
 
 # aggregate the SRTM data
-z <-
-  aggregate(z, 6) # aggregate up to 1deg to match NASA - POWER resolution
+z <- aggregate(z, 6) # aggregate up to 1deg to match NASA - POWER resolution
 z[z == -9999] <- NA # set -9999 to NA
 
 z # inspect the object
@@ -88,11 +91,9 @@ Using the _rgdal_ GeoPackage driver, we will save the file to disk for use in
 interpolating the data, using the spatial data frame object.
 
 ```{r save_file, eval=TRUE}
-rgdal::writeOGR(
-  z_spdf,
-  dsn = "~/Data/",
-  layer = "SRTM_DEM",
-  driver = "GPKG"
+writeRaster(
+  z,
+  file = "~/Data/SRTM"
 )
 ```
 
