@@ -1,14 +1,12 @@
 ---
-title: "3 - Fetch Digital Elevation Data"
+title: "Fetch GSOD Data"
 author: "Adam H Sparks - Centre for Crop Health, USQ"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Fetch Fetch Digital Elevation Data}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: github_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 ```{r check_packages, echo=FALSE, messages=FALSE, warning=FALSE}
 required <- c("raster", "rgdal", "rgeos", "ggplot2", "virids")
 
@@ -93,7 +91,8 @@ interpolating the data, using the spatial data frame object.
 ```{r save_file, eval=TRUE}
 writeRaster(
   z,
-  file = "~/Data/SRTM"
+  file = "~/Data/SRTM",
+  overwrite = TRUE
 )
 ```
 
