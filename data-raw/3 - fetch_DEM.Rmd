@@ -99,7 +99,7 @@ writeRaster(
 
 ## R Session Information
 
-```{r system information, echo=FALSE}
+```{r system_information, echo=FALSE}
 
 devtools::session_info()
 
