@@ -8,10 +8,13 @@ Fetch, Import and Process Elevation Data
 Download Shuttle Radar Topography Mission (SRTM) digital elevation model (DEM) data from the Worldclim Database [(link)](http://www.worldclim.org/) to use in the interpolation as an elevation covariate. Set data type to INT2S since the .bil file is unsigned, set -9999 to NA, then aggregate to 1 arc-degree to match NASA - POWER. Since the DEM covers more area than the agroclimatology data from the *GSODR* package, crop the DEM to match the extent before plotting.
 
 ``` r
-
+# load libraries
 library(raster)
 library(ggplot2)
+library(viridis)
+#> Loading required package: viridisLite
 library(rgdal)
+
 # set up workspace
 tf.zip <- tempfile()
 
@@ -66,6 +69,8 @@ ggplot() +
   theme_bw() +
   coord_map()
 ```
+
+<img src="3_-_fetch_DEM_files/figure-markdown_github/unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
 
 ### Save the Spatial File to Disk
 

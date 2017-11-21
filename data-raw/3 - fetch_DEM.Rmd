@@ -31,6 +31,7 @@ the _GSODR_ package, crop the DEM to match the extent before plotting.
 # load libraries
 library(raster)
 library(ggplot2)
+library(viridis)
 library(rgdal)
 
 # set up workspace
