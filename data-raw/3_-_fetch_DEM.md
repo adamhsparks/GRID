@@ -98,3 +98,55 @@ Appendices
 
 R Session Information
 ---------------------
+
+    #> ─ Session info ──────────────────────────────────────────────────────────
+    #>  setting  value                       
+    #>  version  R version 3.4.2 (2017-09-28)
+    #>  os       Ubuntu 16.04.3 LTS          
+    #>  system   x86_64, linux-gnu           
+    #>  ui       X11                         
+    #>  language (EN)                        
+    #>  collate  en_AU.UTF-8                 
+    #>  tz       Zulu                        
+    #>  date     2017-11-21                  
+    #> 
+    #> ─ Packages ──────────────────────────────────────────────────────────────
+    #>  package     * version date       source        
+    #>  backports     1.1.1   2017-09-25 CRAN (R 3.4.2)
+    #>  clisymbols    1.2.0   2017-05-21 CRAN (R 3.4.2)
+    #>  colorspace    1.3-2   2016-12-14 CRAN (R 3.4.2)
+    #>  devtools      1.13.4  2017-11-09 CRAN (R 3.4.2)
+    #>  digest        0.6.12  2017-01-27 CRAN (R 3.4.2)
+    #>  evaluate      0.10.1  2017-06-24 CRAN (R 3.4.2)
+    #>  ggplot2     * 2.2.1   2016-12-30 CRAN (R 3.4.2)
+    #>  gridExtra     2.3     2017-09-09 CRAN (R 3.4.2)
+    #>  gtable        0.2.0   2016-02-26 CRAN (R 3.4.2)
+    #>  htmltools     0.3.6   2017-04-28 CRAN (R 3.4.2)
+    #>  knitr         1.17    2017-08-10 CRAN (R 3.4.2)
+    #>  labeling      0.3     2014-08-23 CRAN (R 3.4.2)
+    #>  lattice       0.20-35 2017-03-25 CRAN (R 3.3.3)
+    #>  lazyeval      0.2.1   2017-10-29 CRAN (R 3.4.2)
+    #>  magrittr      1.5     2014-11-22 CRAN (R 3.4.2)
+    #>  mapproj       1.2-5   2017-06-08 CRAN (R 3.4.2)
+    #>  maps          3.2.0   2017-06-08 cran (@3.2.0) 
+    #>  memoise       1.1.0   2017-04-21 CRAN (R 3.4.2)
+    #>  munsell       0.4.3   2016-02-13 CRAN (R 3.4.2)
+    #>  plyr          1.8.4   2016-06-08 CRAN (R 3.4.2)
+    #>  raster      * 2.6-7   2017-11-13 CRAN (R 3.4.2)
+    #>  Rcpp          0.12.13 2017-09-28 CRAN (R 3.4.2)
+    #>  rgdal       * 1.2-15  2017-10-30 CRAN (R 3.4.2)
+    #>  rgeos         0.3-26  2017-10-31 CRAN (R 3.4.2)
+    #>  rlang         0.1.4   2017-11-05 CRAN (R 3.4.2)
+    #>  rmarkdown     1.8     2017-11-17 CRAN (R 3.4.2)
+    #>  rprojroot     1.2     2017-01-16 CRAN (R 3.4.2)
+    #>  rstudioapi    0.7     2017-09-07 CRAN (R 3.4.2)
+    #>  scales        0.5.0   2017-08-24 CRAN (R 3.4.2)
+    #>  sessioninfo   1.0.0   2017-06-21 CRAN (R 3.4.2)
+    #>  sp          * 1.2-5   2017-06-29 CRAN (R 3.4.2)
+    #>  stringi       1.1.5   2017-04-07 CRAN (R 3.4.2)
+    #>  stringr       1.2.0   2017-02-18 CRAN (R 3.4.2)
+    #>  tibble        1.3.4   2017-08-22 CRAN (R 3.4.2)
+    #>  viridis     * 0.4.0   2017-03-27 CRAN (R 3.4.2)
+    #>  viridisLite * 0.2.0   2017-03-24 CRAN (R 3.4.2)
+    #>  withr         2.1.0   2017-11-01 CRAN (R 3.4.2)
+    #>  yaml          2.1.14  2016-11-12 CRAN (R 3.4.2)
