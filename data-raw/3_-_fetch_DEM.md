@@ -12,7 +12,6 @@ Download Shuttle Radar Topography Mission (SRTM) digital elevation model (DEM) d
 library(raster)
 library(ggplot2)
 library(viridis)
-#> Loading required package: viridisLite
 library(rgdal)
 
 # set up workspace
