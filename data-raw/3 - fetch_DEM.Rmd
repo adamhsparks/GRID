@@ -87,7 +87,7 @@ interpolating the data, using the spatial data frame object.
 ```{r save_file, eval=TRUE}
 writeRaster(
   z,
-  file = "~/Data/SRTM",
+  file = "~/Data/SRTM/SRTM_1deg",
   overwrite = TRUE
 )
 ```

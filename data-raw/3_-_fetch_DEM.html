@@ -88,7 +88,7 @@ z_df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(z_spdf)
 <p>Using the <em>rgdal</em> GeoPackage driver, we will save the file to disk for use in interpolating the data, using the spatial data frame object.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">writeRaster</span>(
   z,
-  <span class="dt">file =</span> <span class="st">&quot;~/Data/SRTM&quot;</span>,
+  <span class="dt">file =</span> <span class="st">&quot;~/Data/SRTM/SRTM_1deg&quot;</span>,
   <span class="dt">overwrite =</span> <span class="ot">TRUE</span>
 )
 <span class="co">#&gt; class       : RasterLayer </span>
@@ -96,7 +96,7 @@ z_df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(z_spdf)
 <span class="co">#&gt; resolution  : 1, 1  (x, y)</span>
 <span class="co">#&gt; extent      : -180, 180, -60, 60  (xmin, xmax, ymin, ymax)</span>
 <span class="co">#&gt; coord. ref. : +proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs </span>
-<span class="co">#&gt; data source : /home/ubuntu/Data/SRTM.grd </span>
+<span class="co">#&gt; data source : /home/ubuntu/Data/SRTM/SRTM_1deg.grd </span>
 <span class="co">#&gt; names       : alt </span>
 <span class="co">#&gt; values      : -46.5, 5405.139  (min, max)</span></code></pre></div>
 <hr />

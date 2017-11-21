@@ -78,7 +78,7 @@ Using the *rgdal* GeoPackage driver, we will save the file to disk for use in in
 ``` r
 writeRaster(
   z,
-  file = "~/Data/SRTM",
+  file = "~/Data/SRTM/SRTM_1deg",
   overwrite = TRUE
 )
 #> class       : RasterLayer 
@@ -86,7 +86,7 @@ writeRaster(
 #> resolution  : 1, 1  (x, y)
 #> extent      : -180, 180, -60, 60  (xmin, xmax, ymin, ymax)
 #> coord. ref. : +proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs 
-#> data source : /home/ubuntu/Data/SRTM.grd 
+#> data source : /home/ubuntu/Data/SRTM/SRTM_1deg.grd 
 #> names       : alt 
 #> values      : -46.5, 5405.139  (min, max)
 ```
