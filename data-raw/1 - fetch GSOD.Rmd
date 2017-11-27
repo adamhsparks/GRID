@@ -14,7 +14,9 @@ Global Surface Summary of the Day (GSOD) weather data from the US National
 Centers for Environmental Information (NCEI) for the years 1980 to 2016 between
 latitudes -60 and 60 only by using the `agroclimatology` argument in
 `get_GSOD()`. This process will take several hours depending on Internet
-connection and processor speed to download and clean the data. The resulting
+connection and processor speed to download and clean the data. Data are then
+subset to include only the fields of interest, a station id value, longitude,
+latitude, elevation, date, temperature and relative humidity data. The resulting
 comma separated values (CSV) files vary in size from a few hundred megabytes to
 more than half a gigabyte. However, by saving them as .bz2 files, it saves
 several gigabytes of storage space. Note that `fname` below ends in a .bz2 file
@@ -25,6 +27,8 @@ get_write <- function(year_list, dsn) {
   weather <- GSODR::get_GSOD(years = year_list,
                              max_missing = 5,
                              agroclimatology = TRUE)
+  
+  weather <- weather[, c(3, 8:9, 11, 14:19, 33, 35, 48)]
 
   fname <- paste0("GSOD_", weather[1, "YEAR"], ".bz2")
 
