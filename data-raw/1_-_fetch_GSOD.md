@@ -52,44 +52,48 @@ R Session Information
 
     ## Packages -----------------------------------------------------------------
 
-    ##  package     * version    date       source                         
-    ##  assertthat    0.2.0      2017-04-11 CRAN (R 3.4.2)                 
-    ##  backports     1.1.1      2017-09-25 CRAN (R 3.4.2)                 
-    ##  base        * 3.4.2      2017-10-28 local                          
-    ##  bindr         0.1        2016-11-13 CRAN (R 3.4.2)                 
-    ##  bindrcpp      0.2        2017-06-17 CRAN (R 3.4.2)                 
-    ##  compiler      3.4.2      2017-10-28 local                          
-    ##  datasets    * 3.4.2      2017-10-28 local                          
-    ##  devtools      1.13.4     2017-11-09 CRAN (R 3.4.2)                 
-    ##  digest        0.6.12     2017-01-27 CRAN (R 3.4.2)                 
-    ##  dplyr         0.7.4      2017-09-28 CRAN (R 3.4.2)                 
-    ##  evaluate      0.10.1     2017-06-24 CRAN (R 3.4.2)                 
-    ##  glue          1.2.0      2017-10-29 CRAN (R 3.4.2)                 
-    ##  graphics    * 3.4.2      2017-10-28 local                          
-    ##  grDevices   * 3.4.2      2017-10-28 local                          
-    ##  GSODR         1.1.0.9000 2017-11-27 Github (ropensci/GSODR@70d1ebb)
-    ##  hms           0.3        2016-11-22 CRAN (R 3.4.2)                 
-    ##  htmltools     0.3.6      2017-04-28 CRAN (R 3.4.2)                 
-    ##  knitr         1.17       2017-08-10 CRAN (R 3.4.2)                 
-    ##  magrittr      1.5        2014-11-22 CRAN (R 3.4.2)                 
-    ##  memoise       1.1.0      2017-04-21 CRAN (R 3.4.2)                 
-    ##  methods     * 3.4.2      2017-10-28 local                          
-    ##  pkgconfig     2.0.1      2017-03-21 CRAN (R 3.4.2)                 
-    ##  purrr         0.2.4      2017-10-18 CRAN (R 3.4.2)                 
-    ##  R.methodsS3   1.7.1      2016-02-16 CRAN (R 3.4.2)                 
-    ##  R.oo          1.21.0     2016-11-01 CRAN (R 3.4.2)                 
-    ##  R.utils       2.6.0      2017-11-05 CRAN (R 3.4.2)                 
-    ##  R6            2.2.2      2017-06-17 CRAN (R 3.4.2)                 
-    ##  Rcpp          0.12.13    2017-09-28 CRAN (R 3.4.2)                 
-    ##  readr         1.1.1      2017-05-16 CRAN (R 3.4.2)                 
-    ##  rlang         0.1.4      2017-11-05 CRAN (R 3.4.2)                 
-    ##  rmarkdown     1.8        2017-11-17 CRAN (R 3.4.2)                 
-    ##  rprojroot     1.2        2017-01-16 CRAN (R 3.4.2)                 
-    ##  stats       * 3.4.2      2017-10-28 local                          
-    ##  stringi       1.1.6      2017-11-17 cran (@1.1.6)                  
-    ##  stringr       1.2.0      2017-02-18 CRAN (R 3.4.2)                 
-    ##  tibble        1.3.4      2017-08-22 CRAN (R 3.4.2)                 
-    ##  tools         3.4.2      2017-10-28 local                          
-    ##  utils       * 3.4.2      2017-10-28 local                          
-    ##  withr         2.1.0      2017-11-01 CRAN (R 3.4.2)                 
-    ##  yaml          2.1.14     2016-11-12 CRAN (R 3.4.2)
+    ##  package     * version date       source         
+    ##  assertthat    0.2.0   2017-04-11 CRAN (R 3.4.2) 
+    ##  backports     1.1.1   2017-09-25 CRAN (R 3.4.2) 
+    ##  base        * 3.4.2   2017-10-28 local          
+    ##  bindr         0.1     2016-11-13 CRAN (R 3.4.2) 
+    ##  bindrcpp      0.2     2017-06-17 CRAN (R 3.4.2) 
+    ##  compiler      3.4.2   2017-10-28 local          
+    ##  curl          3.0     2017-10-06 CRAN (R 3.4.2) 
+    ##  datasets    * 3.4.2   2017-10-28 local          
+    ##  devtools      1.13.4  2017-11-09 CRAN (R 3.4.2) 
+    ##  digest        0.6.12  2017-01-27 CRAN (R 3.4.2) 
+    ##  dplyr         0.7.4   2017-09-28 CRAN (R 3.4.2) 
+    ##  evaluate      0.10.1  2017-06-24 CRAN (R 3.4.2) 
+    ##  git2r         0.19.0  2017-07-19 CRAN (R 3.4.2) 
+    ##  glue          1.2.0   2017-10-29 CRAN (R 3.4.2) 
+    ##  graphics    * 3.4.2   2017-10-28 local          
+    ##  grDevices   * 3.4.2   2017-10-28 local          
+    ##  GSODR         1.1.1   2017-11-27 CRAN (R 3.4.2) 
+    ##  hms           0.4.0   2017-11-23 cran (@0.4.0)  
+    ##  htmltools     0.3.6   2017-04-28 CRAN (R 3.4.2) 
+    ##  httr          1.3.1   2017-08-20 CRAN (R 3.4.2) 
+    ##  knitr         1.17    2017-08-10 CRAN (R 3.4.2) 
+    ##  magrittr      1.5     2014-11-22 CRAN (R 3.4.2) 
+    ##  memoise       1.1.0   2017-04-21 CRAN (R 3.4.2) 
+    ##  methods     * 3.4.2   2017-10-28 local          
+    ##  pkgconfig     2.0.1   2017-03-21 CRAN (R 3.4.2) 
+    ##  purrr         0.2.4   2017-10-18 CRAN (R 3.4.2) 
+    ##  R.methodsS3   1.7.1   2016-02-16 CRAN (R 3.4.2) 
+    ##  R.oo          1.21.0  2016-11-01 CRAN (R 3.4.2) 
+    ##  R.utils       2.6.0   2017-11-05 CRAN (R 3.4.2) 
+    ##  R6            2.2.2   2017-06-17 CRAN (R 3.4.2) 
+    ##  Rcpp          0.12.14 2017-11-23 cran (@0.12.14)
+    ##  readr         1.1.1   2017-05-16 CRAN (R 3.4.2) 
+    ##  rlang         0.1.4   2017-11-05 CRAN (R 3.4.2) 
+    ##  rmarkdown     1.8     2017-11-17 CRAN (R 3.4.2) 
+    ##  rprojroot     1.2     2017-01-16 CRAN (R 3.4.2) 
+    ##  rstudioapi    0.7     2017-09-07 CRAN (R 3.4.2) 
+    ##  stats       * 3.4.2   2017-10-28 local          
+    ##  stringi       1.1.6   2017-11-17 cran (@1.1.6)  
+    ##  stringr       1.2.0   2017-02-18 CRAN (R 3.4.2) 
+    ##  tibble        1.3.4   2017-08-22 CRAN (R 3.4.2) 
+    ##  tools         3.4.2   2017-10-28 local          
+    ##  utils       * 3.4.2   2017-10-28 local          
+    ##  withr         2.1.0   2017-11-01 CRAN (R 3.4.2) 
+    ##  yaml          2.1.14  2016-11-12 CRAN (R 3.4.2)
