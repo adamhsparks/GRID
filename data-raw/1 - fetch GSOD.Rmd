@@ -28,7 +28,18 @@ get_write <- function(year_list, dsn) {
                              max_missing = 5,
                              agroclimatology = TRUE)
   
-  weather <- weather[, c(3, 8:9, 11, 14:19, 33, 35, 48)]
+  # select only the fields that are necessary for or to be interpolated
+  # this saves more than 1/2 the space of the full original data in storage
+  weather <-
+  weather[, c("STNID",
+  "LAT",
+  "LON",
+  "ELEV_M_SRTM_90m",
+  "YEARMODA",
+  "TEMP",
+  "MAX",
+  "MIN",
+  "RH")]
 
   fname <- paste0("GSOD_", weather[1, "YEAR"], ".bz2")
 
