@@ -36,12 +36,15 @@ get_write <- function(year_list, dsn) {
   "LON",
   "ELEV_M_SRTM_90m",
   "YEARMODA",
+  "YEAR",
   "TEMP",
   "MAX",
   "MIN",
   "RH")]
+  
+  YEAR <- substr(weather$YEARMODA, 1, 4)[1]
 
-  fname <- paste0("GSOD_", weather[1, "YEAR"], ".bz2")
+  fname <- paste0("GSOD_", weather[1, YEAR], ".bz2")
 
   readr::write_csv(weather, path = file.path(dsn, fname), na = "NA")
 
