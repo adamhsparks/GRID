@@ -12,9 +12,23 @@ get_write <- function(year_list, dsn) {
                              max_missing = 5,
                              agroclimatology = TRUE)
   
-  weather <- weather[, c(3, 8:9, 11, 14:19, 33, 35, 48)]
+  # select only the fields that are necessary for or to be interpolated
+  # this saves more than 1/2 the space of the full original data in storage
+  weather <-
+  weather[, c("STNID",
+  "LAT",
+  "LON",
+  "ELEV_M_SRTM_90m",
+  "YEARMODA",
+  "YEAR",
+  "TEMP",
+  "MAX",
+  "MIN",
+  "RH")]
+  
+  YEAR <- substr(weather$YEARMODA, 1, 4)[1]
 
-  fname <- paste0("GSOD_", weather[1, "YEAR"], ".bz2")
+  fname <- paste0("GSOD_", YEAR, ".bz2")
 
   readr::write_csv(weather, path = file.path(dsn, fname), na = "NA")
 
@@ -48,7 +62,7 @@ R Session Information
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Zulu                        
-    ##  date     2017-11-27
+    ##  date     2017-11-28
 
     ## Packages -----------------------------------------------------------------
 
