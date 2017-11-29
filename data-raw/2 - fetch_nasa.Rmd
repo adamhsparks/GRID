@@ -1,7 +1,6 @@
 ---
 title: "Fetch NASA POWER Agroclimatology"
 author: "Adam H Sparks - Centre for Crop Health, USQ"
-author: "Adam H Sparks - Centre for Crop Health, USQ"
 output: github_document
 ---
 
