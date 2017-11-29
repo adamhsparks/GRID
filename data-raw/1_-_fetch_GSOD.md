@@ -20,7 +20,6 @@ get_write <- function(year_list, dsn) {
   "LON",
   "ELEV_M_SRTM_90m",
   "YEARMODA",
-  "YEAR",
   "TEMP",
   "MAX",
   "MIN",
@@ -62,7 +61,7 @@ R Session Information
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Zulu                        
-    ##  date     2017-11-28
+    ##  date     2017-11-29
 
     ## Packages -----------------------------------------------------------------
 
