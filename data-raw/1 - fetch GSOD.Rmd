@@ -55,12 +55,11 @@ get_write <- function(year_list, dsn) {
 }
 
 # generate a vector of "years" from 1983 to 2016
-year_list <- as.list(seq(from = 1983, to = 2016, by = 1))
+year_list <- as.list(seq(from = 1983, to = 2017, by = 1))
 
 # lapply to apply the get_write() function to the list of years
 # download (get) and create (write) CSV files of the GSOD weather data
 lapply(X = year_list, FUN = get_write, dsn = "~/Data/GSOD")
-
 ```
 
 ******
