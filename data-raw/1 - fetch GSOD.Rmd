@@ -34,14 +34,16 @@ get_write <- function(year_list, dsn) {
   weather[, c("STNID",
   "LAT",
   "LON",
+  "ELEV_M",
   "ELEV_M_SRTM_90m",
-  "YEARMODA",
+  "YEAR",
+  "YDAY",
   "TEMP",
   "MAX",
   "MIN",
   "RH")]
   
-  YEAR <- substr(weather$YEARMODA, 1, 4)[1]
+  YEAR <- weather["YEAR"][1]
 
   fname <- paste0("GSOD_", YEAR, ".bz2")
 
