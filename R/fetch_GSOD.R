@@ -70,16 +70,17 @@ fetch_gsod <- function(year_list = NULL, dsn = NULL) {
   # select only the fields that are necessary for or to be interpolated
   # this saves more than 1/2 the space of the full original data in storage
   weather <-
-    weather[, c("STNID",
-                "LON",
-                "LAT",
-                "ELEV_M_SRTM_90m",
-                "YEAR",
-                "YDAY",
-                "TEMP",
-                "MAX",
-                "MIN",
-                "RH")]
+    weather[, c(
+      "STNID",
+      "LON",
+      "LAT",
+      "ELEV_M_SRTM_90m",
+      "YEAR",
+      "YDAY",
+      "TEMP",
+      "MAX",
+      "MIN",
+      "RH")]
 
   # remove any stations lacking elevation data,
   # they cannot be used in calculations
