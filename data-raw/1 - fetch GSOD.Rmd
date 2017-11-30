@@ -43,6 +43,10 @@ get_write <- function(year_list, dsn) {
   "MIN",
   "RH")]
   
+  # remove any stations lacking elevation data,
+  # they cannot be used in calculations
+  weather <- weather[!is.na(weather$ELEV_M_SRTM_90m), ]
+  
   YEAR <- weather$YEAR[1]
 
   fname <- paste0("GSOD_", YEAR, ".bz2")
