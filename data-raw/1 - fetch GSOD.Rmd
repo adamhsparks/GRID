@@ -43,7 +43,7 @@ get_write <- function(year_list, dsn) {
   "MIN",
   "RH")]
   
-  YEAR <- weather["YEAR"][1]
+  YEAR <- weather$YEAR[1]
 
   fname <- paste0("GSOD_", YEAR, ".bz2")
 
