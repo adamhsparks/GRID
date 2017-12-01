@@ -2,3 +2,4 @@
 
 export(fetch_gsod)
 export(interpolate_gsod)
+importFrom(rlang,.data)

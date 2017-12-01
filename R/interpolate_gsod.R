@@ -22,6 +22,7 @@
 #' # Run the function
 #' lapply(X = GSOD_list, FUN = interp, dem = dem)
 #' }
+#' @importFrom rlang .data
 
 interpolate_gsod <- function(bz2_file, dem, dsn) {
 
@@ -33,7 +34,7 @@ interpolate_gsod <- function(bz2_file, dem, dsn) {
   for (i in unique(GSOD$YDAY)) {
 
     # subset the dataframe to just the date of interest
-    x <- dplyr::filter(GSOD, rlang::.data$YDAY == i)
+    x <- dplyr::filter(GSOD, .data$YDAY == i)
 
     for (j in c("TEMP", "MAX", "MIN", "RH")) {
       # create object with x, y and weather var
