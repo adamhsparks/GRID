@@ -1,7 +1,7 @@
 Package: GRID
 Type: Package
 Title: GSOD Interpolated Data in R
-Version: 0.0.1-1
+Version: 0.0.1.9000
 Authors@R: c(person(given = "Adam H.", family = "Sparks",
     role = c("aut", "cre"), email = "adamhsparks@gmail.com"),
     person(given = "Andrew", family = "Nelson", role = "aut",
@@ -17,19 +17,22 @@ License: MIT + file LICENSE
 Imports:
     dplyr,
     fields,
+    grDevices,
     GSODR,
-    knitr,
-    lubridate,
     readr,
     raster,
-    rmarkdown
+    rlang,
+    stats
 Suggests:
     covr,
     devtools,
     foreach,
     ggplot2,
+    knitr,
     parallel,
     roxygen2 (>= 6.0.1),
+    rmarkdown,
+    sessioninfo,
     testthat,
     viridis
 RoxygenNote: 6.0.1
