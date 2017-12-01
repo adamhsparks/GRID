@@ -29,7 +29,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="/index.html">
+  <a href="index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -48,7 +48,7 @@
       <a href="articles/Getting_started_with_Docker.html">Getting started with Docker</a>
     </li>
     <li>
-      <a href="articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GSOD Interpolation as an Improved Alternative To NASA POWER Agroclimatology Data</a>
+      <a href="articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GRID</a>
     </li>
   </ul>
 </li>
@@ -115,7 +115,7 @@
 <a href="#the-r-package" class="anchor"></a>The R package</h3>
 <p>This repository is organized as an R package. There are no actual R functions in this package - all the R code is in the Rmd file. I simply used the R package structure to help manage dependencies, to take advantage of continuous integration for automated code testing, and so I didn’t have to think too much about how to organise the files.</p>
 <p>To download the package source as you see it on GitHub, for offline browsing, use this line at the shell prompt (assuming you have Git installed on your computer):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">git clone https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>adamhsparks<span class="op">/</span>GRID.git</code></pre></div>
+<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><div class="sourceLine" id="cb1-1" data-line-number="1">git clone https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>adamhsparks<span class="op">/</span>GRID.git</div></code></pre>
 <p>Once the download is complete, open the <code>GRID.Rproj</code> in RStudio to begin working with the package and compendium files.</p>
 <p>The package has a number of dependencies on other R packages, and programs outside of R. These are listed at the bottom of this README. Installing these can be time-consuming and complicated, so we’ve done two things to simpify access to the compendium. First is that we have used <a href="https://cran.r-project.org/web/packages/checkpoint/index.html"><em>checkpoint</em></a>, which will install packages as they existed on CRAN at a specific date as a part of your local library. If all works well, these will be installed on your computer when you open <code>GRID.Rproj</code> in RStudio. Second is our Docker image that includes all the necessary software, code and data to run our analysis. The Docker image may give a quicker entry point to the project, and is more self-contained, so might save some fiddling with installing things.</p>
 </div>
@@ -169,12 +169,13 @@
 <p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE.html">LICENSE</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Adam Sparks <br><small class="roles"> Author, maintainer </small> </li>
+<li>Adam H. Sparks <br><small class="roles"> Author, maintainer </small> </li>
 <li>Andrew Nelson <br><small class="roles"> Author </small> </li>
+<li>Jorrel Khalil S. Aunario <br><small class="roles"> Author </small> </li>
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/adamhsparks/GRID/commits/master"><img src="https://img.shields.io/badge/last%20change-2017--07--09-brightgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="https://github.com/adamhsparks/GRID/commits/master"><img src="https://img.shields.io/badge/last%20change-2017--12--01-brightgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="http://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="Licence"></a></li>
 <li><a href="https://travis-ci.org/adamhsparks/GRID"><img src="https://travis-ci.org/adamhsparks/GRID.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://codecov.io/github/adamhsparks/GRID?branch=master"><img src="https://codecov.io/github/adamhsparks/GRID/coverage.svg?branch=master" alt="codecov.io"></a></li>
@@ -185,7 +186,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Adam Sparks, Andrew Nelson.</p>
+  <p>Developed by Adam H. Sparks, Andrew Nelson, Jorrel Khalil S. Aunario.</p>
 </div>
 
 <div class="pkgdown">
