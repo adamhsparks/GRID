@@ -6,7 +6,7 @@
 #' single year may be used.
 #'
 #' @details This function will fetch GSOD data using
-#' \code{\link[GSODR]{get_gsod}} and save a CSV file containing only the
+#' \code{\link[GSODR]{get_GSOD}} and save a CSV file containing only the
 #' following fields to use in interpolating a global surface between 60˚and -60˚
 #' latitude.
 #' \describe{
@@ -98,21 +98,4 @@ fetch_gsod <- function(year_list = NULL, dsn = NULL) {
   # clean up and free up RAM/swap
   rm(weather)
   gc()
-}
-
-#' @noRd
-.validate_dsn <- function(dsn) {
-  if (is.null(dsn)) {
-    dsn <- getwd()
-  } else {
-    if (substr(dsn, nchar(dsn) - 1, nchar(dsn)) == "//") {
-      dsn <- substr(dsn, 1, nchar(dsn) - 2)
-    } else if (substr(dsn, nchar(dsn), nchar(dsn)) == "/" |
-               substr(dsn, nchar(dsn), nchar(dsn)) == "\\") {
-      dsn <- substr(dsn, 1, nchar(dsn) - 1)
-    }
-    if (!dir.exists(dsn) & !dir.exists(dsn)) {
-      stop("\nThis dsn does not exist: ", dsn, ".\n")
-    }
-  }
 }
