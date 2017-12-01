@@ -61,7 +61,7 @@ interpolate_gsod <- function(bz2_file, dem, dsn) {
 
       raster::writeRaster(
         tps_pred,
-        filename = paste0(dsn, "_", x[1, 5], "_", i, ".tiff"),
+        filename = paste0(dsn, "/", j, "_", x[1, 5], "_", i, ".tiff"),
         format = "GTiff",
         dataType = "INT2S",
         options = c("COMPRESS=LZW", "TFW=YES"),
