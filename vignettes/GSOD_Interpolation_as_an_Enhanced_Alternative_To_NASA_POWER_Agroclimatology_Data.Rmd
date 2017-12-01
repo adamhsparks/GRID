@@ -60,6 +60,8 @@ function over the list of GSOD data files. If using the `interp` function in
 a Windows environment, set `mc.cores = 1`, else it will fail.
 
 ```{r run_interpolation, eval=FALSE, message='hide', results='hide'}
+library(GRID)
+
 # load the raster
 dem <- raster::raster("~/Data/SRTM/SRTM_1deg.grd")
 
