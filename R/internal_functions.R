@@ -37,7 +37,7 @@
   } else {
     vars <- toupper(vars)
 
-    if (vars %notin% c("TEMP", "RH", "MAX", "MIN")) {
+    if (any(vars %notin% c("TEMP", "RH", "MAX", "MIN"))) {
       stop("One or more of your weather variable(s) are\n",
            "not valid for interpolation.\n")
     }
