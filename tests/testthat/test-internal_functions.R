@@ -50,6 +50,11 @@ test_that(".validate_max_missing errors with invalid values", {
 
 context(".validate_resolution()")
 test_that(".validate_resolution errors if wrong value is entered", {
+
+  resolution <- NULL
+  agg <- .validate_resolution(resolution)
+  expect_equal(agg, 12)
+
   resolution <- 9
   expect_error(.validate_resolution(resolution))
 
