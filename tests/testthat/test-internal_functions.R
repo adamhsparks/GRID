@@ -1,17 +1,9 @@
 
-# Check that get_inventory functions properly ----------------------------------
 context(".check_year()")
 test_that(".check_year() defaults to current year if none specified", {
   year_list <- NULL
   year_list <- .check_year(year_list)
   expect_equal(year_list, format(Sys.Date(), "%Y"))
-})
-
-context(".validate_dsn()")
-test_that(".validate_dsn defaults to user's `home` dir if none specified", {
-  dsn <- NULL
-  dsn <- .validate_dsn(dsn)
-  expect_equal(dsn, path.expand("~"))
 })
 
 context(".validate_cores()")
@@ -38,4 +30,13 @@ context(".check_bz2()")
 test_that(".check_bz2 errors if no list of files is given", {
   file_list <- NULL
   expect_error(.check_bz2(file_list))
+})
+
+context("..validate_max_missing()")
+test_that(".validate_max_missing errors with invalid values", {
+  missing <- .5
+  expect_error(.validate_max_missing(missing))
+
+  missing <- NA
+  expect_error(.validate_max_missing(missing))
 })
