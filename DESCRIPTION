@@ -8,8 +8,8 @@ Authors@R: c(person(given = "Adam H.", family = "Sparks",
     email = "dr.andy.nelson@gmail.com"),
     person(given = "Jorrel Khalil S.", family = "Aunario",
     role = "aut", email = "jaunario@gmail.com"))
-URL: https://github.com/ropensci/GRID
-BugReports: https://github.com/ropensci/GRID/issues
+URL: https://github.com/adamhsparks/GRID
+BugReports: https://github.com/adamhsparks/GRID/issues
 Description: Interpolate GSOD weather data provided by GSODR.
 Depends:
     R (>= 3.2.0)
