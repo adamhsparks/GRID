@@ -1,9 +1,8 @@
-
-`%notin%` <- Negate("%in%")
-
 #' @noRd
 .validate_dsn <- function(dsn) {
-  if (substr(dsn, nchar(dsn) - 1, nchar(dsn)) == "//") {
+  if (is.null(dsn)) {
+    dsn <- path.expand("~")
+  } else  if (substr(dsn, nchar(dsn) - 1, nchar(dsn)) == "//") {
     dsn <- substr(dsn, 1, nchar(dsn) - 2)
   } else if (substr(dsn, nchar(dsn), nchar(dsn)) == "/" |
              substr(dsn, nchar(dsn), nchar(dsn)) == "\\") {
@@ -14,6 +13,9 @@
     dsn <- dsn
   }
 }
+
+
+`%notin%` <- Negate("%in%")
 
 #' @noRd
 # check year list, if not specified default to current year
@@ -72,15 +74,5 @@
     }
   } else {
     cores <- 1
-  }
-}
-
-#' @noRd
-.validate_max_missing <- function(missing) {
-  if (!is.null(missing)) {
-    if (is.na(missing) | missing < 1) {
-      stop("\nThe 'max_missing' parameter must be a positive",
-           "value larger than 1\n")
-    }
   }
 }
