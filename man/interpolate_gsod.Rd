@@ -11,16 +11,13 @@ interpolate_gsod(gsod = NULL, dem = NULL, dsn = NULL, vars = NULL)
 data created by \link{fetch_gsod}.}
 
 \item{dem}{Path to a raster readable digital elevation model file that has
-been fetched and processed using \code{\link{get_DEM}}.}
+been fetched and processed using \code{\link{fetch_DEM}}.}
 
 \item{dsn}{Directory where resulting GeoTIFF files are to be saved. Defaults
 to user's "home" directory.}
 
 \item{vars}{Weather variables to interpolate. Possible values are,
 \code{TEMP}, \code{MAX}, \code{MIN}, \code{RH}. Defaults to \code{TEMP}.}
-
-\item{cores}{Number of processing cores to use in parallel. Will default to 1
-on Windows OS, and on all others if unspecified.}
 }
 \value{
 GeoTIFF files of interpolated GSOD data at the spatial resolution of the
