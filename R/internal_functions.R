@@ -4,7 +4,21 @@
 .validate_dsn <- function(dsn) {
   if (is.null(dsn)) {
     dsn <- path.expand("~")
-  } else  if (substr(dsn, nchar(dsn) - 1, nchar(dsn)) == "//") {
+  } else if (substr(dsn, nchar(dsn) - 1, nchar(dsn)) == "//") {
+    dsn <- substr(dsn, 1, nchar(dsn) - 2)
+  } else if (substr(dsn, nchar(dsn), nchar(dsn)) == "/" |
+             substr(dsn, nchar(dsn), nchar(dsn)) == "\\") {
+    dsn <- substr(dsn, 1, nchar(dsn) - 1)
+  } else if (!dir.exists(dsn) & !dir.exists(dsn)) {
+    stop("\nThis dsn does not exist: ", dsn, ".\n")
+  } else {
+    dsn <- dsn
+  }
+}
+
+#' @noRd
+.validate_gsod_dsn <- function(dsn) {
+  if (substr(dsn, nchar(dsn) - 1, nchar(dsn)) == "//") {
     dsn <- substr(dsn, 1, nchar(dsn) - 2)
   } else if (substr(dsn, nchar(dsn), nchar(dsn)) == "/" |
              substr(dsn, nchar(dsn), nchar(dsn)) == "\\") {

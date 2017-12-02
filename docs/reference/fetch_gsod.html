@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fetch GSOD Data Using GSODR, Subset Fields for Interpolation and Save CSV Files by Year — fetch_gsod • GRID</title>
+<title>Fetch GSOD Data Using GSODR, Subset Fields for Interpolation — fetch_gsod • GRID</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -95,13 +95,14 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fetch GSOD Data Using GSODR, Subset Fields for Interpolation and Save CSV Files by Year</h1>
+    <h1>Fetch GSOD Data Using GSODR, Subset Fields for Interpolation</h1>
     </div>
 
     
-    <p>This function is designed to be wrapped in an <code><a href='http://www.rdocumentation.org/packages/base/topics/lapply'>lapply</a></code>
-function to retrieve multiple years of GSOD data for interpolation, though a
-single year may be used.</p>
+    <p>This function can be wrapped in an <code><a href='http://www.rdocumentation.org/packages/base/topics/lapply'>lapply</a></code> function to
+retrieve and save multiple years of GSOD data for interpolation, though it
+may be used to retrieve GSOD data and interpolate files on-the-fly. See
+<code>vignette("GRID")</code> for more details and examples.</p>
     
 
     <pre class="usage"><span class='fu'>fetch_gsod</span>(<span class='kw'>year_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -116,8 +117,8 @@ interpolation. Defaults to current year.</p></td>
     </tr>
     <tr>
       <th>dsn</th>
-      <td><p>A filepath where resulting CSV files are to be saved. Defaults
-to user's "home" directory.</p></td>
+      <td><p>Optional. A filepath where resulting CSV files are to be saved on
+local disk.</p></td>
     </tr>
     </table>
     
@@ -157,11 +158,10 @@ Hole-filled SRTM for the globe Version 4, available from the CGIAR-CSI SRTM
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># Fetch one year of GSOD data</span>
-<span class='fu'>fetch_GSOD</span>(<span class='kw'>year_list</span> <span class='kw'>=</span> <span class='fl'>1998</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/GSOD"</span>)
+<span class='no'>gsod_1998</span> <span class='kw'>&lt;-</span> <span class='fu'>fetch_gsod</span>(<span class='kw'>year_list</span> <span class='kw'>=</span> <span class='fl'>1998</span>)
 
-<span class='co'># Fetch multiple years of GSOD data</span>
+<span class='co'># Fetch multiple years of GSOD data and save to disk</span>
 <span class='no'>years</span> <span class='kw'>&lt;-</span> <span class='fu'>as.list</span>(<span class='fu'>seq</span>(<span class='kw'>from</span> <span class='kw'>=</span> <span class='fl'>1983</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2017</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>1</span>))
-
 <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>years</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>fetch_gsod</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/GSOD"</span>)
 <span class='co'># }</span></pre>
   </div>
