@@ -1,3 +1,5 @@
+`%notin%` <- Negate("%in%")
+
 #' @noRd
 .validate_dsn <- function(dsn) {
   if (is.null(dsn)) {
@@ -13,9 +15,6 @@
     dsn <- dsn
   }
 }
-
-
-`%notin%` <- Negate("%in%")
 
 #' @noRd
 # check year list, if not specified default to current year
@@ -82,5 +81,19 @@
       stop("\nThe 'max_missing' parameter must be a positive",
            "value larger than 1\n")
     }
+  }
+}
+
+#' @noRd
+.validate_resolution <- function(resolution) {
+  if (any(resolution %notin% c(NULL, .25, .5, 1))) {
+    stop("The resolution you have specified is not valid.\n",
+         "It should be one of: 1, .5 or .25.")
+  } else if (is.null(resolution)) {
+    agg <- 12
+  } else {
+    agg <- dplyr::case_when(resolution == .25 ~ 3,
+                            resolution == .5 ~ 6,
+                            resolution == 1 ~ 12)
   }
 }

@@ -21,21 +21,7 @@
 fetch_DEM <- function(resolution = NULL, dsn = NULL) {
 
   dsn <- .validate_dsn(dsn)
-
-  if (resolution %notin% c(NULL, .25, .5, 1)) {
-    stop("The resolution you have specified is not valid.\n",
-         "It should be one of: 1, .5 or .25.")
-  }
-
-  if (is.null(resolution)) {
-    agg <- 6
-    } else {
-      dplyr::case_when(
-        resolution == .25 | agg == 3,
-        resolution == .5 | agg == 6,
-        resolution == 1 | agg == 12
-      )
-  }
+  agg <- .validate_resolution(resolution)
 
   # set up workspace
   tf.zip <- tempfile()

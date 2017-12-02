@@ -47,3 +47,21 @@ test_that(".validate_max_missing errors with invalid values", {
   missing <- NA
   expect_error(.validate_max_missing(missing))
 })
+
+context(".validate_resolution()")
+test_that(".validate_resolution errors if wrong value is entered", {
+  resolution <- 9
+  expect_error(.validate_resolution(resolution))
+
+  resolution <- 1
+  agg <- .validate_resolution(resolution)
+  expect_equal(agg, 12)
+
+  resolution <- .5
+  agg <- .validate_resolution(resolution)
+  expect_equal(agg, 6)
+
+  resolution <- .25
+  agg <- .validate_resolution(resolution)
+  expect_equal(agg, 3)
+})
