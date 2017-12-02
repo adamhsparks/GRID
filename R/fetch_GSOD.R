@@ -7,7 +7,7 @@
 #'
 #' @details This function will fetch GSOD data using
 #' \code{\link[GSODR]{get_GSOD}} and save a CSV file containing only the
-#' following fields to use in interpolating a global surface between 60˚and -60
+#' following fields to use in interpolating a global surface between 60 and -60
 #' degrees latitude.
 #' \describe{
 #' \item{STNID}{A unique station id number that can be us ed to identify the
