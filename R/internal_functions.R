@@ -76,3 +76,13 @@
     cores <- 1
   }
 }
+
+#' @noRd
+.validate_max_missing <- function(missing) {
+  if (!is.null(missing)) {
+    if (is.na(missing) | missing < 1) {
+      stop("\nThe 'max_missing' parameter must be a positive",
+           "value larger than 1\n")
+    }
+  }
+}
