@@ -4,22 +4,26 @@
 \alias{fetch_gsod}
 \title{Fetch GSOD Data Using GSODR, Subset Fields for Interpolation and Save CSV Files by Year}
 \usage{
-fetch_gsod(year_list = NULL, dsn = NULL)
+fetch_gsod(year_list = NULL, dsn = NULL, missing = NULL)
 }
 \arguments{
 \item{year_list}{A numeric vector of years of GSOD data to fetch for
 interpolation. Defaults to current year.}
 
-\item{dsn}{A filepath where resulting CSV files are to be saved. Defaults
-to user's "home" directory.}
+\item{dsn}{Optional. A filepath where resulting CSV files are to be saved
+in a .bz2 file format for space saving.}
+
+\item{missing}{Optional. Maximum number of days a station is allowed to have
+missing before being excluded from final data set.}
 }
 \value{
-CSV file of GSOD data in compressed .bz2 format
+Data frame of GSOD data
 }
 \description{
 This function is designed to be wrapped in an \code{\link[base]{lapply}}
-function to retrieve multiple years of GSOD data for interpolation, though a
-single year may be used.
+function to retrieve multiple years of GSOD data and save to disk for
+interpolation, though a single year may be used. Alternatively, it may be
+used to download GSOD data and interpolate on-the-fly.
 }
 \details{
 This function will fetch GSOD data using
@@ -52,7 +56,7 @@ fetch_GSOD(year_list = 1998, dsn = "~/GSOD")
 # Fetch multiple years of GSOD data
 years <- as.list(seq(from = 1983, to = 2017, by = 1))
 
-lapply(X = years, FUN = fetch_gsod, dsn = "~/GSOD")
+lapply(X = years, FUN = fetch_gsod, dsn = "~/GSOD", missing = 5)
 }
 }
 \references{
