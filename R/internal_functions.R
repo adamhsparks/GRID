@@ -72,8 +72,6 @@
     } else {
       stop("You specified more cores than available for processing.")
     }
-  } else {
-    cores <- 1
   }
 }
 
