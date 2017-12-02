@@ -31,7 +31,7 @@ Once the GSOD data are cleaned, thin plate splining, the `Tps()` function, from
 an interpolated surface of temperatures using the SRTM DEM with the
 `interpolate()` function from _raster_.
 
-Use _foreach_ to iterate through the data paralellising the process:
+Use iterate through the data paralellising the process using _mclapply_:
 
 1. check for outliers in GSOD data and remove them,
 

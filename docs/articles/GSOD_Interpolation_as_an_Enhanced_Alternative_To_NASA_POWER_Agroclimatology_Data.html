@@ -90,7 +90,7 @@
 <a href="#daily-weather-data-cleaning-thin-plate-splining-and-interpolation" class="anchor"></a>Daily Weather Data Cleaning, Thin Plate Splining and Interpolation</h1>
 <p>GSOD temperature data are checked for consistency using <code>boxplot.stats()</code> to identify and remove daily outliers for both TMAX and TMIN, separately.</p>
 <p>Once the GSOD data are cleaned, thin plate splining, the <code>Tps()</code> function, from <em>fields</em> is used to create an object that can then be used to create an interpolated surface of temperatures using the SRTM DEM with the <code>interpolate()</code> function from <em>raster</em>.</p>
-<p>Use <em>foreach</em> to iterate through the data paralellising the process:</p>
+<p>Use iterate through the data paralellising the process using <em>mclapply</em>:</p>
 <ol style="list-style-type: decimal">
 <li><p>check for outliers in GSOD data and remove them,</p></li>
 <li><p>interpolate creating a global surface from the values,</p></li>
