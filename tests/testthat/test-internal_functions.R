@@ -13,13 +13,6 @@ test_that(".check_year() defaults to current year if none specified", {
   expect_equal(year_list, format(Sys.Date(), "%Y"))
 })
 
-context(".validate_cores()")
-test_that(".validate_cores() sets to 1 if NULL", {
-  cores <- NULL
-  cores <- .validate_cores(cores)
-  expect_equal(cores, 1)
-})
-
 context(".check_vars()")
 test_that(".check_vars sets vars to TEMP if NULL", {
   vars <- NULL
