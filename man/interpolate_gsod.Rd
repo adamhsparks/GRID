@@ -12,7 +12,7 @@ interpolate_gsod(bz2_file = NULL, dem = NULL, dsn = NULL, vars = NULL,
 
 \item{dem}{Path to a raster readable digital elevation model file.}
 
-\item{dsn}{Directory where resulting CSV files are to be saved. Defaults
+\item{dsn}{Directory where resulting GeoTIFF files are to be saved. Defaults
 to user's "home" directory.}
 
 \item{vars}{Weather variables to interpolate. Possible values are,
