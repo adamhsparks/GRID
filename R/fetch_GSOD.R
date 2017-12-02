@@ -1,5 +1,5 @@
 
-#' Fetch GSOD Data Using GSODR, Subset Fields for Interpolation
+#' Fetch GSOD Data and Subset Fields for Interpolation
 #'
 #' This function can be wrapped in an \code{\link[base]{lapply}} function to
 #' retrieve and save multiple years of GSOD data for interpolation, though it

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fetch_GSOD.R
 \name{fetch_gsod}
 \alias{fetch_gsod}
-\title{Fetch GSOD Data Using GSODR, Subset Fields for Interpolation}
+\title{Fetch GSOD Data and Subset Fields for Interpolation}
 \usage{
 fetch_gsod(year_list = NULL, dsn = NULL)
 }
