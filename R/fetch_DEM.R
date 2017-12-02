@@ -7,8 +7,8 @@
 #' @param dsn Directory where resulting CSV files are to be saved. Defaults
 #' to user's "home" directory.
 #'
-#' @return A digital elevation model cropped to -60/60˚ latitude and aggregated
-#' by the requested factor
+#' @return A digital elevation model cropped to -60/60 degrees latitude and
+#' aggregated by the requested factor
 #' @export
 #'
 #' @examples

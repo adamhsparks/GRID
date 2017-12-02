@@ -15,8 +15,8 @@ options are 1, .5 and .25 degrees.}
 to user's "home" directory.}
 }
 \value{
-A digital elevation model cropped to -60/60˚ latitude and aggregated
-by the requested factor
+A digital elevation model cropped to -60/60 degrees latitude and
+aggregated by the requested factor
 }
 \description{
 Fetch and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data
