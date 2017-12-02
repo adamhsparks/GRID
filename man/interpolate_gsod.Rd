@@ -19,7 +19,7 @@ to user's "home" directory.}
 \code{TEMP}, \code{MAX}, \code{MIN}, \code{RH}. Defaults to \code{TEMP}.}
 
 \item{cores}{Number of processing cores to use in parallel. Will default to 1
-on Windows OS and all others if unspecified.}
+on Windows OS, and on all others if unspecified.}
 }
 \value{
 GeoTIFF files of interpolated GSOD data at the spatial resolution of the

@@ -104,7 +104,8 @@ function to retrieve multiple years of GSOD data for interpolation, though a
 single year may be used.</p>
     
 
-    <pre class="usage"><span class='fu'>interpolate_gsod</span>(<span class='no'>bz2_file</span>, <span class='no'>dem</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>interpolate_gsod</span>(<span class='kw'>bz2_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -126,6 +127,11 @@ to user's "home" directory.</p></td>
       <th>vars</th>
       <td><p>Weather variables to interpolate. Possible values are,
 <code>TEMP</code>, <code>MAX</code>, <code>MIN</code>, <code>RH</code>. Defaults to <code>TEMP</code>.</p></td>
+    </tr>
+    <tr>
+      <th>cores</th>
+      <td><p>Number of processing cores to use in parallel. Will default to 1
+on Windows OS, and on all others if unspecified.</p></td>
     </tr>
     </table>
     
