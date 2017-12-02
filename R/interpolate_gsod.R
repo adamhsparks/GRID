@@ -11,6 +11,8 @@
 #' to user's "home" directory.
 #' @param vars Weather variables to interpolate. Possible values are,
 #' \code{TEMP}, \code{MAX}, \code{MIN}, \code{RH}. Defaults to \code{TEMP}.
+#' @param cores Number of processing cores to use in parallel. Will default to 1
+#' on Windows OS and all others if unspecified.
 #'
 #' @return
 #' GeoTIFF files of interpolated GSOD data at the spatial resolution of the
@@ -32,20 +34,16 @@
 #'
 #' @importFrom rlang .data
 
-interpolate_gsod <- function(bz2_file, dem, dsn = NULL, vars = NULL) {
+interpolate_gsod <- function(bz2_file = NULL,
+                             dem = NULL,
+                             dsn = NULL,
+                             vars = NULL,
+                             cores = NULL) {
 
-  if (is.null(vars)) {
-    vars <- "TEMP"
-  }
-
-  vars <- toupper(vars)
-
-  if (vars %notin% c("TEMP", "RH", "MAX", "MIN")) {
-    stop("One or more of your weather variable(s) are\n",
-          "not valid for interpolation.\n")
-  }
-
+  # validate user inputs, see `internal_functions.R` for these
   dsn <- .validate_dsn(dsn)
+  vars <- .check_vars(vars)
+  cores <- .validate_cores(cores)
 
   # import the file for interpolation
   GSOD <- readr::read_csv(bz2_file, col_types = "cdddcddddd")

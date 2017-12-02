@@ -13,3 +13,11 @@ test_that(".validate_dsn defaults to user's `home` dir if none specified", {
   dsn <- .validate_dsn(dsn)
   expect_equal(dsn, path.expand("~"))
 })
+
+context(".validate_cores()")
+test_that(".validate_cores() sets to 1 if NULL", {
+  skip_on_cran()
+  cores <- NULL
+  cores <- .validate_cores(cores)
+  expect_equal(cores, 1)
+})
