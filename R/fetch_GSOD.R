@@ -52,12 +52,8 @@
 
 fetch_gsod <- function(year_list = NULL, dsn = NULL) {
 
-  # check year list, if not specified default to current year
-  if (is.null(year_list)) {
-    message("\nYou have not specified any years to fetch, defaulting to ",
-            format(Sys.Date(), "%Y"), ".\n")
-    year_list <- format(Sys.Date(), "%Y")
-  }
+  # validate year_list
+  year_list <- .check_year(year_list)
 
   # check if the dsn exists
   dsn <- .validate_dsn(dsn)
