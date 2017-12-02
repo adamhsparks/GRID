@@ -2,9 +2,6 @@ language: r
 sudo: required
 dist: trusty
 
-repos:
-  MRAN: "https://mran.microsoft.com/snapshot/2016-11-08"
-
 warnings_are_errors: false
 
 ## Set up the matrix of different runs
