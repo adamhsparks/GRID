@@ -16,7 +16,6 @@ test_that(".validate_dsn defaults to user's `home` dir if none specified", {
 
 context(".validate_cores()")
 test_that(".validate_cores() sets to 1 if NULL", {
-  skip_on_cran()
   cores <- NULL
   cores <- .validate_cores(cores)
   expect_equal(cores, 1)
@@ -24,8 +23,19 @@ test_that(".validate_cores() sets to 1 if NULL", {
 
 context(".check_vars()")
 test_that(".check_vars sets vars to TEMP if NULL", {
-  skip_on_cran()
   vars <- NULL
   vars <- .check_vars(vars)
   expect_equal(vars, "TEMP")
+})
+
+context(".check_vars()")
+test_that(".check_vars sets vars errors if wrong value is entered", {
+  vars <- c("TEMP", "MAX", "MIN", "RH", "PRCP")
+  expect_error(.check_vars(vars))
+})
+
+context(".check_bz2()")
+test_that(".check_bz2 errors if no list of files is given", {
+  file_list <- NULL
+  expect_error(.check_bz2(file_list))
 })
