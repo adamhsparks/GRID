@@ -22,7 +22,8 @@ Imports:
     readr,
     raster,
     rlang,
-    stats
+    stats,
+    utils
 Suggests:
     covr,
     devtools,
