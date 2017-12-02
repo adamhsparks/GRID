@@ -13,3 +13,6 @@
     dsn <- dsn
   }
 }
+
+
+`%notin%` <- Negate("%in%")
