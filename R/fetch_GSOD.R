@@ -2,9 +2,8 @@
 #' Fetch GSOD Data Using GSODR, Subset Fields for Interpolation and Save CSV Files by Year
 #'
 #' This function is designed to be wrapped in an \code{\link[base]{lapply}}
-#' function to retrieve multiple years of GSOD data and save to disk for
-#' interpolation, though a single year may be used. Alternatively, it may be
-#' used to download GSOD data and interpolate on-the-fly.
+#' function to retrieve multiple years of GSOD data for interpolation, though a
+#' single year may be used.
 #'
 #' @details This function will fetch GSOD data using
 #' \code{\link[GSODR]{get_GSOD}} and save a CSV file containing only the
@@ -29,16 +28,14 @@
 #'
 #' @param year_list A numeric vector of years of GSOD data to fetch for
 #' interpolation. Defaults to current year.
-#' @param dsn Optional. A filepath where resulting CSV files are to be saved
-#' in a .bz2 file format for space saving.
-#' @param missing Optional. Maximum number of days a station is allowed to have
-#' missing before being excluded from final data set.
+#' @param dsn A filepath where resulting CSV files are to be saved. Defaults
+#' to user's "home" directory.
 #'
 #' @references Jarvis, A., Reuter, H. I., Nelson, A., Guevara, E. (2008)
 #' Hole-filled SRTM for the globe Version 4, available from the CGIAR-CSI SRTM
 #' 90m Database (http://srtm.csi.cgiar.org)
 #'
-#' @return Data frame of GSOD data
+#' @return CSV file of GSOD data in compressed .bz2 format
 #' @export
 #'
 #' @examples
@@ -50,10 +47,10 @@
 #' # Fetch multiple years of GSOD data
 #' years <- as.list(seq(from = 1983, to = 2017, by = 1))
 #'
-#' lapply(X = years, FUN = fetch_gsod, dsn = "~/GSOD", missing = 5)
+#' lapply(X = years, FUN = fetch_gsod, dsn = "~/GSOD")
 #' }
 
-fetch_gsod <- function(year_list = NULL, dsn = NULL, missing = NULL) {
+fetch_gsod <- function(year_list = NULL, dsn = NULL) {
 
   # validate year_list
   year_list <- .check_year(year_list)
@@ -61,15 +58,13 @@ fetch_gsod <- function(year_list = NULL, dsn = NULL, missing = NULL) {
   # check if the dsn exists
   dsn <- .validate_dsn(dsn)
 
-  # check missing
-  .validate_max_missing(missing)
-
   # fetch GSOD data from NCEI server
   weather <- GSODR::get_GSOD(years = year_list,
-                             max_missing = missing,
+                             max_missing = 5,
                              agroclimatology = TRUE)
 
   # select only the fields that are necessary for or to be interpolated
+  # this saves more than 1/2 the space of the full original data in storage
   weather <-
     weather[, c(
       "STNID",
@@ -87,18 +82,16 @@ fetch_gsod <- function(year_list = NULL, dsn = NULL, missing = NULL) {
   # they cannot be used in calculations
   weather <- weather[!is.na(weather$ELEV_M_SRTM_90m),]
 
-  # if a dsn is specified save the file to disk.
-  if (!is.null(dsn)) {
-    # create YEAR object for naming file out
-    YEAR <- weather$YEAR[1]
+  # create YEAR object for naming file out
+  YEAR <- weather$YEAR[1]
 
-    # create file name
-    fname <- paste0("GSOD_", YEAR, ".bz2")
+  # create file name
+  fname <- paste0("GSOD_", YEAR, ".bz2")
 
-    # write a compressed CSV file to disk in the specified location
-    readr::write_csv(weather, path = file.path(dsn, fname), na = "NA")
-  }
+  # write a compressed CSV file to disk in the specified location
+  readr::write_csv(weather, path = file.path(dsn, fname), na = "NA")
 
   # clean up and free up RAM/swap
+  rm(weather)
   gc()
 }
