@@ -108,13 +108,13 @@ may be used to retrieve GSOD data and interpolate files on-the-fly. See
 <code><a href='../articles/GRID.html'>vignette("GRID")</a></code> for more details and examples.</p>
     
 
-    <pre class="usage"><span class='fu'>fetch_gsod</span>(<span class='kw'>year_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>fetch_gsod</span>(<span class='kw'>years</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>year_list</th>
+      <th>years</th>
       <td><p>A numeric vector of years of GSOD data to fetch for
 interpolation. Defaults to current year.</p></td>
     </tr>
@@ -127,7 +127,7 @@ local disk. If unspecified a tidy data frame is returned in the R session.</p></
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>CSV file of GSOD data in compressed .bz2 format</p>
+    <p>List of data frames</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -161,11 +161,11 @@ Hole-filled SRTM for the globe Version 4, available from the CGIAR-CSI SRTM
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># Fetch one year of GSOD data</span>
-<span class='no'>gsod_1998</span> <span class='kw'>&lt;-</span> <span class='fu'>fetch_gsod</span>(<span class='kw'>year_list</span> <span class='kw'>=</span> <span class='fl'>1998</span>)
+<span class='no'>gsod_1998</span> <span class='kw'>&lt;-</span> <span class='fu'>fetch_gsod</span>(<span class='kw'>years</span> <span class='kw'>=</span> <span class='fl'>1998</span>)
 
 <span class='co'># Fetch multiple years of GSOD data and save to disk</span>
 <span class='no'>years</span> <span class='kw'>&lt;-</span> <span class='fu'>as.list</span>(<span class='fu'>seq</span>(<span class='kw'>from</span> <span class='kw'>=</span> <span class='fl'>1983</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2017</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>1</span>))
-<span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>years</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>fetch_gsod</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/GSOD"</span>)
+<span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>years</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>fetch_gsod</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Data/GSOD"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
