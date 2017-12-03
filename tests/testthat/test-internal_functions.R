@@ -10,7 +10,7 @@ context(".check_year()")
 test_that(".check_year() defaults to current year if none specified", {
   year_list <- NULL
   year_list <- .check_year(year_list)
-  expect_equal(year_list, format(Sys.Date(), "%Y"))
+  expect_equal(year_list, as.numeric(format(Sys.Date(), "%Y")))
 })
 
 context(".check_vars()")
@@ -32,7 +32,7 @@ test_that(".check_bz2 errors if no list of files is given", {
   expect_error(.check_bz2(file_list))
 })
 
-context("..validate_max_missing()")
+context(".validate_max_missing()")
 test_that(".validate_max_missing errors with invalid values", {
   missing <- .5
   expect_error(.validate_max_missing(missing))
