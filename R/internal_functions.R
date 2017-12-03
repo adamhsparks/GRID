@@ -36,7 +36,7 @@
       format(Sys.Date(), "%Y"),
       ".\n"
     )
-    years <- format(Sys.Date(), "%Y")
+    years <- as.numeric(format(Sys.Date(), "%Y"))
   }
 }
 
