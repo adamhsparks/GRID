@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getting started with Docker • GRID</title>
+<title>GRID • GRID</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -75,44 +75,29 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Getting started with Docker</h1>
+      <h1>GRID</h1>
                         <h4 class="author">Adam H Sparks</h4>
             
-            <h4 class="date">2017-12-03</h4>
           </div>
 
     
     
 <div class="contents">
-<p>Instructions for macOS and Windows</p>
-<ol style="list-style-type: decimal">
-<li><p>Download DockerToolbox</p></li>
-<li><p>Follow installation instructions presented by installer</p></li>
-<li>For macOS, open a terminal window and type</li>
-</ol>
-<pre><code>$ $ docker-machine start # Start virtual machine for docker
-$ docker-machine env  # It's helps to get environment variables
-$ eval "$(docker-machine env default)" # Set environment variables</code></pre>
-<div id="running-rstudio-server" class="section level2">
+<div id="using-fetch_dem" class="section level2">
 <h2 class="hasAnchor">
-<a href="#running-rstudio-server" class="anchor"></a>Running RStudio server</h2>
-<p>See <a href="https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image" class="uri">https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image</a> for instructions on running RStudio server from Docker</p>
-<blockquote>
-<p>From the docker window, run: <code>sudo docker run -d -p 8787:8787 rocker/rstudio</code> That will take a while to download the image the first time you run it. Linux users might want to add their user to the docker group to avoid having to use sudo. To do so, just run <code>sudo usermod -a -G docker &lt;username&gt;</code>. You may need to login again to refresh your group membership. (Mac and Windows users do not need to use sudo.) Once the download is finished RStudio-Server will launch invisibly. To connect to it, open a browser and enter in the ip address noted above followed by <code>:8787</code>, e.g. <a href="http://192.168.59.103:8787" class="uri">http://192.168.59.103:8787</a>, and you should be greeted by the RStudio welcome screen. Log in using:</p>
-</blockquote>
-<blockquote>
-<ul>
-<li>username: rstudio</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>password: rstudio</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>and you should be able to work with RStudio in your browser in much the same way as you would on your desktop.</p>
-</blockquote>
+<a href="#using-fetch_dem" class="anchor"></a>Using fetch_DEM</h2>
+</div>
+<div id="using-fetch_gsod" class="section level2">
+<h2 class="hasAnchor">
+<a href="#using-fetch_gsod" class="anchor"></a>Using fetch_gsod</h2>
+</div>
+<div id="using-interpolate_gsod-with-a-list-of-data-frames" class="section level2">
+<h2 class="hasAnchor">
+<a href="#using-interpolate_gsod-with-a-list-of-data-frames" class="anchor"></a>Using interpolate_gsod with a list of data frames</h2>
+</div>
+<div id="using-interpolate_gsod-with-a-list-of-csv-files" class="section level2">
+<h2 class="hasAnchor">
+<a href="#using-interpolate_gsod-with-a-list-of-csv-files" class="anchor"></a>Using interpolate_gsod with a list of CSV files</h2>
 </div>
 </div>
   </div>
@@ -122,7 +107,10 @@ $ eval "$(docker-machine env default)" # Set environment variables</code></pre>
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#running-rstudio-server">Running RStudio server</a></li>
+<li><a href="#using-fetch_dem">Using fetch_DEM</a></li>
+      <li><a href="#using-fetch_gsod">Using fetch_gsod</a></li>
+      <li><a href="#using-interpolate_gsod-with-a-list-of-data-frames">Using interpolate_gsod with a list of data frames</a></li>
+      <li><a href="#using-interpolate_gsod-with-a-list-of-csv-files">Using interpolate_gsod with a list of CSV files</a></li>
       </ul>
 </div>
       </div>

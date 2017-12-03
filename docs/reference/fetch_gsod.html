@@ -58,6 +58,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/GRID.html">Get Started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -102,7 +105,7 @@
     <p>This function can be wrapped in an <code><a href='http://www.rdocumentation.org/packages/base/topics/lapply'>lapply</a></code> function to
 retrieve and save multiple years of GSOD data for interpolation, though it
 may be used to retrieve GSOD data and interpolate files on-the-fly. See
-<code>vignette("GRID")</code> for more details and examples.</p>
+<code><a href='../articles/GRID.html'>vignette("GRID")</a></code> for more details and examples.</p>
     
 
     <pre class="usage"><span class='fu'>fetch_gsod</span>(<span class='kw'>year_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -118,7 +121,7 @@ interpolation. Defaults to current year.</p></td>
     <tr>
       <th>dsn</th>
       <td><p>Optional. A filepath where resulting CSV files are to be saved on
-local disk.</p></td>
+local disk. If unspecified a tidy data frame is returned in the R session.</p></td>
     </tr>
     </table>
     

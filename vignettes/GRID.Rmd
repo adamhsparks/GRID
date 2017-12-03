@@ -1,0 +1,27 @@
+---
+title: "GRID"
+author: "Adam H Sparks"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{GRID}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Using fetch_DEM
+
+
+## Using fetch_gsod
+
+
+## Using interpolate_gsod with a list of data frames
+
+
+## Using interpolate_gsod with a list of CSV files
