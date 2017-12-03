@@ -4,17 +4,17 @@
 \alias{fetch_gsod}
 \title{Fetch GSOD Data and Subset Fields for Interpolation}
 \usage{
-fetch_gsod(year_list = NULL, dsn = NULL)
+fetch_gsod(years = NULL, dsn = NULL)
 }
 \arguments{
-\item{year_list}{A numeric vector of years of GSOD data to fetch for
+\item{years}{A numeric vector of years of GSOD data to fetch for
 interpolation. Defaults to current year.}
 
 \item{dsn}{Optional. A filepath where resulting CSV files are to be saved on
 local disk. If unspecified a tidy data frame is returned in the R session.}
 }
 \value{
-CSV file of GSOD data in compressed .bz2 format
+List of data frames
 }
 \description{
 This function can be wrapped in an \code{\link[base]{lapply}} function to
@@ -48,11 +48,11 @@ derived from the CGIAR-CSI SRTM 90m database (Jarvis et al. 2008).}
 \dontrun{
 
 # Fetch one year of GSOD data
-gsod_1998 <- fetch_gsod(year_list = 1998)
+gsod_1998 <- fetch_gsod(years = 1998)
 
 # Fetch multiple years of GSOD data and save to disk
 years <- as.list(seq(from = 1983, to = 2017, by = 1))
-lapply(X = years, FUN = fetch_gsod, dsn = "~/GSOD")
+lapply(X = years, FUN = fetch_gsod, dsn = "~/Data/GSOD")
 }
 }
 \references{

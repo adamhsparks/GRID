@@ -1,5 +1,4 @@
 
-
 #' Fetch GSOD Data and Subset Fields for Interpolation
 #'
 #' This function can be wrapped in an \code{\link[base]{lapply}} function to
@@ -44,7 +43,7 @@
 #' \dontrun{
 #'
 #' # Fetch one year of GSOD data
-#' gsod_1998 <- fetch_gsod(year_list = 1998)
+#' gsod_1998 <- fetch_gsod(years = 1998)
 #'
 #' # Fetch multiple years of GSOD data and save to disk
 #' years <- as.list(seq(from = 1983, to = 2017, by = 1))
@@ -87,4 +86,6 @@ fetch_gsod <- function(years = NULL, dsn = NULL) {
   if (!is.null(dsn)) {
     lapply(X =  weather, FUN = write_gsod, dsn = dsn)
   }
+
+  return(weather)
 }
