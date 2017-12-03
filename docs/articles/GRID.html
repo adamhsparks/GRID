@@ -86,7 +86,12 @@
 <div id="using-fetch_dem" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-fetch_dem" class="anchor"></a>Using fetch_DEM</h2>
-<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><div class="sourceLine" id="cb1-1" data-line-number="1">fetch_DEM</div></code></pre>
+<p>Fetch a digital elevation model (DEM) from WorldClim data, aggregate to 1 arc degree and crop at -60/60 degrees latitude and return a spatial object in the current R session.</p>
+<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><div class="sourceLine" id="cb1-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_DEM.html">fetch_DEM</a></span>()</div></code></pre>
+<p>Fetch a digital elevation model (DEM) from WorldClim data, aggregate to 1 arc degree and crop at -60/60 degrees latitude and save a raster format DEM on local disk.</p>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><div class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_DEM.html">fetch_DEM</a></span>(<span class="dt">dsn =</span> <span class="st">"~/GSOD"</span>)</div></code></pre>
+<p>Fetch a digital elevation model (DEM) from WorldClim data, aggregate to 15 arc minutes and crop at -60/60 degrees latitude and save a raster format DEM on local disk.</p>
+<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><div class="sourceLine" id="cb3-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_DEM.html">fetch_DEM</a></span>(<span class="dt">aggregate =</span> <span class="fl">.25</span>, <span class="dt">dsn =</span> <span class="st">"~/GSOD"</span>)</div></code></pre>
 </div>
 <div id="using-fetch_gsod" class="section level2">
 <h2 class="hasAnchor">

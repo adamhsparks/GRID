@@ -21,7 +21,10 @@ A digital elevation model cropped to -60/60 degrees latitude and
 aggregated by the requested factor
 }
 \description{
-Fetch and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data
+Fetches a digital elevation model (DEM) from WorldClim data, crops and
+aggregates to a larger spatial resolution and crops at -60/60 degrees
+latitude for use with other weather data that provide rainfall, \emph{e.g.}
+NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises.
 }
 \examples{
 

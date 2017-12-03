@@ -102,7 +102,10 @@
     </div>
 
     
-    <p>Fetch and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data</p>
+    <p>Fetches a digital elevation model (DEM) from WorldClim data, crops and
+aggregates to a larger spatial resolution and crops at -60/60 degrees
+latitude for use with other weather data that provide rainfall, <em>e.g.</em>
+NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises.</p>
     
 
     <pre class="usage"><span class='fu'>fetch_DEM</span>(<span class='kw'>resolution</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>

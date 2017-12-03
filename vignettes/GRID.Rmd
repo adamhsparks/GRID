@@ -17,9 +17,30 @@ knitr::opts_chunk$set(
 
 ## Using fetch_DEM
 
-```{r DEM, eval=FALSE}
-fetch_DEM
+Fetch a digital elevation model (DEM) from WorldClim data, aggregate to 1 arc
+degree and crop at -60/60 degrees latitude and return a spatial object in the
+current R session.
+
+```{r R_DEM, eval=FALSE}
+DEM <- fetch_DEM()
 ```
+
+Fetch a digital elevation model (DEM) from WorldClim data, aggregate to 1 arc
+degree and crop at -60/60 degrees latitude and save a raster format DEM on local
+disk.
+
+```{r dsn_DEM, eval=FALSE}
+DEM <- fetch_DEM(dsn = "~/GSOD")
+```
+
+Fetch a digital elevation model (DEM) from WorldClim data, aggregate to 15 arc
+minutes and crop at -60/60 degrees latitude and save a raster format DEM on
+local disk.
+
+```{r dsn_DEM_0.25, eval=FALSE}
+DEM <- fetch_DEM(aggregate = .25, dsn = "~/GSOD")
+```
+
 ## Using fetch_gsod
 
 
