@@ -25,26 +25,42 @@ current R session.
 DEM <- fetch_DEM()
 ```
 
-Fetch a digital elevation model (DEM) from WorldClim data, aggregate to 1 arc
-degree and crop at -60/60 degrees latitude and save a raster format DEM on local
-disk.
+Fetch a digital elevation model (DEM) from WorldClim data and aggregate to 1 arc
+degree.
 
 ```{r dsn_DEM, eval=FALSE}
-DEM <- fetch_DEM(dsn = "~/GSOD")
+DEM <- fetch_DEM()
 ```
 
 Fetch a digital elevation model (DEM) from WorldClim data, aggregate to 15 arc
-minutes and crop at -60/60 degrees latitude and save a raster format DEM on
-local disk.
+minutes and crop at -60/60 degrees latitude and save a GeoTIFF file of the
+resulting DEM to local disk.
 
 ```{r dsn_DEM_0.25, eval=FALSE}
-DEM <- fetch_DEM(aggregate = .25, dsn = "~/GSOD")
+DEM <- fetch_DEM(resolution = .25, dsn = "~/GSOD")
 ```
 
 ## Using fetch_gsod
 
+Fetch GSOD data for 1998 to 2000.
+
+```{r fetch_gsod, eval=FALSE}
+gsod <- fetch_gsod(years = 1998:2000)
+```
 
 ## Using interpolate_gsod with a list of data frames
 
 
 ## Using interpolate_gsod with a list of CSV files
+
+# Example 1: Saving all Files to Local Disk
+
+```{r local_disk}
+
+```
+
+# Example 2: Using In-Memory Data Only
+
+```{r in_memory}
+
+```
