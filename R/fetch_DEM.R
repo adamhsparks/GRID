@@ -71,6 +71,8 @@ fetch_DEM <- function(resolution = NULL, dsn = NULL) {
   )
   }
 
+  return(z)
+
   # clean up
   unlink(tempfile())
 }
