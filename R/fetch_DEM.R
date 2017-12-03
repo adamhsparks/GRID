@@ -21,8 +21,8 @@
 #' @examples
 #'
 #' \dontrun{
-#' # Fetch DEM and aggregate to 1 arc degree and save to local disk
-#' fetch_DEM(dsn = "~/Data/DEM")
+#' # Fetch DEM and aggregate to 1 arc degree
+#' DEM <- fetch_DEM(dsn = "~/Data/DEM")
 #' }
 #'
 fetch_DEM <- function(resolution = NULL, dsn = NULL) {

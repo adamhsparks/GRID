@@ -29,8 +29,8 @@ NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises.
 \examples{
 
 \dontrun{
-# Fetch DEM and aggregate to 1 arc degree and save to local disk
-fetch_DEM(dsn = "~/Data/DEM")
+# Fetch DEM and aggregate to 1 arc degree
+DEM <- fetch_DEM(dsn = "~/Data/DEM")
 }
 
 }
