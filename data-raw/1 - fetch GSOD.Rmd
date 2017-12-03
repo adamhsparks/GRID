@@ -23,7 +23,7 @@ several gigabytes of storage space. Note that `fname` below ends in a .bz2 file
 extension so `readr::write_csv` automatically compresses the files.
 
 ```{R get_GSOD, eval=TRUE, echo=TRUE, message=FALSE, results='hide'}
-fetch_gsod <- function(year_list, dsn) {
+fetch_GSOD <- function(year_list, dsn) {
 
   # fetch GSOD data from NCEI server
   weather <- GSODR::get_GSOD(years = year_list,
@@ -68,7 +68,7 @@ year_list <- as.list(seq(from = 1983, to = 2017, by = 1))
 
 # lapply to apply the get_write() function to the list of years
 # download (get) and create (write) CSV files of the GSOD weather data
-lapply(X = year_list, FUN = fetch_gsod, dsn = "~/Data/GSOD")
+lapply(X = year_list, FUN = fetch_GSOD, dsn = "~/Data/GSOD")
 ```
 
 ******

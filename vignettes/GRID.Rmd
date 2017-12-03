@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(GRID)
 ```
 
 ## Using fetch_DEM
@@ -40,12 +41,12 @@ resulting DEM to local disk.
 DEM <- fetch_DEM(resolution = .25, dsn = "~/GSOD")
 ```
 
-## Using fetch_gsod
+## Using fetch_GSOD
 
 Fetch GSOD data for 1998 to 2000.
 
-```{r fetch_gsod, eval=FALSE}
-gsod <- fetch_gsod(years = 1998:2000)
+```{r fetch_GSOD, eval=FALSE}
+gsod <- fetch_GSOD(years = 1998:2000)
 ```
 
 ## Using interpolate_gsod with a list of data frames
@@ -55,12 +56,19 @@ gsod <- fetch_gsod(years = 1998:2000)
 
 # Example 1: Saving all Files to Local Disk
 
-```{r local_disk}
+```{r local_disk, eval=FALSE}
 
 ```
 
 # Example 2: Using In-Memory Data Only
 
-```{r in_memory}
+```{r in_memory, eval=FALSE}
+# Create a list of GSOD files
+gsod_list <- fetch_GSOD(years = 1998:1999)
 
+# Fetch and aggregate the raster digital elevation model
+dem <- fetch_DEM()
+
+# Run the function for MAX and MIN temperature
+lapply(X = gsod_list, FUN = interp, dem = dem, vars = c("MAX", "MIN"))
 ```

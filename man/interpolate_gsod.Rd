@@ -8,20 +8,18 @@ interpolate_gsod(gsod = NULL, dem = NULL, dsn = NULL, vars = NULL)
 }
 \arguments{
 \item{gsod}{A \code{\link[base]{list}} of data frames or CSV files of GSOD
-data created by \link{fetch_gsod}.}
+data created by \link{fetch_GSOD}.}
 
-\item{dem}{Path to a raster readable digital elevation model file that has
-been fetched and processed using \code{\link{fetch_DEM}}.}
+\item{dem}{Digital elevation model that has been fetched and processed using
+\code{\link{fetch_DEM}}.}
 
-\item{dsn}{Directory where resulting GeoTIFF files are to be saved. Defaults
-to user's "home" directory.}
+\item{dsn}{Optional. Directory where resulting GeoTIFF files are to be saved.}
 
 \item{vars}{Weather variables to interpolate. Possible values are,
 \code{TEMP}, \code{MAX}, \code{MIN}, \code{RH}. Defaults to \code{TEMP}.}
 }
 \value{
-GeoTIFF files of interpolated GSOD data at the spatial resolution of the
-supplied digital elevation model.
+\code{List} of \code{\link[raster]{stack}} objects by year and variable
 }
 \description{
 This function is designed to be wrapped in an \code{\link[base]{lapply}}
@@ -33,8 +31,8 @@ single year may be used.
 # Create a list of GSOD files
 gsod_list <- list.files("~/Data/gsod", full.names = TRUE)
 
-# Load the raster digital elevation model
-dem <- raster::raster("~/Data/SRTM/SRTM_1deg.grd")
+# Fetch and aggregate the raster digital elevation model
+dem <- fetch_DEM()
 
 # Run the function for MAX and MIN temperature
 lapply(X = gsod_list, FUN = interp, dem = dem, vars = c("MAX", "MIN"))

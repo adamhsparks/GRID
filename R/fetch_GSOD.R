@@ -43,14 +43,14 @@
 #' \dontrun{
 #'
 #' # Fetch one year of GSOD data
-#' gsod_1998 <- fetch_gsod(years = 1998)
+#' gsod_1998 <- fetch_GSOD(years = 1998)
 #'
 #' # Fetch multiple years of GSOD data and save to disk
 #' years <- as.list(seq(from = 1983, to = 2017, by = 1))
-#' lapply(X = years, FUN = fetch_gsod, dsn = "~/Data/GSOD")
+#' lapply(X = years, FUN = fetch_GSOD, dsn = "~/Data/GSOD")
 #' }
 
-fetch_gsod <- function(years = NULL, dsn = NULL) {
+fetch_GSOD <- function(years = NULL, dsn = NULL) {
   # check user inputs, see internal_functions.R for these functions
   year_list <- .check_year(years)
   dsn <- .validate_dsn(dsn)
