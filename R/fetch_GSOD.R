@@ -27,7 +27,7 @@
 #' \item{RH}{Mean daily relative humidity.}
 #' }
 #'
-#' @param year_list A numeric vector of years of GSOD data to fetch for
+#' @param years A numeric vector of years of GSOD data to fetch for
 #' interpolation. Defaults to current year.
 #' @param dsn Optional. A filepath where resulting CSV files are to be saved on
 #' local disk. If unspecified a tidy data frame is returned in the R session.
@@ -50,10 +50,10 @@
 #' lapply(X = years, FUN = fetch_gsod, dsn = "~/GSOD")
 #' }
 
-fetch_gsod <- function(year_list = NULL, dsn = NULL) {
+fetch_gsod <- function(years = NULL, dsn = NULL) {
 
   # check user inputs, see internal_functions.R for these functions
-  year_list <- .check_year(year_list)
+  year_list <- .check_year(years)
   dsn <- .validate_dsn(dsn)
 
   # fetch GSOD data from NCEI server

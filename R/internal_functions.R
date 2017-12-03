@@ -29,14 +29,16 @@
 
 #' @noRd
 # check year list, if not specified default to current year
-.check_year <- function(year_list) {
-  if (is.null(year_list)) {
+.check_year <- function(years) {
+  if (is.null(years)) {
     message(
       "\nYou have not specified any years to fetch, defaulting to ",
       format(Sys.Date(), "%Y"),
       ".\n"
     )
-    year_list <- format(Sys.Date(), "%Y")
+    years <- format(Sys.Date(), "%Y")
+  } else {
+    years <- years
   }
 }
 
