@@ -24,7 +24,7 @@ Fetch and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data
 \examples{
 
 \dontrun{
-# Fetch DEM and aggregate to 1 arc degree
+# Fetch DEM and aggregate to 1 arc degree and save to local disk
 fetch_DEM(dsn = "~/Data/DEM")
 }
 

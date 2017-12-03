@@ -49,8 +49,10 @@ fetch_DEM <- function(resolution = NULL, dsn = NULL) {
   # aggregate the SRTM data
   z <- raster::aggregate(z, fact = agg)
 
-  z[z == -9999] <- NA # set -9999 to NA
+  # set -9999 to NA
+  z[z == -9999] <- NA
 
+  # if dsn is specified, write a raster file to disk
   if (!is.null(dsn)) {
   raster::writeRaster(
     z,
@@ -61,4 +63,7 @@ fetch_DEM <- function(resolution = NULL, dsn = NULL) {
     overwrite = TRUE
   )
   }
+
+  # clean up
+  unlink(tempfile())
 }
