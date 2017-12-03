@@ -11,7 +11,7 @@ fetch_gsod(year_list = NULL, dsn = NULL)
 interpolation. Defaults to current year.}
 
 \item{dsn}{Optional. A filepath where resulting CSV files are to be saved on
-local disk.}
+local disk. If unspecified a tidy data frame is returned in the R session.}
 }
 \value{
 CSV file of GSOD data in compressed .bz2 format

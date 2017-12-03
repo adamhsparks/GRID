@@ -11,8 +11,8 @@ fetch_DEM(resolution = NULL, dsn = NULL)
 arc-degrees, e.g. 1 = 1 arc degree, .25 = one quarter arc degree. Valid
 options are 1, .5 and .25 degrees.}
 
-\item{dsn}{Directory where resulting CSV files are to be saved. Defaults
-to user's "home" directory.}
+\item{dsn}{Optional. Directory where resulting DEM file is to be saved. If
+unspecified a spatial object is returned in the R session.}
 }
 \value{
 A digital elevation model cropped to -60/60 degrees latitude and

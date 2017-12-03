@@ -30,7 +30,7 @@
 #' @param year_list A numeric vector of years of GSOD data to fetch for
 #' interpolation. Defaults to current year.
 #' @param dsn Optional. A filepath where resulting CSV files are to be saved on
-#' local disk.
+#' local disk. If unspecified a tidy data frame is returned in the R session.
 #'
 #' @references Jarvis, A., Reuter, H. I., Nelson, A., Guevara, E. (2008)
 #' Hole-filled SRTM for the globe Version 4, available from the CGIAR-CSI SRTM
@@ -54,7 +54,7 @@ fetch_gsod <- function(year_list = NULL, dsn = NULL) {
 
   # check user inputs, see internal_functions.R for these functions
   year_list <- .check_year(year_list)
-  dsn <- .validate_gsod_dsn(dsn)
+  dsn <- .validate_dsn(dsn)
 
   # fetch GSOD data from NCEI server
   weather <- GSODR::get_GSOD(years = year_list,
