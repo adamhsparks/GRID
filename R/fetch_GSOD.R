@@ -1,4 +1,5 @@
 
+
 #' Fetch GSOD Data and Subset Fields for Interpolation
 #'
 #' This function can be wrapped in an \code{\link[base]{lapply}} function to
@@ -36,7 +37,7 @@
 #' Hole-filled SRTM for the globe Version 4, available from the CGIAR-CSI SRTM
 #' 90m Database (http://srtm.csi.cgiar.org)
 #'
-#' @return CSV file of GSOD data in compressed .bz2 format
+#' @return List of data frames
 #' @export
 #'
 #' @examples
@@ -47,11 +48,10 @@
 #'
 #' # Fetch multiple years of GSOD data and save to disk
 #' years <- as.list(seq(from = 1983, to = 2017, by = 1))
-#' lapply(X = years, FUN = fetch_gsod, dsn = "~/GSOD")
+#' lapply(X = years, FUN = fetch_gsod, dsn = "~/Data/GSOD")
 #' }
 
 fetch_gsod <- function(years = NULL, dsn = NULL) {
-
   # check user inputs, see internal_functions.R for these functions
   year_list <- .check_year(years)
   dsn <- .validate_dsn(dsn)
@@ -77,16 +77,14 @@ fetch_gsod <- function(years = NULL, dsn = NULL) {
 
   # remove any stations lacking elevation data,
   # they cannot be used in calculations
-  weather <- weather[!is.na(weather$ELEV_M_SRTM_90m), ]
+  weather <- weather[!is.na(weather$ELEV_M_SRTM_90m),]
 
+  # create a list of data frames to return
+  weather <- split(weather, weather$YEAR)
+
+  # if dsn is specifed write data frames to files, see internal_funtions.R
+  # for write_gsod()
   if (!is.null(dsn)) {
-    # create YEAR object for naming object out
-    YEAR <- weather$YEAR[1]
-
-    # create file name
-    fname <- paste0("GSOD_", YEAR, ".bz2")
-
-    # write a compressed CSV file to disk in the specified location
-    readr::write_csv(weather, path = file.path(dsn, fname), na = "NA")
+    lapply(X =  weather, FUN = write_gsod, dsn = dsn)
   }
 }

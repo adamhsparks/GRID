@@ -37,6 +37,8 @@
       ".\n"
     )
     years <- as.numeric(format(Sys.Date(), "%Y"))
+  } else {
+    years <- years
   }
 }
 
@@ -78,4 +80,16 @@
                             resolution == .5 ~ 6,
                             resolution == 1 ~ 12)
   }
+}
+
+#' @noRd
+write_gsod <- function(weather, dsn) {
+  # create YEAR object for naming object out
+  YEAR <- weather$YEAR[1]
+
+  # create file name
+  fname <- paste0("GSOD_", YEAR, ".bz2")
+
+  # write a compressed CSV file to disk in the specified location
+  readr::write_csv(weather, path = file.path(dsn, fname), na = "NA")
 }
