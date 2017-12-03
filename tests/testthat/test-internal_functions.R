@@ -1,11 +1,4 @@
 
-context(".validate_dsn()")
-test_that(".validate_dsn defaults to user's `home` dir if none specified", {
-  dsn <- NULL
-  dsn <- .validate_dsn(dsn)
-  expect_equal(dsn, path.expand("~"))
-})
-
 context(".check_year()")
 test_that(".check_year() defaults to current year if none specified", {
   year_list <- NULL
