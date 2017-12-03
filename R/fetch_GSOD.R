@@ -89,6 +89,4 @@ fetch_gsod <- function(years = NULL, dsn = NULL) {
     # write a compressed CSV file to disk in the specified location
     readr::write_csv(weather, path = file.path(dsn, fname), na = "NA")
   }
-  # clean up and free up RAM/swap
-  gc()
 }
