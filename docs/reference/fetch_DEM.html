@@ -119,7 +119,9 @@ options are 1, .5 and .25 degrees.</p></td>
     <tr>
       <th>dsn</th>
       <td><p>Optional. Directory where resulting DEM file is to be saved. If
-unspecified a spatial object is returned in the R session.</p></td>
+unspecified a spatial object is returned in the R session. If a DEM exists,
+it will be overwritten with the new one of the same resolution. If a new
+resolution is specified, a new file will be created.</p></td>
     </tr>
     </table>
     

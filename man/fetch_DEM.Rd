@@ -12,7 +12,9 @@ arc-degrees, e.g. 1 = 1 arc degree, .25 = one quarter arc degree. Valid
 options are 1, .5 and .25 degrees.}
 
 \item{dsn}{Optional. Directory where resulting DEM file is to be saved. If
-unspecified a spatial object is returned in the R session.}
+unspecified a spatial object is returned in the R session. If a DEM exists,
+it will be overwritten with the new one of the same resolution. If a new
+resolution is specified, a new file will be created.}
 }
 \value{
 A digital elevation model cropped to -60/60 degrees latitude and
