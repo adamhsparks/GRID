@@ -5,6 +5,8 @@ GRID, GSOD(R) Interoplated Data
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 [![Travis-CI Build
 Status](https://travis-ci.org/adamhsparks/GRID.svg?branch=master)](https://travis-ci.org/adamhsparks/GRID)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/adamhsparks/GRID?branch=master&svg=true)](https://ci.appveyor.com/project/adamhsparks/GRID)
 [![codecov.io](https://codecov.io/github/adamhsparks/GRID/coverage.svg?branch=master)](https://codecov.io/github/adamhsparks/GRID?branch=master)
 
 ## Research compendium for a report on interpolating GSOD weather data
