@@ -37,8 +37,6 @@
       ".\n"
     )
     years <- format(Sys.Date(), "%Y")
-  } else {
-    years <- years
   }
 }
 
