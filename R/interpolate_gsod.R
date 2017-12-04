@@ -71,7 +71,7 @@ interpolate_gsod <- function(gsod = NULL,
         tps_pred <- raster::interpolate(dem, tps_y, xyOnly = FALSE)
       }
 
-      gsod_stack <- lapply(X = , FUN = .create_stack)
+      gsod_stack <- lapply(X = , FUN = .create_stack, vars = vars, gsod = gsod)
 
       if (!is.null(dsn)) {
         # write to disk
