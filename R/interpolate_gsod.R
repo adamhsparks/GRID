@@ -27,12 +27,13 @@
 #' dem <- fetch_DEM()
 #'
 #' # Run the function for MAX and MIN temperature
-#' lapply(X = gsod_list, FUN = interp, dem = dem, vars = c("MAX", "MIN"))
+#' lapply(X = gsod_list, FUN = interpolate_GSOD,
+#'        dem = dem, vars = c("MAX", "MIN"))
 #' }
 #'
 #' @importFrom rlang .data
 
-interpolate_gsod <- function(gsod = NULL,
+interpolate_GSOD <- function(gsod = NULL,
                              dem = NULL,
                              dsn = NULL,
                              vars = NULL) {
