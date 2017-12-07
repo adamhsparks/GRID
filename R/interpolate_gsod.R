@@ -27,8 +27,8 @@
 #' dem <- fetch_DEM()
 #'
 #' # Run the function for MAX and MIN temperature
-#' lapply(X = file_list, FUN = interpolate_GSOD,
-#'        dem = dem, vars = c("MAX", "MIN"))
+#' pblapply(X = file_list, FUN = interpolate_GSOD,
+#'          dem = dem, vars = c("MAX", "MIN"))
 #' }
 #'
 
@@ -40,11 +40,6 @@ interpolate_GSOD <- function(GSOD = NULL,
   dsn <- .validate_dsn(dsn)
   vars <- .check_vars(vars)
   GSOD <- .check_GSOD(GSOD)
-
-  TEMP <- NULL
-  MAX <- NULL
-  MIN <- NULL
-  RH <- NULL
 
   # Import GSOD data
   GSOD <- readr::read_csv(GSOD, col_types = "cdddcddddd", progress = FALSE)
@@ -60,6 +55,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       dem = dem,
       dsn = dsn
     )
+  } else {
+    TEMP <- NULL
   }
 
   if ("MAX" %in% vars) {
@@ -69,6 +66,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       dem = dem,
       dsn = dsn
     )
+  } else {
+    MAX <- NULL
   }
 
   if ("MIN" %in% vars) {
@@ -78,6 +77,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       dem = dem,
       dsn = dsn
     )
+  } else {
+    MIN <- NULL
   }
 
   if ("RH" %in% vars) {
@@ -87,9 +88,12 @@ interpolate_GSOD <- function(GSOD = NULL,
       dem = dem,
       dsn = dsn
     )
+  } else {
+    RH <- NULL
   }
 
-  out <- list(TEMP, MAX, MIN, RH)
+  # create a list of the raster stacks, name it, remove NULL items
+  out <- list(c(TEMP, MAX, MIN, RH))
   return(out)
 }
 
@@ -146,7 +150,6 @@ interpolate_GSOD <- function(GSOD = NULL,
     )
   weather <- raster::stack(weather[seq_along(weather)])
   weather <-
-    setNames(weather, paste0(weather, "_", 1:raster::nlayers(weather)))
+    setNames(weather, paste0(var, "_", 1:raster::nlayers(weather)))
   return(weather)
-  gc()
 }
