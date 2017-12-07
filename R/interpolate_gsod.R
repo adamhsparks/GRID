@@ -89,8 +89,8 @@ interpolate_GSOD <- function(GSOD = NULL,
     )
   }
 
-
   out <- list(TEMP, MAX, MIN, RH)
+  return(out)
 }
 
 #' @noRd
@@ -124,7 +124,7 @@ interpolate_GSOD <- function(GSOD = NULL,
     # write to disk with "YYYY_YDAY.tiff" as the name
     raster::writeRaster(
       tps_pred,
-      filename = paste0(dsn, "/", j, "_", x[1, 5], "_", x[1, 6], ".tiff"),
+      filename = paste0(dsn, "/", var, "_", x[1, 5], "_", x[1, 6], ".tiff"),
       format = "GTiff",
       dataType = "INT2S",
       options = c("COMPRESS=LZW", "TFW=YES"),
@@ -136,6 +136,10 @@ interpolate_GSOD <- function(GSOD = NULL,
 
 #' @noRd
 .create_stack <- function(x, var, dem, dsn) {
+
+  # split the data frame into a list of dataframes by day of year
+  x <- split(x, x$YDAY)
+
   weather <-
     lapply(
       X = x,
