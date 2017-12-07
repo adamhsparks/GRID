@@ -117,7 +117,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 .interpolate_raster <- function(GSOD, var, dsn, dem) {
   # create data frame for individual weather vars for interpolation
   y <-
-    data.frame(x["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"], GSOD[var])
+    data.frame(GSOD["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"], GSOD[var])
 
   # remove any NA values from the data, the interpolation will not work with
   # any NAs present for any field.
