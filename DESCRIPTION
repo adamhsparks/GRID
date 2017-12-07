@@ -21,7 +21,6 @@ Imports:
     GSODR,
     readr,
     raster,
-    rlang,
     stats,
     utils
 Suggests:

@@ -4,10 +4,10 @@
 \alias{interpolate_GSOD}
 \title{Interpolate GSOD Data to a Gridded Surface}
 \usage{
-interpolate_GSOD(gsod = NULL, dem = NULL, dsn = NULL, vars = NULL)
+interpolate_GSOD(GSOD = NULL, dem = NULL, dsn = NULL, vars = NULL)
 }
 \arguments{
-\item{gsod}{A \code{\link[base]{list}} of data frames or CSV files of GSOD
+\item{GSOD}{A \code{\link[base]{list}} of data frames or CSV files of GSOD
 data created by \link{fetch_GSOD}.}
 
 \item{dem}{Digital elevation model that has been fetched and processed using
@@ -29,14 +29,14 @@ single year may be used.
 \examples{
 \dontrun{
 # Create a list of GSOD files
-gsod_list <- list.files("~/Data/gsod", full.names = TRUE)
+file_list <- list.files("~/Data/GSOD", full.names = TRUE)
 
 # Fetch and aggregate the raster digital elevation model
 dem <- fetch_DEM()
 
 # Run the function for MAX and MIN temperature
-lapply(X = gsod_list, FUN = interpolate_GSOD,
-       dem = dem, vars = c("MAX", "MIN"))
+GRID <- pblapply(X = file_list, FUN = interpolate_GSOD,
+                     dem = dem, vars = c("MAX", "MIN"))
 }
 
 }

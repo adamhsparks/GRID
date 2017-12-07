@@ -1,4 +1,5 @@
 
+
 #' Interpolate GSOD Data to a Gridded Surface
 #'
 #' This function is designed to be wrapped in an \code{\link[base]{lapply}}
@@ -42,7 +43,8 @@ interpolate_GSOD <- function(GSOD = NULL,
   GSOD <- .check_GSOD(GSOD)
 
   # Import GSOD data
-  GSOD <- readr::read_csv(GSOD, col_types = "cdddcddddd", progress = FALSE)
+  GSOD <-
+    readr::read_csv(GSOD, col_types = "cdddcddddd", progress = FALSE)
 
   # Create a list of data frames by YDAY
   GSOD <- split(GSOD, as.factor(GSOD$YDAY))
@@ -125,7 +127,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 
   # remove outliers
   bxs <- grDevices::boxplot.stats(y[, 4])
-  y <- y[!y[, 4] %in% bxs$out,]
+  y <- y[!y[, 4] %in% bxs$out, ]
 
   # create interpolation data set
   y_vals <- y[, 4]
@@ -144,7 +146,13 @@ interpolate_GSOD <- function(GSOD = NULL,
     # write to disk with "YYYY_YDAY.tiff" as the name
     raster::writeRaster(
       tps_pred,
-      filename = paste0(dsn, "/", var, "_", GSOD[1, 5], "_", GSOD[1, 6], ".tiff"),
+      filename = paste0(dsn,
+                        "/",
+                        var,
+                        "_",
+                        GSOD[1, 5],
+                        "_", GSOD[1, 6],
+                        ".tiff"),
       format = "GTiff",
       dataType = "INT2S",
       options = c("COMPRESS=LZW", "TFW=YES"),

@@ -3,4 +3,3 @@
 export(fetch_DEM)
 export(fetch_GSOD)
 export(interpolate_GSOD)
-importFrom(rlang,.data)
