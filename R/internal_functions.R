@@ -1,14 +1,14 @@
 `%notin%` <- Negate("%in%")
 
 #' @noRd
-.check_gsod <- function(gsod) {
-  if (is.null(gsod)) {
+.check_GSOD <- function(GSOD) {
+  if (is.null(GSOD)) {
     stop("You must supply a list of GSOD data files for interpolation")
-  } else if (typeof(gsod[[1]]) == "character") {
-    gsod <- gsod
+  } else if (typeof(GSOD[[1]]) == "character") {
+    GSOD <- GSOD
   } else {
     # import the file for interpolation
-    gsod <- readr::read_csv(gsod, col_types = "cdddcddddd")
+    GSOD <- readr::read_csv(GSOD, col_types = "cdddcddddd")
   }
 
 }
@@ -83,7 +83,7 @@
 }
 
 #' @noRd
-write_gsod <- function(weather, dsn) {
+write_GSOD <- function(weather, dsn) {
   # create YEAR object for naming object out
   YEAR <- weather$YEAR[1]
 
