@@ -136,10 +136,6 @@ interpolate_GSOD <- function(GSOD = NULL,
 
 #' @noRd
 .create_stack <- function(x, var, dem, dsn) {
-
-  # split the data frame into a list of dataframes by day of year
-  x <- split(x, x$YDAY)
-
   weather <-
     lapply(
       X = x,
