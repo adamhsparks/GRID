@@ -41,8 +41,13 @@ interpolate_GSOD <- function(GSOD = NULL,
   vars <- .check_vars(vars)
   GSOD <- .check_GSOD(GSOD)
 
+  TEMP <- NULL
+  MAX <- NULL
+  MIN <- NULL
+  RH <- NULL
+
   # Import GSOD data
-  GSOD <- readr::read_csv(GSOD, col_types = "cdddcddddd")
+  GSOD <- readr::read_csv(GSOD, col_types = "cdddcddddd", progress = FALSE)
 
   # Create a list of data frames by YDAY
   GSOD <- split(GSOD, as.factor(GSOD$YDAY))
@@ -83,6 +88,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn
     )
   }
+
+
   out <- list(TEMP, MAX, MIN, RH)
 }
 
