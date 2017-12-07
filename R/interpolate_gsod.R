@@ -144,7 +144,7 @@ interpolate_GSOD <- function(GSOD = NULL,
     # write to disk with "YYYY_YDAY.tiff" as the name
     raster::writeRaster(
       tps_pred,
-      filename = paste0(dsn, "/", var, "_", x[1, 5], "_", x[1, 6], ".tiff"),
+      filename = paste0(dsn, "/", var, "_", GSOD[1, 5], "_", GSOD[1, 6], ".tiff"),
       format = "GTiff",
       dataType = "INT2S",
       options = c("COMPRESS=LZW", "TFW=YES"),
