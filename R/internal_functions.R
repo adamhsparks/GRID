@@ -25,6 +25,7 @@
            "not valid for interpolation.\n")
     }
   }
+  return(vars)
 }
 
 #' @noRd

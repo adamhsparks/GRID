@@ -27,8 +27,8 @@
 #' dem <- fetch_DEM()
 #'
 #' # Run the function for MAX and MIN temperature
-#' pblapply(X = file_list, FUN = interpolate_GSOD,
-#'          dem = dem, vars = c("MAX", "MIN"))
+#' GRID <- pblapply(X = file_list, FUN = interpolate_GSOD,
+#'                      dem = dem, vars = c("MAX", "MIN"))
 #' }
 #'
 
@@ -50,7 +50,7 @@ interpolate_GSOD <- function(GSOD = NULL,
   # Apply function for each var that is specified
   if ("TEMP" %in% vars) {
     TEMP <- .create_stack(
-      x = GSOD,
+      GSOD = GSOD,
       var = "TEMP",
       dem = dem,
       dsn = dsn
@@ -61,7 +61,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 
   if ("MAX" %in% vars) {
     MAX <- .create_stack(
-      x = GSOD,
+      GSOD = GSOD,
       var = "MAX",
       dem = dem,
       dsn = dsn
@@ -72,7 +72,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 
   if ("MIN" %in% vars) {
     MIN <- .create_stack(
-      x = GSOD,
+      GSOD = GSOD,
       var = "MIN",
       dem = dem,
       dsn = dsn
@@ -83,7 +83,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 
   if ("RH" %in% vars) {
     RH <- .create_stack(
-      x = GSOD,
+      GSOD = GSOD,
       var = "RH",
       dem = dem,
       dsn = dsn
@@ -98,7 +98,23 @@ interpolate_GSOD <- function(GSOD = NULL,
 }
 
 #' @noRd
-.interpolate_raster <- function(x, var, dsn, dem) {
+.create_stack <- function(GSOD, var, dem, dsn) {
+  weather <-
+    lapply(
+      X = GSOD,
+      FUN = .interpolate_raster,
+      var = var,
+      dem = dem,
+      dsn = dsn
+    )
+  weather <- raster::stack(weather[seq_along(weather)])
+  weather <-
+    setNames(weather, paste0(var, "_", 1:raster::nlayers(weather)))
+  return(weather)
+}
+
+#' @noRd
+.interpolate_raster <- function(GSOD, var, dsn, dem) {
   # create data frame for individual weather vars for interpolation
   y <-
     data.frame(x["LON"], x["LAT"], x["ELEV_M_SRTM_90m"], x[var])
@@ -136,20 +152,4 @@ interpolate_GSOD <- function(GSOD = NULL,
     )
   }
   return(tps_pred)
-}
-
-#' @noRd
-.create_stack <- function(x, var, dem, dsn) {
-  weather <-
-    lapply(
-      X = x,
-      FUN = .interpolate_raster,
-      var = var,
-      dem = dem,
-      dsn = dsn
-    )
-  weather <- raster::stack(weather[seq_along(weather)])
-  weather <-
-    setNames(weather, paste0(var, "_", 1:raster::nlayers(weather)))
-  return(weather)
 }
