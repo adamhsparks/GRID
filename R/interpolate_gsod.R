@@ -42,7 +42,6 @@ interpolate_GSOD <- function(GSOD = NULL,
   dsn <- .validate_dsn(dsn)
   vars <- .validate_vars(vars)
   GSOD <- .validate_GSOD(GSOD)
-  cores <- .validate_cores(cores)
 
   # Import GSOD data
   GSOD <-
@@ -57,8 +56,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "TEMP",
       dem = dem,
-      dsn = dsn,
-      cores = cores
+      dsn = dsn
     )
   } else {
     TEMP <- NULL
@@ -69,8 +67,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "MAX",
       dem = dem,
-      dsn = dsn,
-      cores = cores
+      dsn = dsn
     )
   } else {
     MAX <- NULL
@@ -81,8 +78,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "MIN",
       dem = dem,
-      dsn = dsn,
-      cores = cores
+      dsn = dsn
     )
   } else {
     MIN <- NULL
@@ -93,8 +89,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "RH",
       dem = dem,
-      dsn = dsn,
-      cores = cores
+      dsn = dsn
     )
   } else {
     RH <- NULL
