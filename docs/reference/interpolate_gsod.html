@@ -107,7 +107,8 @@ function to process multiple years of GSOD data for interpolation, though a
 single year may be used.</p>
     
 
-    <pre class="usage"><span class='fu'>interpolate_GSOD</span>(<span class='kw'>GSOD</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>interpolate_GSOD</span>(<span class='kw'>GSOD</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -130,6 +131,11 @@ data created by <a href='fetch_GSOD.html'>fetch_GSOD</a>.</p></td>
       <th>vars</th>
       <td><p>Weather variables to interpolate. Possible values are,
 <code>TEMP</code>, <code>MAX</code>, <code>MIN</code>, <code>RH</code>. Defaults to <code>TEMP</code>.</p></td>
+    </tr>
+    <tr>
+      <th>cores</th>
+      <td><p>Number of cores to use for parallel processing. Defaults to 1 on
+Windows OS or if not specified.</p></td>
     </tr>
     </table>
     
