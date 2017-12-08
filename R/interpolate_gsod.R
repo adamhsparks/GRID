@@ -14,6 +14,8 @@
 #' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
 #' @param vars Weather variables to interpolate. Possible values are,
 #' \code{TEMP}, \code{MAX}, \code{MIN}, \code{RH}. Defaults to \code{TEMP}.
+#' @param cores Number of cores to use for parallel processing. Defaults to 1 on
+#' Windows OS or if not specified.
 #'
 #' @return
 #' \code{List} of \code{\link[raster]{stack}} objects by year and variable
@@ -37,7 +39,8 @@
 interpolate_GSOD <- function(GSOD = NULL,
                              dem = NULL,
                              dsn = NULL,
-                             vars = NULL) {
+                             vars = NULL,
+                             cores = NULL) {
   # validate user inputs, see `internal_functions.R` for these
   dsn <- .validate_dsn(dsn)
   vars <- .validate_vars(vars)
@@ -103,12 +106,13 @@ interpolate_GSOD <- function(GSOD = NULL,
 #' @noRd
 .create_stack <- function(GSOD, var, dem, dsn) {
   weather <-
-    lapply(
+    parallel::mclapply(
       X = GSOD,
       FUN = .interpolate_raster,
       var = var,
       dem = dem,
-      dsn = dsn
+      dsn = dsn,
+      mc.cores = cores
     )
   weather <- raster::stack(weather[seq_along(weather)])
   weather <-
