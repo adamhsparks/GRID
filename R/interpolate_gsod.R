@@ -31,8 +31,8 @@
 #' dem <- fetch_DEM()
 #'
 #' # Run the function for MAX and MIN temperature
-#' GRID <- pblapply(X = file_list, FUN = interpolate_GSOD,
-#'                      dem = dem, vars = c("MAX", "MIN"))
+#' GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
+#' vars = c("MAX", "MIN"), cores = 4)
 #' }
 #'
 
@@ -45,6 +45,7 @@ interpolate_GSOD <- function(GSOD = NULL,
   dsn <- .validate_dsn(dsn)
   vars <- .validate_vars(vars)
   GSOD <- .validate_GSOD(GSOD)
+  cores <- .validate_cores(cores)
 
   # Import GSOD data
   GSOD <-
@@ -59,7 +60,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "TEMP",
       dem = dem,
-      dsn = dsn
+      dsn = dsn,
+      cores = cores
     )
   } else {
     TEMP <- NULL
@@ -70,7 +72,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "MAX",
       dem = dem,
-      dsn = dsn
+      dsn = dsn,
+      cores = cores
     )
   } else {
     MAX <- NULL
@@ -81,7 +84,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "MIN",
       dem = dem,
-      dsn = dsn
+      dsn = dsn,
+      cores = cores
     )
   } else {
     MIN <- NULL
@@ -92,7 +96,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "RH",
       dem = dem,
-      dsn = dsn
+      dsn = dsn,
+      cores = cores
     )
   } else {
     RH <- NULL
@@ -104,7 +109,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 }
 
 #' @noRd
-.create_stack <- function(GSOD, var, dem, dsn) {
+.create_stack <- function(GSOD, var, dem, dsn, cores) {
   weather <-
     parallel::mclapply(
       X = GSOD,
@@ -112,7 +117,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       var = var,
       dem = dem,
       dsn = dsn,
-      mc.cores = cores
+      mc.cores = cores,
+      mc.preschedule = FALSE
     )
   weather <- raster::stack(weather[seq_along(weather)])
   weather <-

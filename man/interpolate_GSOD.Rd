@@ -39,8 +39,8 @@ file_list <- list.files("~/Data/GSOD", full.names = TRUE)
 dem <- fetch_DEM()
 
 # Run the function for MAX and MIN temperature
-GRID <- pblapply(X = file_list, FUN = interpolate_GSOD,
-                     dem = dem, vars = c("MAX", "MIN"))
+GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
+vars = c("MAX", "MIN"), cores = 4)
 }
 
 }
