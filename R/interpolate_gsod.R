@@ -60,7 +60,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "TEMP",
       dem = dem,
-      dsn = dsn
+      dsn = dsn,
+      mc.cores = cores
     )
   } else {
     TEMP <- NULL
@@ -71,7 +72,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "MAX",
       dem = dem,
-      dsn = dsn
+      dsn = dsn,
+      mc.cores = cores
     )
   } else {
     MAX <- NULL
@@ -82,7 +84,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "MIN",
       dem = dem,
-      dsn = dsn
+      dsn = dsn,
+      mc.cores = cores
     )
   } else {
     MIN <- NULL
@@ -93,7 +96,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       GSOD = GSOD,
       var = "RH",
       dem = dem,
-      dsn = dsn
+      dsn = dsn,
+      mc.cores = cores
     )
   } else {
     RH <- NULL
