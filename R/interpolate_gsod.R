@@ -14,6 +14,8 @@
 #' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
 #' @param vars Weather variables to interpolate. Possible values are,
 #' \code{TEMP}, \code{MAX}, \code{MIN}, \code{RH}. Defaults to \code{TEMP}.
+#' @param cores Number of cores to use for parallel processing. Defaults to 1 on
+#' Windows OS or if not specified.
 #'
 #' @return
 #' \code{List} of \code{\link[raster]{stack}} objects by year and variable
