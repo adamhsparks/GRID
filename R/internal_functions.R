@@ -1,7 +1,7 @@
 `%notin%` <- Negate("%in%")
 
 #' @noRd
-.check_GSOD <- function(GSOD) {
+.validate_GSOD <- function(GSOD) {
   if (is.null(GSOD)) {
     stop("You must supply a list of GSOD data files for interpolation")
   } else if (typeof(GSOD[[1]]) == "character") {
@@ -34,36 +34,6 @@
     } else {
       stop("You specified more cores than available for processing.")
     }
-  }
-}
-
-#' @noRd
-.check_vars <- function(vars) {
-  if (is.null(vars)) {
-    vars <- "TEMP"
-  } else {
-    vars <- toupper(vars)
-
-    if (any(vars %notin% c("TEMP", "RH", "MAX", "MIN"))) {
-      stop("One or more of your weather variable(s) are\n",
-           "not valid for interpolation.\n")
-    }
-  }
-  return(vars)
-}
-
-#' @noRd
-# check year list, if not specified default to current year
-.check_year <- function(years) {
-  if (is.null(years)) {
-    message(
-      "\nYou have not specified any years to fetch, defaulting to ",
-      format(Sys.Date(), "%Y"),
-      ".\n"
-    )
-    years <- as.numeric(format(Sys.Date(), "%Y"))
-  } else {
-    years <- years
   }
 }
 
@@ -108,7 +78,37 @@
 }
 
 #' @noRd
-write_GSOD <- function(weather, dsn) {
+.validate_vars <- function(vars) {
+  if (is.null(vars)) {
+    vars <- "TEMP"
+  } else {
+    vars <- toupper(vars)
+
+    if (any(vars %notin% c("TEMP", "RH", "MAX", "MIN"))) {
+      stop("One or more of your weather variable(s) are\n",
+           "not valid for interpolation.\n")
+    }
+  }
+  return(vars)
+}
+
+#' @noRd
+# check year list, if not specified default to current year
+.validate_year <- function(years) {
+  if (is.null(years)) {
+    message(
+      "\nYou have not specified any years to fetch, defaulting to ",
+      format(Sys.Date(), "%Y"),
+      ".\n"
+    )
+    years <- as.numeric(format(Sys.Date(), "%Y"))
+  } else {
+    years <- years
+  }
+}
+
+#' @noRd
+.write_GSOD <- function(weather, dsn) {
   # create YEAR object for naming object out
   YEAR <- weather$YEAR[1]
 

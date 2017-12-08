@@ -43,9 +43,9 @@ interpolate_GSOD <- function(GSOD = NULL,
                              cores = NULL) {
   # validate user inputs, see `internal_functions.R` for these
   dsn <- .validate_dsn(dsn)
-  vars <- .check_vars(vars)
-  GSOD <- .check_GSOD(GSOD)
-  cores <- .check_cores(cores)
+  vars <- .validate_vars(vars)
+  GSOD <- .validate_GSOD(GSOD)
+  cores <- .validate_cores(cores)
 
   # Import GSOD data
   GSOD <-

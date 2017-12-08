@@ -82,9 +82,9 @@ fetch_GSOD <- function(years = NULL, dsn = NULL) {
   weather <- split(weather, weather$YEAR)
 
   # if dsn is specifed write data frames to files, see internal_funtions.R
-  # for write_gsod()
+  # for .write_gsod()
   if (!is.null(dsn)) {
-    lapply(X =  weather, FUN = write_gsod, dsn = dsn)
+    lapply(X =  weather, FUN = .write_gsod, dsn = dsn)
   }
 
   return(weather)
