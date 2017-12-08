@@ -101,7 +101,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 }
 
 #' @noRd
-.create_stack <- function(GSOD, var, dem, dsn, cores) {
+.create_stack <- function(GSOD, var, dem, dsn) {
   weather <-
     lapply(
       X = GSOD,
