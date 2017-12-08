@@ -105,7 +105,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 }
 
 #' @noRd
-.create_stack <- function(GSOD, var, dem, dsn) {
+.create_stack <- function(GSOD, var, dem, dsn, cores) {
   weather <-
     parallel::mclapply(
       X = GSOD,
