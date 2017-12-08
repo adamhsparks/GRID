@@ -4,8 +4,7 @@
 \alias{interpolate_GSOD}
 \title{Interpolate GSOD Data to a Gridded Surface}
 \usage{
-interpolate_GSOD(GSOD = NULL, dem = NULL, dsn = NULL, vars = NULL,
-  cores = NULL)
+interpolate_GSOD(GSOD = NULL, dem = NULL, dsn = NULL, vars = NULL)
 }
 \arguments{
 \item{GSOD}{A \code{\link[base]{list}} of data frames or CSV files of GSOD
@@ -18,9 +17,6 @@ data created by \link{fetch_GSOD}.}
 
 \item{vars}{Weather variables to interpolate. Possible values are,
 \code{TEMP}, \code{MAX}, \code{MIN}, \code{RH}. Defaults to \code{TEMP}.}
-
-\item{cores}{Number of cores to use for parallel processing. Defaults to 1 on
-Windows OS or if not specified.}
 }
 \value{
 \code{List} of \code{\link[raster]{stack}} objects by year and variable
