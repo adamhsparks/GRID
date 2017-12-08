@@ -14,6 +14,30 @@
 }
 
 #' @noRd
+# check OS and set cores to 1 if NULL, Windows OS or unknown
+# make sure that number of cores specifed less than number available
+.validate_cores <- function(cores) {
+  if (is.null(cores)) {
+    cores <- 1
+  }
+  if (.Platform$OS.type == "windows") {
+    cores <- 1
+  } else if (Sys.info()["sysname"] == "Darwin") {
+    if (cores <= parallel::detectCores()) {
+      cores <- cores
+    } else {
+      stop("You specified more cores than available for processing.")
+    }
+  } else if (.Platform$OS.type == "unix") {
+    if (cores <= parallel::detectCores()) {
+      cores <- cores
+    } else {
+      stop("You specified more cores than available for processing.")
+    }
+  }
+}
+
+#' @noRd
 .check_vars <- function(vars) {
   if (is.null(vars)) {
     vars <- "TEMP"

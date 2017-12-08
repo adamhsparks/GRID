@@ -1,5 +1,6 @@
 
 
+
 #' Interpolate GSOD Data to a Gridded Surface
 #'
 #' This function is designed to be wrapped in an \code{\link[base]{lapply}}
@@ -36,11 +37,13 @@
 interpolate_GSOD <- function(GSOD = NULL,
                              dem = NULL,
                              dsn = NULL,
-                             vars = NULL) {
+                             vars = NULL,
+                             cores = NULL) {
   # validate user inputs, see `internal_functions.R` for these
   dsn <- .validate_dsn(dsn)
   vars <- .check_vars(vars)
   GSOD <- .check_GSOD(GSOD)
+  cores <- .check_cores(cores)
 
   # Import GSOD data
   GSOD <-
@@ -102,12 +105,13 @@ interpolate_GSOD <- function(GSOD = NULL,
 #' @noRd
 .create_stack <- function(GSOD, var, dem, dsn) {
   weather <-
-    lapply(
+    parallel::mclapply(
       X = GSOD,
       FUN = .interpolate_raster,
       var = var,
       dem = dem,
-      dsn = dsn
+      dsn = dsn,
+      mc.cores = cores
     )
   weather <- raster::stack(weather[seq_along(weather)])
   weather <-
@@ -127,7 +131,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 
   # remove outliers
   bxs <- grDevices::boxplot.stats(y[, 4])
-  y <- y[!y[, 4] %in% bxs$out, ]
+  y <- y[!y[, 4] %in% bxs$out,]
 
   # create interpolation data set
   y_vals <- y[, 4]
