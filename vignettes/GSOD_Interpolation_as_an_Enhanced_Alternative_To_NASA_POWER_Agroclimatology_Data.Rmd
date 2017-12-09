@@ -44,7 +44,7 @@ variables that _GRID_ can interpolate are:
 
 * RH - Mean daily relative humidity.
 
-## Downloading the digital elevation model
+## Downloading the Digital Elevation Model
 
 _GRID_ offers customised functionality, `fetch_DEM()` to download a digital
 elevation model based on the Shuttle Radar Topography Mission (SRTM) from
