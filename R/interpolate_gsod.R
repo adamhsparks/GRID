@@ -1,6 +1,4 @@
 
-
-
 #' Interpolate GSOD Data to a Gridded Surface
 #'
 #' This function is designed to be wrapped in an \code{\link[base]{lapply}}
@@ -30,9 +28,17 @@
 #' # Fetch and aggregate the raster digital elevation model
 #' dem <- fetch_DEM()
 #'
-#' # Run the function for MAX and MIN temperature
+#' # Run the function for MAX and MIN temperature on a *nix system using 2 cores
+#'
+#' library(parallel)
 #' GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
-#' vars = c("MAX", "MIN"), cores = 4)
+#' dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"), cores = 2)
+#'
+#' # Run the function for MAX and MIN temperature using 1 core, will work on Win
+#'
+#' library(parallel)
+#' GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
+#' dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
 #' }
 #'
 
