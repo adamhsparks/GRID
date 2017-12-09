@@ -67,7 +67,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
-    TEMP <- .stack_lists(X = TEMP, wvar = "TEMP", GSOD)
+    TEMP <- .stack_lists(X = TEMP, wvar = "TEMP")
   } else {
     TEMP <- NULL
   }
@@ -80,7 +80,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
-    MAX <- .stack_lists(X = MAX, wvar = "MAX", GSOD)
+    MAX <- .stack_lists(X = MAX, wvar = "MAX")
   } else {
     MAX <- NULL
   }
@@ -93,7 +93,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
-    MIN <- .stack_lists(X = MIN, wvar = "MIN", GSOD)
+    MIN <- .stack_lists(X = MIN, wvar = "MIN")
   } else {
     MIN <- NULL
   }
@@ -106,7 +106,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
-    RH <- .stack_lists(X = RH, wvar = "RH", GSOD)
+    RH <- .stack_lists(X = RH, wvar = "RH")
   } else {
     RH <- NULL
   }
@@ -174,5 +174,9 @@ interpolate_GSOD <- function(GSOD = NULL,
       overwrite = TRUE
     )
   }
+  names(tps_pred) <- paste0(wvar,
+                            "_",
+                            GSOD[1, 5],
+                            "_", GSOD[1, 6])
   return(tps_pred)
 }
