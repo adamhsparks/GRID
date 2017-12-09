@@ -129,12 +129,13 @@ interpolate_GSOD <- function(GSOD = NULL,
     dem = dem,
     dsn = dsn,
     mc.cores = cores,
-    mc.preschedule = FALSE
+    mc.preschedule = FALSE,
+    year = year
   )
 }
 
 #' @noRd
-.interpolate_raster <- function(GSOD, wvar, dsn, dem) {
+.interpolate_raster <- function(GSOD, wvar, dsn, dem, year) {
   # create data frame for individual weather vars for interpolation
   y <-
     data.frame(GSOD["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"],
