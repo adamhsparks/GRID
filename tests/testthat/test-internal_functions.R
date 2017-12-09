@@ -1,4 +1,17 @@
 
+
+context(".validate_GSOD()")
+test_that(".validate_GSOD() stops if not specified", {
+  GSOD <- NULL
+  expect_error(.validate_GSOD(GSOD))
+})
+
+context(".validate_dsn()")
+test_that(".validate_dsn() stops if invalid", {
+  dsn <- "/dev/NULL"
+  expect_error(.validate_dsn(dsn))
+})
+
 context(".validate_year()")
 test_that(".validate_year() defaults to current year if none specified", {
   year_list <- NULL
