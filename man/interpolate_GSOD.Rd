@@ -46,7 +46,6 @@ dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"), cores = 2)
 
 # Run the function for MAX and MIN temperature using 1 core, will work on Win
 
-library(parallel)
 GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
 dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
 }
