@@ -68,6 +68,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
+    TEMP <- .stack_lists(X = TEMP, wvar = "TEMP")
   } else {
     TEMP <- NULL
   }
@@ -80,6 +81,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
+    MAX <- .stack_lists(X = MAX, wvar = "MAX")
   } else {
     MAX <- NULL
   }
@@ -92,6 +94,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
+    MIN <- .stack_lists(X = MIN, wvar = "MIN")
   } else {
     MIN <- NULL
   }
@@ -104,6 +107,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
+    RH <- .stack_lists(X = RH, wvar = "RH")
   } else {
     RH <- NULL
   }
@@ -115,15 +119,15 @@ interpolate_GSOD <- function(GSOD = NULL,
 
 #' @noRd
 .create_stack <- function(GSOD, wvar, dem, dsn, cores) {
-    parallel::mclapply(
-      X = GSOD,
-      FUN = .interpolate_raster,
-      wvar = wvar,
-      dem = dem,
-      dsn = dsn,
-      mc.cores = cores,
-      mc.preschedule = FALSE
-    )
+  parallel::mclapply(
+    X = GSOD,
+    FUN = .interpolate_raster,
+    wvar = wvar,
+    dem = dem,
+    dsn = dsn,
+    mc.cores = cores,
+    mc.preschedule = FALSE
+  )
 }
 
 #' @noRd

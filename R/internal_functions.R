@@ -1,6 +1,13 @@
 `%notin%` <- Negate("%in%")
 
 #' @noRd
+.stack_lists <- function(X, wvar) {
+  X <- raster::stack(X[seq_along(X)])
+  X <-
+    stats::setNames(X, paste0(wvar, "_", 1:raster::nlayers(X)))
+}
+
+#' @noRd
 .validate_GSOD <- function(GSOD) {
   if (is.null(GSOD)) {
     stop("You must supply a list of GSOD data files for interpolation")
