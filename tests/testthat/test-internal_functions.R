@@ -34,6 +34,13 @@ test_that(".validate_year() defaults to current year if none specified", {
   expect_equal(year_list, as.numeric(format(Sys.Date(), "%Y")))
 })
 
+context(".validate_year()")
+test_that(".validate_year() returns valid years object", {
+  year_list <- 1983:2000
+  year_list <- .validate_year(year_list)
+  expect_equal(year_list, 1983:2000)
+})
+
 context(".validate_vars()")
 test_that(".validate_vars sets vars to TEMP if NULL", {
   vars <- NULL
