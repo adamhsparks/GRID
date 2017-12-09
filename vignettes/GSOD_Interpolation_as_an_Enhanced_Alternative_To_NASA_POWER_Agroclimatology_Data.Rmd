@@ -16,67 +16,119 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Global Surface Summary of the Day - GSOD data,
 [(link)](https://data.noaa.gov/dataset/global-surface-summary-of-the-day-gsod)
-is free, ground-based (or bouy) weather station data with global
+is free, ground-based (or buoy) weather station data with global
 coverage. When properly cleaned and interpolated this data can provide a better
 alternative to NASA/POWER for agroclimatology work. This document describes how
 to reproduce these data using freely available data, software and methodologies.
 
 # Daily Weather Data Cleaning, Thin Plate Splining and Interpolation
 
-GSOD temperature data are checked for consistency using `boxplot.stats()` to
-identify and remove daily outliers for both TMAX and TMIN, separately.
+The _GRID_ package makes this process as simple as possible. Described below are
+the steps that the package uses internally to create gridded weather data from
+the GSOD data.
+
+## Downloading GSOD Data
+
+_GRID_ offers customised functionality to download GSOD data, `fetch_GSOD()`
+using functionality from the [_GSODR_](https://ropensci.github.io/GSODR/)
+package. _GRID_ will provide only the data necessary for interpolation,
+excluding the other data that GSOD provides while omitting any station that has
+more than a maximum five missing days to help ensure data quality. The four
+variables that _GRID_ can interpolate are:
+
+* TEMP - Mean daily temperature,
+
+* MAX - Daily maximum temperature,
+
+* MIN - Daily minimum temperature,
+
+* RH - Mean daily relative humidity.
+
+## Downloading the digital elevation model
+
+_GRID_ offers customised functionality, `fetch_DEM()` to download a digital
+elevation model based on the Shuttle Radar Topography Mission (SRTM) from
+[WorldClim](https://wwww.worldclim.org/) and aggregated it to:
+
+* 1 degree (matching [NASA - POWER](https://power.larc.nasa.gov/) data, which
+can provide rainfall),
+
+* 0.5 degree (matching future [NASA - POWER](https://power.larc.nasa.gov/) data,
+which can provide rainfall),
+
+* 0.25 degree (matching [CHIRPS](http://chg.geog.ucsb.edu/data/chirps/) data,
+which can provide rainfall)
+
+## Interpolating the GSOD Data
+
+_GRID_ offers a simple function, `interpolate_GSOD()`, to automate error
+checking, interpolation and saving GeoTIFF files of the resulting data.
+
+When using the `interpolate_GSOD()` function, GSOD data are first checked for
+consistency using `boxplot.stats()` to identify and remove daily outliers for
+any variable requested.
 
 Once the GSOD data are cleaned, thin plate splining, the `Tps()` function, from
  _fields_ is used to create an object that can then be used to create
 an interpolated surface of temperatures using the SRTM DEM with the
 `interpolate()` function from _raster_.
 
-Use iterate through the data paralellising the process using _mclapply_:
+The data are then returned in a list of raster stacks by weather variable in the
+R session or saved to disk in GeoTIFF file format in an INT2S format with LZW
+compression for saving disk space.
 
-1. check for outliers in GSOD data and remove them,
-
-2. interpolate creating a global surface from the values,
-
-3. write GeoTIFF files to disk for every day, every weather variable specified.
-
-This is an extremly processor and time-intensive process for the entire global
-dataset. It is suggested to use a computer dedicated just to this task, while it
+This is an extremely processor and time-intensive process for the entire global
+data set. It is suggested to use a computer dedicated just to this task, while it
 will run on a fairly modest desktop, the computer may become unresponsive while
 performing this operation.
 
-### Step 1: Create a List of GSOD Data Files
+## Example Creating a Set of Global GeoTIFF Files from 1983 to 2016
 
-First make a list of the GSOD weather data .csv files as documented in:
-<https://github.com/adamhsparks/GRID/blob/master/data-raw/1_-_fetch_GSOD.md>
+### Step 1: Download the GSOD data
 
-```{r file_list}
+```{r fetch_GSOD, eval=FALSE, message='hide', results='hide'}
+years <- as.list(seq(from = 1983, to = 2016, by = 1))
+lapply(X = years, FUN = fetch_GSOD, dsn = "~/Data/GSOD")
+```
+
+### Step 2: Download the Digital Elevation Model and Aggregate to 1 Degree
+
+```{r fetch_DEM, eval=FALSE, message='hide', results='hide'}
+DEM <- fetch_DEM()
+```
+### Step 3: Interpolate the GSOD Data from On-disk Files
+
+```{r list_GSOD_files, eval=FALSE, message='hide', results='hide'}
 GSOD_list <- list.files("~/Data/GSOD", full.names = TRUE)
 ```
-### Step 2: Interpolate the Data
 
-Using a Linux, UNIX or macOS operating system, use `mclapply` to run the
-function in parallel on all four cores available on the server, apply the
-function over the list of GSOD data files. If using the `interp` function in
-a Windows environment, set `mc.cores = 1`, else it will fail.
+For a Unix-type operating system, it is possible to run the process in parallel
+to reduce the time necessary to generate all variables. This example shows how
+to run the function and save GTiff files in "~/Cache/GTiff" using two cores.
 
-```{r run_interpolation, eval=FALSE, message='hide', results='hide'}
-library(GRID)
-
-# load the raster
-dem <- raster::raster("~/Data/SRTM/SRTM_1deg.grd")
-
-# Run the function
-parallel::mclapply(X = GSOD_list,
-                   FUN = interpolate_gsod,
-                   dem = dem,
-                   mc.cores = 4,
-                   dsn = "/mnt/Cache/GTiff")
+```{r interpolate_2_cores,  eval=FALSE, message='hide', results='hide'}
+GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
+dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"), cores = 2)
 ```
+
+#### Using a Single Core on Windows
+
+If a Windows operating system is detected, the function will automatically
+default to using a single core for the processes as Windows does not support
+the parallel procedures that it uses. No need to specify the cores here, will
+default to one. If set to higher than one, it will automatically reset to one to
+run.
+
+```{r interpolate_windows,  eval=FALSE, message='hide', results='hide'}
+GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
+dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
+```
+
 ******
 
 # Appendices
 
-## R Session Information
+## Reproducibility
 
 ```{r system information, echo=FALSE}
 

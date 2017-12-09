@@ -86,50 +86,80 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>Global Surface Summary of the Day - GSOD data, <a href="https://data.noaa.gov/dataset/global-surface-summary-of-the-day-gsod">(link)</a> is free, ground-based (or bouy) weather station data with global coverage. When properly cleaned and interpolated this data can provide a better alternative to NASA/POWER for agroclimatology work. This document describes how to reproduce these data using freely available data, software and methodologies.</p>
+<p>Global Surface Summary of the Day - GSOD data, <a href="https://data.noaa.gov/dataset/global-surface-summary-of-the-day-gsod">(link)</a> is free, ground-based (or buoy) weather station data with global coverage. When properly cleaned and interpolated this data can provide a better alternative to NASA/POWER for agroclimatology work. This document describes how to reproduce these data using freely available data, software and methodologies.</p>
 </div>
 <div id="daily-weather-data-cleaning-thin-plate-splining-and-interpolation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#daily-weather-data-cleaning-thin-plate-splining-and-interpolation" class="anchor"></a>Daily Weather Data Cleaning, Thin Plate Splining and Interpolation</h1>
-<p>GSOD temperature data are checked for consistency using <code>boxplot.stats()</code> to identify and remove daily outliers for both TMAX and TMIN, separately.</p>
-<p>Once the GSOD data are cleaned, thin plate splining, the <code>Tps()</code> function, from <em>fields</em> is used to create an object that can then be used to create an interpolated surface of temperatures using the SRTM DEM with the <code>interpolate()</code> function from <em>raster</em>.</p>
-<p>Use iterate through the data paralellising the process using <em>mclapply</em>:</p>
-<ol style="list-style-type: decimal">
-<li><p>check for outliers in GSOD data and remove them,</p></li>
-<li><p>interpolate creating a global surface from the values,</p></li>
-<li><p>write GeoTIFF files to disk for every day, every weather variable specified.</p></li>
-</ol>
-<p>This is an extremly processor and time-intensive process for the entire global dataset. It is suggested to use a computer dedicated just to this task, while it will run on a fairly modest desktop, the computer may become unresponsive while performing this operation.</p>
-<div id="step-1-create-a-list-of-gsod-data-files" class="section level3">
-<h3 class="hasAnchor">
-<a href="#step-1-create-a-list-of-gsod-data-files" class="anchor"></a>Step 1: Create a List of GSOD Data Files</h3>
-<p>First make a list of the GSOD weather data .csv files as documented in: <a href="https://github.com/adamhsparks/GRID/blob/master/data-raw/1_-_fetch_GSOD.md" class="uri">https://github.com/adamhsparks/GRID/blob/master/data-raw/1_-_fetch_GSOD.md</a></p>
-<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">GSOD_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">"~/Data/GSOD"</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a></code></pre>
+<p>The <em>GRID</em> package makes this process as simple as possible. Described below are the steps that the package uses internally to create gridded weather data from the GSOD data.</p>
+<div id="downloading-gsod-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#downloading-gsod-data" class="anchor"></a>Downloading GSOD Data</h2>
+<p><em>GRID</em> offers customised functionality to download GSOD data, <code><a href="../reference/fetch_GSOD.html">fetch_GSOD()</a></code> using functionality from the <a href="https://ropensci.github.io/GSODR/"><em>GSODR</em></a> package. <em>GRID</em> will provide only the data necessary for interpolation, excluding the other data that GSOD provides while omitting any station that has more than a maximum five missing days to help ensure data quality. The four variables that <em>GRID</em> can interpolate are:</p>
+<ul>
+<li><p>TEMP - Mean daily temperature,</p></li>
+<li><p>MAX - Daily maximum temperature,</p></li>
+<li><p>MIN - Daily minimum temperature,</p></li>
+<li><p>RH - Mean daily relative humidity.</p></li>
+</ul>
 </div>
-<div id="step-2-interpolate-the-data" class="section level3">
+<div id="downloading-the-digital-elevation-model" class="section level2">
+<h2 class="hasAnchor">
+<a href="#downloading-the-digital-elevation-model" class="anchor"></a>Downloading the digital elevation model</h2>
+<p><em>GRID</em> offers customised functionality, <code><a href="../reference/fetch_DEM.html">fetch_DEM()</a></code> to download a digital elevation model based on the Shuttle Radar Topography Mission (SRTM) from <a href="https://wwww.worldclim.org/">WorldClim</a> and aggregated it to:</p>
+<ul>
+<li><p>1 degree (matching <a href="https://power.larc.nasa.gov/">NASA - POWER</a> data, which can provide rainfall),</p></li>
+<li><p>0.5 degree (matching future <a href="https://power.larc.nasa.gov/">NASA - POWER</a> data, which can provide rainfall),</p></li>
+<li><p>0.25 degree (matching <a href="http://chg.geog.ucsb.edu/data/chirps/">CHIRPS</a> data, which can provide rainfall)</p></li>
+</ul>
+</div>
+<div id="interpolating-the-gsod-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#interpolating-the-gsod-data" class="anchor"></a>Interpolating the GSOD Data</h2>
+<p><em>GRID</em> offers a simple function, <code><a href="../reference/interpolate_GSOD.html">interpolate_GSOD()</a></code>, to automate error checking, interpolation and saving GeoTIFF files of the resulting data.</p>
+<p>When using the <code><a href="../reference/interpolate_GSOD.html">interpolate_GSOD()</a></code> function, GSOD data are first checked for consistency using <code>boxplot.stats()</code> to identify and remove daily outliers for any variable requested.</p>
+<p>Once the GSOD data are cleaned, thin plate splining, the <code>Tps()</code> function, from <em>fields</em> is used to create an object that can then be used to create an interpolated surface of temperatures using the SRTM DEM with the <code>interpolate()</code> function from <em>raster</em>.</p>
+<p>The data are then returned in a list of raster stacks by weather variable in the R session or saved to disk in GeoTIFF file format in an INT2S format with LZW compression for saving disk space.</p>
+<p>This is an extremely processor and time-intensive process for the entire global data set. It is suggested to use a computer dedicated just to this task, while it will run on a fairly modest desktop, the computer may become unresponsive while performing this operation.</p>
+</div>
+<div id="example-creating-a-set-of-global-geotiff-files-from-1983-to-2016" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-creating-a-set-of-global-geotiff-files-from-1983-to-2016" class="anchor"></a>Example Creating a Set of Global GeoTIFF Files from 1983 to 2016</h2>
+<div id="step-1-download-the-gsod-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#step-2-interpolate-the-data" class="anchor"></a>Step 2: Interpolate the Data</h3>
-<p>Using a Linux, UNIX or macOS operating system, use <code>mclapply</code> to run the function in parallel on all four cores available on the server, apply the function over the list of GSOD data files. If using the <code>interp</code> function in a Windows environment, set <code>mc.cores = 1</code>, else it will fail.</p>
-<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(GRID)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co"># load the raster</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">dem &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(<span class="st">"~/Data/SRTM/SRTM_1deg.grd"</span>)</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co"># Run the function</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">parallel<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dt">X =</span> GSOD_list,</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">                   <span class="dt">FUN =</span> interpolate_gsod,</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">                   <span class="dt">dem =</span> dem,</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">                   <span class="dt">mc.cores =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">                   <span class="dt">dsn =</span> <span class="st">"/mnt/Cache/GTiff"</span>)</a></code></pre>
+<a href="#step-1-download-the-gsod-data" class="anchor"></a>Step 1: Download the GSOD data</h3>
+<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">years &lt;-<span class="st"> </span><span class="kw">as.list</span>(<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1983</span>, <span class="dt">to =</span> <span class="dv">2016</span>, <span class="dt">by =</span> <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">lapply</span>(<span class="dt">X =</span> years, <span class="dt">FUN =</span> fetch_GSOD, <span class="dt">dsn =</span> <span class="st">"~/Data/GSOD"</span>)</a></code></pre>
+</div>
+<div id="step-2-download-the-digital-elevation-model-and-aggregate-to-1-degree" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-2-download-the-digital-elevation-model-and-aggregate-to-1-degree" class="anchor"></a>Step 2: Download the Digital Elevation Model and Aggregate to 1 Degree</h3>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_DEM.html">fetch_DEM</a></span>()</a></code></pre>
+</div>
+<div id="step-3-interpolate-the-gsod-data-from-on-disk-files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#step-3-interpolate-the-gsod-data-from-on-disk-files" class="anchor"></a>Step 3: Interpolate the GSOD Data from On-disk Files</h3>
+<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">GSOD_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">"~/Data/GSOD"</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a></code></pre>
+<p>For a Unix-type operating system, it is possible to run the process in parallel to reduce the time necessary to generate all variables. This example shows how to run the function and save GTiff files in “~/Cache/GTiff” using two cores.</p>
+<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">GRID &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dt">X =</span> file_list, <span class="dt">FUN =</span> interpolate_GSOD, <span class="dt">dem =</span> dem,</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="dt">dsn =</span> <span class="st">"~/Cache/GTiff"</span>, <span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">"MAX"</span>, <span class="st">"MIN"</span>), <span class="dt">cores =</span> <span class="dv">2</span>)</a></code></pre>
+<div id="using-a-single-core-on-windows" class="section level4">
+<h4 class="hasAnchor">
+<a href="#using-a-single-core-on-windows" class="anchor"></a>Using a Single Core on Windows</h4>
+<p>If a Windows operating system is detected, the function will automatically default to using a single core for the processes as Windows does not support the parallel procedures that it uses. No need to specify the cores here, will default to one. If set to higher than one, it will automatically reset to one to run.</p>
+<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">GRID &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dt">X =</span> file_list, <span class="dt">FUN =</span> interpolate_GSOD, <span class="dt">dem =</span> dem,</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="dt">dsn =</span> <span class="st">"~/Cache/GTiff"</span>, <span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">"MAX"</span>, <span class="st">"MIN"</span>))</a></code></pre>
 <hr>
+</div>
+</div>
 </div>
 </div>
 <div id="appendices" class="section level1">
 <h1 class="hasAnchor">
 <a href="#appendices" class="anchor"></a>Appendices</h1>
-<div id="r-session-information" class="section level2">
+<div id="reproducibility" class="section level2">
 <h2 class="hasAnchor">
-<a href="#r-session-information" class="anchor"></a>R Session Information</h2>
+<a href="#reproducibility" class="anchor"></a>Reproducibility</h2>
 <pre><code>## ─ Session info ──────────────────────────────────────────────────────────
 ##  setting  value                       
 ##  version  R version 3.4.3 (2017-11-30)
@@ -169,10 +199,17 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction">Introduction</a></li>
-      <li><a href="#daily-weather-data-cleaning-thin-plate-splining-and-interpolation">Daily Weather Data Cleaning, Thin Plate Splining and Interpolation</a></li>
+      <li>
+<a href="#daily-weather-data-cleaning-thin-plate-splining-and-interpolation">Daily Weather Data Cleaning, Thin Plate Splining and Interpolation</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#downloading-gsod-data">Downloading GSOD Data</a></li>
+      <li><a href="#downloading-the-digital-elevation-model">Downloading the digital elevation model</a></li>
+      <li><a href="#interpolating-the-gsod-data">Interpolating the GSOD Data</a></li>
+      <li><a href="#example-creating-a-set-of-global-geotiff-files-from-1983-to-2016">Example Creating a Set of Global GeoTIFF Files from 1983 to 2016</a></li>
+      </ul>
+</li>
       <li>
 <a href="#appendices">Appendices</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#r-session-information">R Session Information</a></li>
+<li><a href="#reproducibility">Reproducibility</a></li>
       </ul>
 </li>
       </ul>
