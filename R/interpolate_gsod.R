@@ -174,9 +174,5 @@ interpolate_GSOD <- function(GSOD = NULL,
       overwrite = TRUE
     )
   }
-  names(tps_pred) <- paste0(wvar,
-                            "_",
-                            GSOD[1, 5],
-                            "_", GSOD[1, 6])
   return(tps_pred)
 }
