@@ -139,7 +139,7 @@
 <div id="step-3-interpolate-the-gsod-data-from-on-disk-files" class="section level3">
 <h3 class="hasAnchor">
 <a href="#step-3-interpolate-the-gsod-data-from-on-disk-files" class="anchor"></a>Step 3: Interpolate the GSOD Data from On-disk Files</h3>
-<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">GSOD_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">"~/Data/GSOD"</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a></code></pre>
+<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">file_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">"~/Data/GSOD"</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a></code></pre>
 <p>For a Unix-type operating system, it is possible to run the process in parallel to reduce the time necessary to generate all variables. This example shows how to run the function and save GTiff files in “~/Cache/GTiff” using two cores.</p>
 <pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">GRID &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dt">X =</span> file_list, <span class="dt">FUN =</span> interpolate_GSOD, <span class="dt">dem =</span> dem,</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="dt">dsn =</span> <span class="st">"~/Cache/GTiff"</span>, <span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">"MAX"</span>, <span class="st">"MIN"</span>), <span class="dt">cores =</span> <span class="dv">2</span>)</a></code></pre>
