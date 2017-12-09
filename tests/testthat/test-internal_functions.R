@@ -6,6 +6,15 @@ test_that(".validate_cores() sets to 1 if not specified", {
   expect_equal(cores, 1)
 })
 
+context(".validate_cores()")
+test_that(".validate_cores() sets to 1 if Windows detected", {
+  skip_on_os("unix")
+  # set cores to 4 to be sure properly set to 1 when Windows OS detected
+  cores <- 4
+  cores <- .validate_cores(cores)
+  expect_equal(cores, 1)
+})
+
 context(".validate_GSOD()")
 test_that(".validate_GSOD() stops if not specified", {
   GSOD <- NULL

@@ -20,7 +20,8 @@
   if (is.null(cores)) {
     cores <- 1
   }
-  if (.Platform$OS.type == "windows") {
+
+  if (tolower(.Platform$OS.type) == "windows") {
     cores <- 1
   } else if (Sys.info()["sysname"] == "Darwin") {
     if (cores <= parallel::detectCores()) {
