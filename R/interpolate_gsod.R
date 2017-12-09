@@ -128,7 +128,7 @@ interpolate_GSOD <- function(GSOD = NULL,
     )
   weather <- raster::stack(weather[seq_along(weather)])
   weather <-
-    setNames(weather, paste0(var, "_", 1:raster::nlayers(weather)))
+    stats::setNames(weather, paste0(var, "_", 1:raster::nlayers(weather)))
   return(weather)
 }
 

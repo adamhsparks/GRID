@@ -1,28 +1,28 @@
 
-context(".check_year()")
-test_that(".check_year() defaults to current year if none specified", {
+context(".validate_year()")
+test_that(".validate_year() defaults to current year if none specified", {
   year_list <- NULL
-  year_list <- .check_year(year_list)
+  year_list <- .validate_year(year_list)
   expect_equal(year_list, as.numeric(format(Sys.Date(), "%Y")))
 })
 
-context(".check_vars()")
-test_that(".check_vars sets vars to TEMP if NULL", {
+context(".validate_vars()")
+test_that(".validate_vars sets vars to TEMP if NULL", {
   vars <- NULL
-  vars <- .check_vars(vars)
+  vars <- .validate_vars(vars)
   expect_equal(vars, "TEMP")
 })
 
-context(".check_vars()")
-test_that(".check_vars sets vars errors if wrong value is entered", {
+context(".validate_vars()")
+test_that(".validate_vars sets vars errors if wrong value is entered", {
   vars <- c("TEMP", "MAX", "MIN", "RH", "PRCP")
-  expect_error(.check_vars(vars))
+  expect_error(.validate_vars(vars))
 })
 
-context(".check_bz2()")
-test_that(".check_bz2 errors if no list of files is given", {
+context(".validate_bz2()")
+test_that(".validate_bz2 errors if no list of files is given", {
   file_list <- NULL
-  expect_error(.check_bz2(file_list))
+  expect_error(.validate_bz2(file_list))
 })
 
 context(".validate_max_missing()")

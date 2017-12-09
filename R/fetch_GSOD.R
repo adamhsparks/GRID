@@ -52,7 +52,7 @@
 
 fetch_GSOD <- function(years = NULL, dsn = NULL) {
   # check user inputs, see internal_functions.R for these functions
-  year_list <- .check_year(years)
+  year_list <- .validate_year(years)
   dsn <- .validate_dsn(dsn)
 
   # fetch GSOD data from NCEI server
@@ -84,7 +84,7 @@ fetch_GSOD <- function(years = NULL, dsn = NULL) {
   # if dsn is specifed write data frames to files, see internal_funtions.R
   # for .write_gsod()
   if (!is.null(dsn)) {
-    lapply(X =  weather, FUN = .write_gsod, dsn = dsn)
+    lapply(X =  weather, FUN = .write_GSOD, dsn = dsn)
   }
 
   return(weather)
