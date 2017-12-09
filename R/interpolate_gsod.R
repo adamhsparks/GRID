@@ -62,9 +62,8 @@ interpolate_GSOD <- function(GSOD = NULL,
 
   # Apply function for each var that is specified
   if ("TEMP" %in% vars) {
-    TEMP <- lapply(
-      X = GSOD,
-      FUN = .create_stack,
+    TEMP <- .create_stack(
+      GSOD = GSOD,
       var = "TEMP",
       dem = dem,
       dsn = dsn,
@@ -75,9 +74,8 @@ interpolate_GSOD <- function(GSOD = NULL,
   }
 
   if ("MAX" %in% vars) {
-    MAX <- lapply(
-      X = GSOD,
-      FUN = .create_stack,
+    MAX <- .create_stack(
+      GSOD = GSOD,
       var = "MAX",
       dem = dem,
       dsn = dsn,
@@ -88,9 +86,8 @@ interpolate_GSOD <- function(GSOD = NULL,
   }
 
   if ("MIN" %in% vars) {
-    MIN <- lapply(
-      X = GSOD,
-      FUN = .create_stack,
+    MIN <- .create_stack(
+      GSOD = GSOD,
       var = "MIN",
       dem = dem,
       dsn = dsn,
@@ -101,9 +98,8 @@ interpolate_GSOD <- function(GSOD = NULL,
   }
 
   if ("RH" %in% vars) {
-    RH <- lapply(
-      X = GSOD,
-      FUN = .create_stack,
+    RH <- .create_stack(
+      GSOD = GSOD,
       var = "RH",
       dem = dem,
       dsn = dsn,
@@ -119,7 +115,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 }
 
 #' @noRd
-.create_stack <- function(GSOD, var, dem, dsn, cores, list_length, out) {
+.create_stack <- function(GSOD, var, dem, dsn, cores) {
   weather <-
     parallel::mclapply(
       X = GSOD,
@@ -133,6 +129,7 @@ interpolate_GSOD <- function(GSOD = NULL,
   weather <- raster::stack(weather[seq_along(weather)])
   weather <-
     stats::setNames(weather, paste0(var, "_", 1:raster::nlayers(weather)))
+  return(weather)
 }
 
 #' @noRd
