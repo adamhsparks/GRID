@@ -154,7 +154,6 @@ Windows OS or if not specified.</p></td>
 
 <span class='co'># Run the function for MAX and MIN temperature on a *nix system using 2 cores</span>
 
-<span class='fu'>library</span>(<span class='no'>parallel</span>)
 <span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>file_list</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>,
 <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Cache/GTiff"</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"MAX"</span>, <span class='st'>"MIN"</span>), <span class='kw'>cores</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
