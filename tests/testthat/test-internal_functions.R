@@ -6,6 +6,13 @@ test_that(".validate_cores() sets to 1 if not specified", {
   expect_equal(cores, 1)
 })
 
+context(".validate_cores()")
+test_that(".validate_cores() sets to 1 if OS == windows", {
+OS_type <- "windows"
+cores <- .validate_cores(cores)
+expect_equal(cores, 1)
+})
+
 context(".validate_GSOD()")
 test_that(".validate_GSOD() stops if not specified", {
   GSOD <- NULL
