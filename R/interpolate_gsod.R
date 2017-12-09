@@ -36,7 +36,6 @@
 #'
 #' # Run the function for MAX and MIN temperature using 1 core, will work on Win
 #'
-#' library(parallel)
 #' GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
 #' dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
 #' }
@@ -111,6 +110,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 
   # create a list of the raster stacks, name it, remove NULL items
   out <- list(c(TEMP, MAX, MIN, RH))
+  names(out) <- vars
   return(out)
 }
 
