@@ -126,10 +126,6 @@ interpolate_GSOD <- function(GSOD = NULL,
       mc.cores = cores,
       mc.preschedule = FALSE
     )
-  weather <- raster::stack(weather[seq_along(weather)])
-  weather <-
-    stats::setNames(weather, paste0(var, "_", 1:raster::nlayers(weather)))
-  return(weather)
 }
 
 #' @noRd
