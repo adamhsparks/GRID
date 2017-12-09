@@ -65,8 +65,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       wvar = "TEMP",
       dem = dem,
       dsn = dsn,
-      cores = cores,
-      year = GSOD[1, 5]
+      cores = cores
     )
     TEMP <- .stack_lists(X = TEMP, wvar = "TEMP")
   } else {
@@ -79,8 +78,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       wvar = "MAX",
       dem = dem,
       dsn = dsn,
-      cores = cores,
-      year = GSOD[1, 5]
+      cores = cores
     )
     MAX <- .stack_lists(X = MAX, wvar = "MAX")
   } else {
@@ -93,8 +91,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       wvar = "MIN",
       dem = dem,
       dsn = dsn,
-      cores = cores,
-      year = GSOD[1, 5]
+      cores = cores
     )
     MIN <- .stack_lists(X = MIN, wvar = "MIN")
   } else {
@@ -107,8 +104,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       wvar = "RH",
       dem = dem,
       dsn = dsn,
-      cores = cores,
-      year = GSOD[1, 5]
+      cores = cores
     )
     RH <- .stack_lists(X = RH, wvar = "RH")
   } else {
@@ -121,7 +117,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 }
 
 #' @noRd
-.create_stack <- function(GSOD, wvar, dem, dsn, cores, year) {
+.create_stack <- function(GSOD, wvar, dem, dsn, cores) {
   parallel::mclapply(
     X = GSOD,
     FUN = .interpolate_raster,
@@ -129,13 +125,12 @@ interpolate_GSOD <- function(GSOD = NULL,
     dem = dem,
     dsn = dsn,
     mc.cores = cores,
-    mc.preschedule = FALSE,
-    year = year
+    mc.preschedule = FALSE
   )
 }
 
 #' @noRd
-.interpolate_raster <- function(GSOD, wvar, dsn, dem, year) {
+.interpolate_raster <- function(GSOD, wvar, dsn, dem) {
   # create data frame for individual weather vars for interpolation
   y <-
     data.frame(GSOD["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"],
@@ -179,9 +174,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       overwrite = TRUE
     )
   }
-  names(tps_pred) <- paste0(year,
-                            "_",
-                            wvar,
+  names(tps_pred) <- paste0(wvar,
                             "_",
                             GSOD[1, 5],
                             "_", GSOD[1, 6])
