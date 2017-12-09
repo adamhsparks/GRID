@@ -1,8 +1,14 @@
 `%notin%` <- Negate("%in%")
 
 #' @noRd
-.stack_lists <- function(X, wvar) {
-X <- raster::stack(X[seq_along(X)])
+  .stack_lists <- function(X, wvar, year) {
+    X <- raster::stack(X[seq_along(X)])
+    X <-
+      stats::setNames(X, paste0(year,
+                                "_",
+                                wvar,
+                                "_",
+                                1:raster::nlayers(X)))
 }
 
 #' @noRd

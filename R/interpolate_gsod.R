@@ -65,7 +65,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       wvar = "TEMP",
       dem = dem,
       dsn = dsn,
-      cores = cores
+      cores = cores,
+      year = GSOD[1, 5]
     )
     TEMP <- .stack_lists(X = TEMP, wvar = "TEMP")
   } else {
@@ -78,7 +79,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       wvar = "MAX",
       dem = dem,
       dsn = dsn,
-      cores = cores
+      cores = cores,
+      year = GSOD[1, 5]
     )
     MAX <- .stack_lists(X = MAX, wvar = "MAX")
   } else {
@@ -91,7 +93,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       wvar = "MIN",
       dem = dem,
       dsn = dsn,
-      cores = cores
+      cores = cores,
+      year = GSOD[1, 5]
     )
     MIN <- .stack_lists(X = MIN, wvar = "MIN")
   } else {
@@ -104,7 +107,8 @@ interpolate_GSOD <- function(GSOD = NULL,
       wvar = "RH",
       dem = dem,
       dsn = dsn,
-      cores = cores
+      cores = cores,
+      year = GSOD[1, 5]
     )
     RH <- .stack_lists(X = RH, wvar = "RH")
   } else {
@@ -117,7 +121,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 }
 
 #' @noRd
-.create_stack <- function(GSOD, wvar, dem, dsn, cores) {
+.create_stack <- function(GSOD, wvar, dem, dsn, cores, year) {
   parallel::mclapply(
     X = GSOD,
     FUN = .interpolate_raster,
@@ -174,5 +178,11 @@ interpolate_GSOD <- function(GSOD = NULL,
       overwrite = TRUE
     )
   }
+  names(tps_pred) <- paste0(year,
+                            "_",
+                            wvar,
+                            "_",
+                            GSOD[1, 5],
+                            "_", GSOD[1, 6])
   return(tps_pred)
 }
