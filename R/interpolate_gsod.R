@@ -59,11 +59,11 @@ interpolate_GSOD <- function(GSOD = NULL,
   # Create a list of data frames by YDAY
   GSOD <- split(GSOD, as.factor(GSOD$YDAY))
 
-  # Apply function for each var that is specified
+  # Apply function for each wvar that is specified
   if ("TEMP" %in% vars) {
     TEMP <- .create_stack(
       GSOD = GSOD,
-      var = "TEMP",
+      wvar = "TEMP",
       dem = dem,
       dsn = dsn,
       cores = cores
@@ -75,7 +75,7 @@ interpolate_GSOD <- function(GSOD = NULL,
   if ("MAX" %in% vars) {
     MAX <- .create_stack(
       GSOD = GSOD,
-      var = "MAX",
+      wvar = "MAX",
       dem = dem,
       dsn = dsn,
       cores = cores
@@ -87,7 +87,7 @@ interpolate_GSOD <- function(GSOD = NULL,
   if ("MIN" %in% vars) {
     MIN <- .create_stack(
       GSOD = GSOD,
-      var = "MIN",
+      wvar = "MIN",
       dem = dem,
       dsn = dsn,
       cores = cores
@@ -99,7 +99,7 @@ interpolate_GSOD <- function(GSOD = NULL,
   if ("RH" %in% vars) {
     RH <- .create_stack(
       GSOD = GSOD,
-      var = "RH",
+      wvar = "RH",
       dem = dem,
       dsn = dsn,
       cores = cores
@@ -108,19 +108,17 @@ interpolate_GSOD <- function(GSOD = NULL,
     RH <- NULL
   }
 
-  # create a list of the raster stacks, name it, remove NULL items
-  out <- list(c(TEMP, MAX, MIN, RH))
-  names(out) <- vars
+  # create a list of the raster stacks, name it
+  out <- list(c(TEMP = TEMP, MAX = MAX, MIN = MIN, RH = RH))
   return(out)
 }
 
 #' @noRd
-.create_stack <- function(GSOD, var, dem, dsn, cores) {
-  weather <-
+.create_stack <- function(GSOD, wvar, dem, dsn, cores) {
     parallel::mclapply(
       X = GSOD,
       FUN = .interpolate_raster,
-      var = var,
+      wvar = wvar,
       dem = dem,
       dsn = dsn,
       mc.cores = cores,
@@ -129,10 +127,11 @@ interpolate_GSOD <- function(GSOD = NULL,
 }
 
 #' @noRd
-.interpolate_raster <- function(GSOD, var, dsn, dem) {
+.interpolate_raster <- function(GSOD, wvar, dsn, dem) {
   # create data frame for individual weather vars for interpolation
   y <-
-    data.frame(GSOD["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"], GSOD[var])
+    data.frame(GSOD["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"],
+               GSOD[wvar])
 
   # remove any NA values from the data, the interpolation will not work with
   # any NAs present for any field.
@@ -161,7 +160,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       tps_pred,
       filename = paste0(dsn,
                         "/",
-                        var,
+                        wvar,
                         "_",
                         GSOD[1, 5],
                         "_", GSOD[1, 6],
