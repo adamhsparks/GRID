@@ -30,7 +30,6 @@
 #'
 #' # Run the function for MAX and MIN temperature on a *nix system using 2 cores
 #'
-#' library(parallel)
 #' GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
 #' dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"), cores = 2)
 #'
@@ -69,6 +68,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       cores = cores
     )
     TEMP <- .stack_lists(X = TEMP, wvar = "TEMP")
+    names(TEMP) <- unique(GSOD[YEAR])
   } else {
     TEMP <- NULL
   }
@@ -82,6 +82,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       cores = cores
     )
     MAX <- .stack_lists(X = MAX, wvar = "MAX")
+    names(MAX) <- unique(GSOD[YEAR])
   } else {
     MAX <- NULL
   }
@@ -95,6 +96,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       cores = cores
     )
     MIN <- .stack_lists(X = MIN, wvar = "MIN")
+    names(MIN) <- unique(GSOD[YEAR])
   } else {
     MIN <- NULL
   }
@@ -108,6 +110,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       cores = cores
     )
     RH <- .stack_lists(X = RH, wvar = "RH")
+    names(RH) <- unique(GSOD[YEAR])
   } else {
     RH <- NULL
   }
