@@ -68,7 +68,6 @@ interpolate_GSOD <- function(GSOD = NULL,
       cores = cores
     )
     TEMP <- .stack_lists(X = TEMP, wvar = "TEMP")
-    names(TEMP) <- GSOD["YEAR"]
   } else {
     TEMP <- NULL
   }
@@ -82,7 +81,6 @@ interpolate_GSOD <- function(GSOD = NULL,
       cores = cores
     )
     MAX <- .stack_lists(X = MAX, wvar = "MAX")
-    names(MAX) <- GSOD["YEAR"]
   } else {
     MAX <- NULL
   }
@@ -96,7 +94,6 @@ interpolate_GSOD <- function(GSOD = NULL,
       cores = cores
     )
     MIN <- .stack_lists(X = MIN, wvar = "MIN")
-    names(MIN) <- GSOD["YEAR"]
   } else {
     MIN <- NULL
   }
@@ -110,7 +107,6 @@ interpolate_GSOD <- function(GSOD = NULL,
       cores = cores
     )
     RH <- .stack_lists(X = RH, wvar = "RH")
-    names(RH) <- GSOD["YEAR"]
   } else {
     RH <- NULL
   }
