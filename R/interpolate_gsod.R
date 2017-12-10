@@ -67,7 +67,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
-    TEMP <- .stack_lists(X = TEMP, wvar = "TEMP")
+    TEMP <- .stack_lists(X = TEMP, wvar = "TEMP", year = GSOD[[1]][1, "YEAR"])
   } else {
     TEMP <- NULL
   }
@@ -80,7 +80,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
-    MAX <- .stack_lists(X = MAX, wvar = "MAX")
+    MAX <- .stack_lists(X = MAX, wvar = "MAX", year = GSOD[[1]][1, "YEAR"])
   } else {
     MAX <- NULL
   }
@@ -93,7 +93,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
-    MIN <- .stack_lists(X = MIN, wvar = "MIN")
+    MIN <- .stack_lists(X = MIN, wvar = "MIN", year = GSOD[[1]][1, "YEAR"])
   } else {
     MIN <- NULL
   }
@@ -106,12 +106,12 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
-    RH <- .stack_lists(X = RH, wvar = "RH")
+    RH <- .stack_lists(X = RH, wvar = "RH", year = GSOD[[1]][1, "YEAR"])
   } else {
     RH <- NULL
   }
 
-  # create a list of the raster stacks, name it
+  # create a list of the raster stacks
   out <- list(c(TEMP = TEMP, MAX = MAX, MIN = MIN, RH = RH))
   return(out)
 }
@@ -130,7 +130,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 }
 
 #' @noRd
-.interpolate_raster <- function(GSOD, wvar, dsn, dem) {
+.interpolate_raster <- function(GSOD, wvar, dsn, dem, year) {
   # create data frame for individual weather vars for interpolation
   y <-
     data.frame(GSOD["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"],
@@ -174,9 +174,4 @@ interpolate_GSOD <- function(GSOD = NULL,
       overwrite = TRUE
     )
   }
-  names(tps_pred) <- paste0(wvar,
-                            "_",
-                            GSOD[1, 5],
-                            "_", GSOD[1, 6])
-  return(tps_pred)
 }
