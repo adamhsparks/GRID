@@ -22,21 +22,18 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Create a list of GSOD files
-#' file_list <- list.files("~/Data/GSOD", full.names = TRUE)
-#'
 #' # Fetch and aggregate the raster digital elevation model
 #' dem <- fetch_DEM()
 #'
-#' # Run the function for MAX and MIN temperature on a *nix system using 2 cores
+#' # Create a list of GSOD files
+#' files <- list.files("~/Data/GSOD", full.names = TRUE)
 #'
-#' GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
+#' # Run the function for MAX and MIN temperature on a *nix system using 2 cores
+#' GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem,
 #' dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"), cores = 2)
 #'
 #' # Run the function for MAX and MIN temperature using 1 core, will work on Win
-#'
-#' GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
-#' dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
+#' GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
 #' }
 #'
 

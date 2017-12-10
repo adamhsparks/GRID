@@ -146,21 +146,18 @@ Windows OS or if not specified.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Create a list of GSOD files</span>
-<span class='no'>file_list</span> <span class='kw'>&lt;-</span> <span class='fu'>list.files</span>(<span class='st'>"~/Data/GSOD"</span>, <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
 <span class='co'># Fetch and aggregate the raster digital elevation model</span>
 <span class='no'>dem</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fetch_DEM.html'>fetch_DEM</a></span>()
 
-<span class='co'># Run the function for MAX and MIN temperature on a *nix system using 2 cores</span>
+<span class='co'># Create a list of GSOD files</span>
+<span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'>list.files</span>(<span class='st'>"~/Data/GSOD"</span>, <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>file_list</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>,
+<span class='co'># Run the function for MAX and MIN temperature on a *nix system using 2 cores</span>
+<span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>,
 <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Cache/GTiff"</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"MAX"</span>, <span class='st'>"MIN"</span>), <span class='kw'>cores</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
 <span class='co'># Run the function for MAX and MIN temperature using 1 core, will work on Win</span>
-
-<span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>file_list</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>,
-<span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Cache/GTiff"</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"MAX"</span>, <span class='st'>"MIN"</span>))
+<span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='st'>"MAX"</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
