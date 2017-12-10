@@ -1,11 +1,11 @@
 `%notin%` <- Negate("%in%")
 
 #' @noRd
-.validate_GSOD <- function(GSOD) {
-  if (is.null(GSOD)) {
+.validate_files <- function(file_list) {
+  if (is.null(file_list)) {
     stop("You must supply a list of GSOD data files for interpolation")
-  } else if (typeof(GSOD[[1]]) == "character") {
-    GSOD <- GSOD
+  } else if (typeof(file_list[[1]]) == "character") {
+    file_list <- file_list
   }
 }
 
