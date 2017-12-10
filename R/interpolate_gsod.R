@@ -171,4 +171,5 @@ interpolate_GSOD <- function(GSOD = NULL,
       overwrite = TRUE
     )
   }
+  return(tps_pred)
 }
