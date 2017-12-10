@@ -136,8 +136,8 @@ interpolate_GSOD <- function(GSOD = NULL,
 #' @noRd
 .extract_year <- function(GSOD) {
   year <- paste0("GSOD_", as.character(GSOD[1, 5]))
+  return(year)
 }
-
 
 #' @noRd
 .interpolate_raster <- function(GSOD, wvar, dsn, dem, year) {
