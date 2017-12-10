@@ -5,8 +5,8 @@
 #' function to process multiple years of GSOD data for interpolation, though a
 #' single year may be used.
 #'
-#' @param GSOD A \code{\link[base]{list}} of data frames or CSV files of GSOD
-#' data created by \link{fetch_GSOD}.
+#' @param file_list A \code{\link[base]{list}} of data frames or CSV files of
+#' GSOD data created by \link{fetch_GSOD}.
 #' @param dem Digital elevation model that has been fetched and processed using
 #' \code{\link{fetch_DEM}}.
 #' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
@@ -37,7 +37,7 @@
 #' }
 #'
 
-interpolate_GSOD <- function(GSOD = NULL,
+interpolate_GSOD <- function(file_list = NULL,
                              dem = NULL,
                              dsn = NULL,
                              vars = NULL,
@@ -45,12 +45,12 @@ interpolate_GSOD <- function(GSOD = NULL,
   # validate user inputs, see `internal_functions.R` for these
   dsn <- .validate_dsn(dsn)
   vars <- .validate_vars(vars)
-  GSOD <- .validate_GSOD(GSOD)
+  file_list <- .validate_files(file_list)
   cores <- .validate_cores(cores)
 
   # Import GSOD data
   GSOD <-
-    readr::read_csv(GSOD, col_types = "cdddcddddd", progress = FALSE)
+    readr::read_csv(file_list, col_types = "cdddcddddd", progress = FALSE)
 
   # Create a list of data frames by YDAY
   GSOD <- split(GSOD, as.factor(GSOD$YDAY))
@@ -108,13 +108,9 @@ interpolate_GSOD <- function(GSOD = NULL,
   # create a list of the raster stacks
   out <- list(c(TEMP = TEMP, MAX = MAX, MIN = MIN, RH = RH))
 
-  # create list of years to name list items
-  name_list <- parallel::mclapply(X = GSOD,
-                                  FUN = .extract_year,
-                                  mc.cores = cores)
-
   # assign GSOD_YYYY to list objects before returning list
-  names(out) <- unlist(name_list)
+  names(out) <- paste0(substr(file_list, 1, 9))
+
   return(out)
 }
 
