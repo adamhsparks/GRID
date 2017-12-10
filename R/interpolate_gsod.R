@@ -64,6 +64,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
+    TEMP <- .stack_lists(X = TEMP, wvar = "TEMP", year = GSOD[[1]][1, "YEAR"])
   } else {
     TEMP <- NULL
   }
@@ -76,6 +77,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
+    MAX <- .stack_lists(X = MAX, wvar = "MAX", year = GSOD[[1]][1, "YEAR"])
   } else {
     MAX <- NULL
   }
@@ -88,6 +90,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
+    MIN <- .stack_lists(X = MIN, wvar = "MIN", year = GSOD[[1]][1, "YEAR"])
   } else {
     MIN <- NULL
   }
@@ -100,7 +103,7 @@ interpolate_GSOD <- function(GSOD = NULL,
       dsn = dsn,
       cores = cores
     )
-
+    RH <- .stack_lists(X = RH, wvar = "RH", year = GSOD[[1]][1, "YEAR"])
   } else {
     RH <- NULL
   }
@@ -112,7 +115,7 @@ interpolate_GSOD <- function(GSOD = NULL,
 
 #' @noRd
 .create_stack <- function(GSOD, wvar, dem, dsn, cores) {
-  X <- parallel::mclapply(
+  parallel::mclapply(
     X = GSOD,
     FUN = .interpolate_raster,
     wvar = wvar,
@@ -121,7 +124,6 @@ interpolate_GSOD <- function(GSOD = NULL,
     mc.cores = cores,
     mc.preschedule = FALSE
   )
-  X <- .stack_lists(X = X, wvar = wvar, year = GSOD[[1]][1, "YEAR"])
 }
 
 #' @noRd
