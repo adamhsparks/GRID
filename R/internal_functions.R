@@ -1,23 +1,12 @@
 `%notin%` <- Negate("%in%")
 
 #' @noRd
-  .stack_lists <- function(X, wvar, year) {
-    X <- raster::stack(X[seq_along(X)])
-    stats::setNames(X,
-                    paste0(wvar, "_", year, "_", 1:raster::nlayers(X)))
-}
-
-#' @noRd
 .validate_GSOD <- function(GSOD) {
   if (is.null(GSOD)) {
     stop("You must supply a list of GSOD data files for interpolation")
   } else if (typeof(GSOD[[1]]) == "character") {
     GSOD <- GSOD
-  } else {
-    # import the file for interpolation
-    GSOD <- readr::read_csv(GSOD, col_types = "cdddcddddd")
   }
-
 }
 
 #' @noRd
