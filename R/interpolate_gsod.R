@@ -107,6 +107,14 @@ interpolate_GSOD <- function(GSOD = NULL,
 
   # create a list of the raster stacks
   out <- list(c(TEMP = TEMP, MAX = MAX, MIN = MIN, RH = RH))
+
+  # create list of years to name list items
+  name_list <- parallel::mclapply(X = GSOD,
+                                  FUN = .extract_year,
+                                  mc.cores = cores)
+
+  # assign GSOD_YYYY to list objects before returning list
+  names(out) <- unlist(name_list)
   return(out)
 }
 
@@ -124,6 +132,12 @@ interpolate_GSOD <- function(GSOD = NULL,
   Y <- .stack_lists(X = Y, wvar = wvar)
   return(Y)
 }
+
+#' @noRd
+.extract_year <- function(GSOD) {
+  year <- paste0("GSOD_", as.character(GSOD[1, 5]))
+}
+
 
 #' @noRd
 .interpolate_raster <- function(GSOD, wvar, dsn, dem, year) {
