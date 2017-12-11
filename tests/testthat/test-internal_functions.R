@@ -15,10 +15,10 @@ test_that(".validate_cores() sets to 1 if Windows detected", {
   expect_equal(cores, 1)
 })
 
-context(".validate_GSOD()")
-test_that(".validate_GSOD() stops if not specified", {
-  GSOD <- NULL
-  expect_error(.validate_GSOD(GSOD))
+context(".validate_files()")
+test_that(".validate_files() stops if not specified", {
+  files <- NULL
+  expect_error(.validate_files(files))
 })
 
 context(".validate_dsn()")
