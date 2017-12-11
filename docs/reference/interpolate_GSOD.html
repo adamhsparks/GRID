@@ -107,16 +107,16 @@ function to process multiple years of GSOD data for interpolation, though a
 single year may be used.</p>
     
 
-    <pre class="usage"><span class='fu'>interpolate_GSOD</span>(<span class='kw'>GSOD</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>interpolate_GSOD</span>(<span class='kw'>file_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>GSOD</th>
-      <td><p>A <code><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></code> of data frames or CSV files of GSOD
-data created by <a href='fetch_GSOD.html'>fetch_GSOD</a>.</p></td>
+      <th>file_list</th>
+      <td><p>A <code><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></code> of data frames or CSV files of
+GSOD data created by <a href='fetch_GSOD.html'>fetch_GSOD</a>.</p></td>
     </tr>
     <tr>
       <th>dem</th>
