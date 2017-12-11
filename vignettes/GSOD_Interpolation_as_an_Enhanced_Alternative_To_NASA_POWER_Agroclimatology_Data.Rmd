@@ -1,9 +1,9 @@
 ---
-title: "GRID"
+title: "GRID Use Case"
 author: "Adam H. Sparks - Centre for Crop Health, USQ"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{GRID}
+  %\VignetteIndexEntry{GRID Use Case}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -29,7 +29,7 @@ the GSOD data.
 
 ## Downloading GSOD Data
 
-_GRID_ offers customised functionality to download GSOD data, `fetch_GSOD()`
+_GRID_ offers customised functionality to download GSOD data, `get_GSOD()`
 using functionality from the [_GSODR_](https://ropensci.github.io/GSODR/)
 package. _GRID_ will provide only the data necessary for interpolation,
 excluding the other data that GSOD provides while omitting any station that has
@@ -46,7 +46,7 @@ variables that _GRID_ can interpolate are:
 
 ## Downloading the Digital Elevation Model
 
-_GRID_ offers customised functionality, `fetch_DEM()` to download a digital
+_GRID_ offers customised functionality, `get_DEM()` to download a digital
 elevation model based on the Shuttle Radar Topography Mission (SRTM) from
 [WorldClim](https://wwww.worldclim.org/) and aggregated it to:
 
@@ -86,15 +86,15 @@ performing this operation.
 
 ### Step 1: Download the GSOD data
 
-```{r fetch_GSOD, eval=FALSE, message='hide', results='hide'}
+```{r get_GSOD, eval=FALSE, message='hide', results='hide'}
 years <- as.list(seq(from = 1983, to = 2016, by = 1))
-lapply(X = years, FUN = fetch_GSOD, dsn = "~/Data/GSOD")
+lapply(X = years, FUN = get_GSOD, dsn = "~/Data/GSOD")
 ```
 
 ### Step 2: Download the Digital Elevation Model and Aggregate to 1 Degree
 
-```{r fetch_DEM, eval=FALSE, message='hide', results='hide'}
-DEM <- fetch_DEM()
+```{r get_DEM, eval=FALSE, message='hide', results='hide'}
+DEM <- get_DEM()
 ```
 ### Step 3: Interpolate the GSOD Data from On-disk Files
 

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRID • GRID</title>
+<title>GRID Use Case • GRID</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -51,7 +51,7 @@
       <a href="../articles/Getting_started_with_Docker.html">Getting started with Docker</a>
     </li>
     <li>
-      <a href="../articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GRID</a>
+      <a href="../articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GRID Use Case</a>
     </li>
   </ul>
 </li>
@@ -75,7 +75,7 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>GRID</h1>
+      <h1>GRID Use Case</h1>
                         <h4 class="author">Adam H. Sparks - Centre for Crop Health, USQ</h4>
             
           </div>
@@ -95,7 +95,7 @@
 <div id="downloading-gsod-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#downloading-gsod-data" class="anchor"></a>Downloading GSOD Data</h2>
-<p><em>GRID</em> offers customised functionality to download GSOD data, <code><a href="../reference/fetch_GSOD.html">fetch_GSOD()</a></code> using functionality from the <a href="https://ropensci.github.io/GSODR/"><em>GSODR</em></a> package. <em>GRID</em> will provide only the data necessary for interpolation, excluding the other data that GSOD provides while omitting any station that has more than a maximum five missing days to help ensure data quality. The four variables that <em>GRID</em> can interpolate are:</p>
+<p><em>GRID</em> offers customised functionality to download GSOD data, <code>get_GSOD()</code> using functionality from the <a href="https://ropensci.github.io/GSODR/"><em>GSODR</em></a> package. <em>GRID</em> will provide only the data necessary for interpolation, excluding the other data that GSOD provides while omitting any station that has more than a maximum five missing days to help ensure data quality. The four variables that <em>GRID</em> can interpolate are:</p>
 <ul>
 <li><p>TEMP - Mean daily temperature,</p></li>
 <li><p>MAX - Daily maximum temperature,</p></li>
@@ -106,7 +106,7 @@
 <div id="downloading-the-digital-elevation-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#downloading-the-digital-elevation-model" class="anchor"></a>Downloading the Digital Elevation Model</h2>
-<p><em>GRID</em> offers customised functionality, <code><a href="../reference/fetch_DEM.html">fetch_DEM()</a></code> to download a digital elevation model based on the Shuttle Radar Topography Mission (SRTM) from <a href="https://wwww.worldclim.org/">WorldClim</a> and aggregated it to:</p>
+<p><em>GRID</em> offers customised functionality, <code>get_DEM()</code> to download a digital elevation model based on the Shuttle Radar Topography Mission (SRTM) from <a href="https://wwww.worldclim.org/">WorldClim</a> and aggregated it to:</p>
 <ul>
 <li><p>1 degree (matching <a href="https://power.larc.nasa.gov/">NASA - POWER</a> data, which can provide rainfall),</p></li>
 <li><p>0.5 degree (matching future <a href="https://power.larc.nasa.gov/">NASA - POWER</a> data, which can provide rainfall),</p></li>
@@ -129,12 +129,12 @@
 <h3 class="hasAnchor">
 <a href="#step-1-download-the-gsod-data" class="anchor"></a>Step 1: Download the GSOD data</h3>
 <pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">years &lt;-<span class="st"> </span><span class="kw">as.list</span>(<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1983</span>, <span class="dt">to =</span> <span class="dv">2016</span>, <span class="dt">by =</span> <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">lapply</span>(<span class="dt">X =</span> years, <span class="dt">FUN =</span> fetch_GSOD, <span class="dt">dsn =</span> <span class="st">"~/Data/GSOD"</span>)</a></code></pre>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">lapply</span>(<span class="dt">X =</span> years, <span class="dt">FUN =</span> get_GSOD, <span class="dt">dsn =</span> <span class="st">"~/Data/GSOD"</span>)</a></code></pre>
 </div>
 <div id="step-2-download-the-digital-elevation-model-and-aggregate-to-1-degree" class="section level3">
 <h3 class="hasAnchor">
 <a href="#step-2-download-the-digital-elevation-model-and-aggregate-to-1-degree" class="anchor"></a>Step 2: Download the Digital Elevation Model and Aggregate to 1 Degree</h3>
-<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_DEM.html">fetch_DEM</a></span>()</a></code></pre>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw">get_DEM</span>()</a></code></pre>
 </div>
 <div id="step-3-interpolate-the-gsod-data-from-on-disk-files" class="section level3">
 <h3 class="hasAnchor">

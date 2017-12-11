@@ -1,6 +1,6 @@
 ---
 title: "GRID"
-author: "Adam H Sparks"
+author: "Adam H. Sparks - Centre for Crop Health, USQ"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{GRID}
@@ -9,10 +9,7 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+knitr::opts_chunk$set(echo = TRUE)
 library(GRID)
 ```
 
