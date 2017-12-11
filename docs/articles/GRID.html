@@ -83,21 +83,21 @@
     
     
 <div class="contents">
-<div id="using-fetch_dem" class="section level2">
+<div id="using-get_dem" class="section level2">
 <h2 class="hasAnchor">
-<a href="#using-fetch_dem" class="anchor"></a>Using fetch_DEM</h2>
-<p>Fetch a digital elevation model (DEM) from WorldClim data, aggregate to 1 arc degree and crop at -60/60 degrees latitude and return a spatial object in the current R session.</p>
-<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_DEM.html">fetch_DEM</a></span>()</a></code></pre>
-<p>Fetch a digital elevation model (DEM) from WorldClim data and aggregate to 1 arc degree.</p>
-<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_DEM.html">fetch_DEM</a></span>()</a></code></pre>
-<p>Fetch a digital elevation model (DEM) from WorldClim data, aggregate to 15 arc minutes and crop at -60/60 degrees latitude and save a GeoTIFF file of the resulting DEM to local disk.</p>
-<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_DEM.html">fetch_DEM</a></span>(<span class="dt">resolution =</span> <span class="fl">.25</span>, <span class="dt">dsn =</span> <span class="st">"~/GSOD"</span>)</a></code></pre>
+<a href="#using-get_dem" class="anchor"></a>Using get_DEM</h2>
+<p>Get a digital elevation model (DEM) from WorldClim data, aggregate to 1 arc degree and crop at -60/60 degrees latitude and return a spatial object in the current R session.</p>
+<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw">get_DEM</span>()</a></code></pre>
+<p>Get a digital elevation model (DEM) from WorldClim data and aggregate to 1 arc degree.</p>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw">get_DEM</span>()</a></code></pre>
+<p>Get a digital elevation model (DEM) from WorldClim data, aggregate to 15 arc minutes and crop at -60/60 degrees latitude and save a GeoTIFF file of the resulting DEM to local disk.</p>
+<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw">get_DEM</span>(<span class="dt">resolution =</span> <span class="fl">.25</span>, <span class="dt">dsn =</span> <span class="st">"~/GSOD"</span>)</a></code></pre>
 </div>
-<div id="using-fetch_gsod" class="section level2">
+<div id="using-get_gsod" class="section level2">
 <h2 class="hasAnchor">
-<a href="#using-fetch_gsod" class="anchor"></a>Using fetch_GSOD</h2>
-<p>Fetch GSOD data for 1998 to 2000.</p>
-<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">gsod &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_GSOD.html">fetch_GSOD</a></span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">2000</span>)</a></code></pre>
+<a href="#using-get_gsod" class="anchor"></a>Using get_GSOD</h2>
+<p>Get GSOD data for 1998 to 2000.</p>
+<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">gsod &lt;-<span class="st"> </span><span class="kw">get_GSOD</span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">2000</span>)</a></code></pre>
 </div>
 <div id="using-interpolate_gsod-with-a-list-of-data-frames" class="section level2">
 <h2 class="hasAnchor">
@@ -115,10 +115,10 @@
 <h1 class="hasAnchor">
 <a href="#example-2-using-in-memory-data-only" class="anchor"></a>Example 2: Using In-Memory Data Only</h1>
 <pre class="sourceCode r" id="cb5"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Create a list of GSOD files</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">gsod_list &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_GSOD.html">fetch_GSOD</a></span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">1999</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">gsod_list &lt;-<span class="st"> </span><span class="kw">get_GSOD</span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">1999</span>)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># Fetch and aggregate the raster digital elevation model</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">dem &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_DEM.html">fetch_DEM</a></span>()</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># Get and aggregate the raster digital elevation model</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">dem &lt;-<span class="st"> </span><span class="kw">get_DEM</span>()</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co"># Run the function for MAX and MIN temperature</span></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">lapply</span>(<span class="dt">X =</span> gsod_list, <span class="dt">FUN =</span> interp, <span class="dt">dem =</span> dem, <span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">"MAX"</span>, <span class="st">"MIN"</span>))</a></code></pre>
@@ -131,8 +131,8 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#using-fetch_dem">Using fetch_DEM</a></li>
-      <li><a href="#using-fetch_gsod">Using fetch_GSOD</a></li>
+<li><a href="#using-get_dem">Using get_DEM</a></li>
+      <li><a href="#using-get_gsod">Using get_GSOD</a></li>
       <li><a href="#using-interpolate_gsod-with-a-list-of-data-frames">Using interpolate_gsod with a list of data frames</a></li>
       <li><a href="#using-interpolate_gsod-with-a-list-of-csv-files">Using interpolate_gsod with a list of CSV files</a></li>
       <li><a href="#example-1-saving-all-files-to-local-disk">Example 1: Saving all Files to Local Disk</a></li>

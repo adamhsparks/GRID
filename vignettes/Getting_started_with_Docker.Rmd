@@ -1,7 +1,6 @@
 ---
 title: "Getting started with Docker"
 author: "Adam H Sparks"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Getting Started with Docker}
