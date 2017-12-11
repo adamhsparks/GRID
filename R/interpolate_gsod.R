@@ -6,9 +6,9 @@
 #' single year may be used.
 #'
 #' @param file_list A \code{\link[base]{list}} of data frames or CSV files of
-#' GSOD data created by \link{fetch_GSOD}.
-#' @param dem Digital elevation model that has been fetched and processed using
-#' \code{\link{fetch_DEM}}.
+#' GSOD data created by \link{get_GSOD}.
+#' @param dem Digital elevation model that has been geted and processed using
+#' \code{\link{get_DEM}}.
 #' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
 #' @param vars Weather variables to interpolate. Possible values are,
 #' \code{TEMP}, \code{MAX}, \code{MIN}, \code{RH}. Defaults to \code{TEMP}.
@@ -22,8 +22,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Fetch and aggregate the raster digital elevation model
-#' dem <- fetch_DEM()
+#' # Get and aggregate the raster digital elevation model
+#' dem <- get_DEM()
 #'
 #' # Create a list of GSOD files
 #' files <- list.files("~/Data/GSOD", full.names = TRUE)

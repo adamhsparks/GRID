@@ -9,10 +9,10 @@ interpolate_GSOD(file_list = NULL, dem = NULL, dsn = NULL, vars = NULL,
 }
 \arguments{
 \item{file_list}{A \code{\link[base]{list}} of data frames or CSV files of
-GSOD data created by \link{fetch_GSOD}.}
+GSOD data created by \link{get_GSOD}.}
 
-\item{dem}{Digital elevation model that has been fetched and processed using
-\code{\link{fetch_DEM}}.}
+\item{dem}{Digital elevation model that has been geted and processed using
+\code{\link{get_DEM}}.}
 
 \item{dsn}{Optional. Directory where resulting GeoTIFF files are to be saved.}
 
@@ -32,8 +32,8 @@ single year may be used.
 }
 \examples{
 \dontrun{
-# Fetch and aggregate the raster digital elevation model
-dem <- fetch_DEM()
+# Get and aggregate the raster digital elevation model
+dem <- get_DEM()
 
 # Create a list of GSOD files
 files <- list.files("~/Data/GSOD", full.names = TRUE)

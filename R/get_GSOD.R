@@ -1,12 +1,12 @@
 
-#' Fetch GSOD Data and Subset Fields for Interpolation
+#' Get GSOD Data and Subset Fields for Interpolation
 #'
 #' This function can be wrapped in an \code{\link[base]{lapply}} function to
 #' retrieve and save multiple years of GSOD data for interpolation, though it
 #' may be used to retrieve GSOD data and interpolate files on-the-fly. See
 #' \code{vignette("GRID")} for more details and examples.
 #'
-#' @details This function will fetch GSOD data using
+#' @details This function will get GSOD data using
 #' \code{\link[GSODR]{get_GSOD}} and save a CSV file containing only the
 #' following fields to use in interpolating a global surface between 60 and -60
 #' degrees latitude.
@@ -27,7 +27,7 @@
 #' \item{RH}{Mean daily relative humidity.}
 #' }
 #'
-#' @param years A numeric vector of years of GSOD data to fetch for
+#' @param years A numeric vector of years of GSOD data to get for
 #' interpolation. Defaults to current year.
 #' @param dsn Optional. A filepath where resulting CSV files are to be saved on
 #' local disk. If unspecified a tidy data frame is returned in the R session.
@@ -42,20 +42,20 @@
 #' @examples
 #' \dontrun{
 #'
-#' # Fetch one year of GSOD data
-#' gsod_1998 <- fetch_GSOD(years = 1998)
+#' # Get one year of GSOD data
+#' gsod_1998 <- get_GSOD(years = 1998)
 #'
-#' # Fetch multiple years of GSOD data and save to disk
+#' # Get multiple years of GSOD data and save to disk
 #' years <- as.list(seq(from = 1983, to = 2017, by = 1))
-#' lapply(X = years, FUN = fetch_GSOD, dsn = "~/Data/GSOD")
+#' lapply(X = years, FUN = get_GSOD, dsn = "~/Data/GSOD")
 #' }
 
-fetch_GSOD <- function(years = NULL, dsn = NULL) {
+get_GSOD <- function(years = NULL, dsn = NULL) {
   # check user inputs, see internal_functions.R for these functions
   year_list <- .validate_year(years)
   dsn <- .validate_dsn(dsn)
 
-  # fetch GSOD data from NCEI server
+  # get GSOD data from NCEI server
   weather <- GSODR::get_GSOD(years = year_list,
                              max_missing = 5,
                              agroclimatology = TRUE)

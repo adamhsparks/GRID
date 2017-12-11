@@ -94,7 +94,7 @@
 .validate_year <- function(years) {
   if (is.null(years)) {
     message(
-      "\nYou have not specified any years to fetch, defaulting to ",
+      "\nYou have not specified any years to get, defaulting to ",
       format(Sys.Date(), "%Y"),
       ".\n"
     )

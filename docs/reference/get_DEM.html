@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fetch and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data — fetch_DEM • GRID</title>
+<title>Get and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data — get_DEM • GRID</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,17 +98,17 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fetch and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data</h1>
+    <h1>Get and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data</h1>
     </div>
 
     
-    <p>Fetches a digital elevation model (DEM) from WorldClim data, crops and
+    <p>Getes a digital elevation model (DEM) from WorldClim data, crops and
 aggregates to a larger spatial resolution and crops at -60/60 degrees
 latitude for use with other weather data that provide rainfall, <em>e.g.</em>
 NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises.</p>
     
 
-    <pre class="usage"><span class='fu'>fetch_DEM</span>(<span class='kw'>resolution</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_DEM</span>(<span class='kw'>resolution</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -137,8 +137,8 @@ aggregated by the requested factor</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 </div><span class='co'># NOT RUN {</span>
-<span class='co'># Fetch DEM and aggregate to 1 arc degree</span>
-<span class='no'>DEM</span> <span class='kw'>&lt;-</span> <span class='fu'>fetch_DEM</span>(<span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Data/DEM"</span>)
+<span class='co'># Get DEM and aggregate to 1 arc degree</span>
+<span class='no'>DEM</span> <span class='kw'>&lt;-</span> <span class='fu'>get_DEM</span>(<span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Data/DEM"</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
