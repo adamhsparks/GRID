@@ -109,9 +109,9 @@ interpolate_GSOD <- function(file_list = NULL,
   out <- list(c(TEMP = TEMP, MAX = MAX, MIN = MIN, RH = RH))
 
   # assign GSOD_YYYY to list objects before returning list
-  names(out) <- paste0("GSOD_", substr(file_list,
-                                       nchar(file_list) - 8 + 1,
-                                       nchar(file_list) - 5 + 1))
+  names(out) <- paste0(substr(file_list,
+                              nchar(file_list) - 13 + 1,
+                              nchar(file_list) - 5 + 1))
 
   return(out)
 }
