@@ -105,8 +105,12 @@ interpolate_GSOD <- function(file_list = NULL,
     RH <- NULL
   }
 
-  # create a list of the raster stacks
-  out <- raster::stack(TEMP, MAX, MIN, RH)
+  # remove any null vars
+  out <- list(TEMP, MAX, MIN, RH)
+  out <- out[unlist(lapply(out, length) != 0)]
+
+  # create final stack of vars
+  out <- raster::stack(out)
 
   # assign GSOD_YYYY to list objects before returning list
   out <- stats::setNames(out,
