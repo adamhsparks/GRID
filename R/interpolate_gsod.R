@@ -16,7 +16,7 @@
 #' Windows OS or if not specified.
 #'
 #' @return
-#' \code{List} of \code{\link[raster]{stack}} objects by year and variable
+#' A \code{\link[raster]{stack}}
 #'
 #' @export
 #'

@@ -23,7 +23,7 @@ GSOD data created by \link{get_GSOD}.}
 Windows OS or if not specified.}
 }
 \value{
-\code{List} of \code{\link[raster]{stack}} objects by year and variable
+A \code{\link[raster]{stack}}
 }
 \description{
 This function is designed to be wrapped in an \code{\link[base]{lapply}}
