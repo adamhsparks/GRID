@@ -67,7 +67,7 @@
 #' @noRd
 .stack_lists <- function(X, wvar) {
   X <- raster::stack(X[seq_along(X)])
-  stats::setNames(X,
+  X <- stats::setNames(X,
                   paste0(wvar, "_", 1:raster::nlayers(X)))
 }
 
