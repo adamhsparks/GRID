@@ -8,8 +8,11 @@
 <title>GRID • GRID</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="GRID">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -48,10 +51,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Getting_started_with_Docker.html">Getting started with Docker</a>
+      <a href="../articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GRID Use Case</a>
     </li>
     <li>
-      <a href="../articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GRID Use Case</a>
+      <a href="../articles/Getting_started_with_Docker.html">Getting started with Docker</a>
     </li>
   </ul>
 </li>
@@ -78,7 +81,10 @@
       <h1>GRID</h1>
                         <h4 class="author">Adam H. Sparks - Centre for Crop Health, USQ</h4>
             
-          </div>
+      
+      <small>Source: <a href="https:/github.com/adamhsparks/GRID/blob/master/vignettes/GRID.Rmd"><code>vignettes/GRID.Rmd</code></a></small>
+
+    </div>
 
     
     
@@ -87,17 +93,17 @@
 <h2 class="hasAnchor">
 <a href="#using-get_dem" class="anchor"></a>Using get_DEM</h2>
 <p>Get a digital elevation model (DEM) from WorldClim data, aggregate to 1 arc degree and crop at -60/60 degrees latitude and return a spatial object in the current R session.</p>
-<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw">get_DEM</span>()</a></code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_DEM.html">get_DEM</a></span>()</a></code></pre></div>
 <p>Get a digital elevation model (DEM) from WorldClim data and aggregate to 1 arc degree.</p>
-<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw">get_DEM</span>()</a></code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_DEM.html">get_DEM</a></span>()</a></code></pre></div>
 <p>Get a digital elevation model (DEM) from WorldClim data, aggregate to 15 arc minutes and crop at -60/60 degrees latitude and save a GeoTIFF file of the resulting DEM to local disk.</p>
-<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw">get_DEM</span>(<span class="dt">resolution =</span> <span class="fl">.25</span>, <span class="dt">dsn =</span> <span class="st">"~/GSOD"</span>)</a></code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_DEM.html">get_DEM</a></span>(<span class="dt">resolution =</span> <span class="fl">.25</span>, <span class="dt">dsn =</span> <span class="st">"~/GSOD"</span>)</a></code></pre></div>
 </div>
 <div id="using-get_gsod" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-get_gsod" class="anchor"></a>Using get_GSOD</h2>
 <p>Get GSOD data for 1998 to 2000.</p>
-<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">gsod &lt;-<span class="st"> </span><span class="kw">get_GSOD</span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">2000</span>)</a></code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">gsod &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_GSOD.html">get_GSOD</a></span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">2000</span>)</a></code></pre></div>
 </div>
 <div id="using-interpolate_gsod-with-a-list-of-data-frames" class="section level2">
 <h2 class="hasAnchor">
@@ -114,14 +120,14 @@
 <div id="example-2-using-in-memory-data-only" class="section level1">
 <h1 class="hasAnchor">
 <a href="#example-2-using-in-memory-data-only" class="anchor"></a>Example 2: Using In-Memory Data Only</h1>
-<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Create a list of GSOD files</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">gsod_list &lt;-<span class="st"> </span><span class="kw">get_GSOD</span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">1999</span>)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Create a list of GSOD files</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">gsod_list &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_GSOD.html">get_GSOD</a></span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">1999</span>)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># Get and aggregate the raster digital elevation model</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">dem &lt;-<span class="st"> </span><span class="kw">get_DEM</span>()</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">dem &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_DEM.html">get_DEM</a></span>()</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co"># Run the function for MAX and MIN temperature</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">lapply</span>(<span class="dt">X =</span> gsod_list, <span class="dt">FUN =</span> interp, <span class="dt">dem =</span> dem, <span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">"MAX"</span>, <span class="st">"MIN"</span>))</a></code></pre>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">lapply</span>(<span class="dt">X =</span> gsod_list, <span class="dt">FUN =</span> interp, <span class="dt">dem =</span> dem, <span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">"MAX"</span>, <span class="st">"MIN"</span>))</a></code></pre></div>
 </div>
 </div>
   </div>
@@ -149,7 +155,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

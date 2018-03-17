@@ -8,8 +8,11 @@
 <title>GSOD Interpolated Data in R • GRID</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><meta property="og:title" content="GSOD Interpolated Data in R">
+<meta property="og:description" content="Interpolate GSOD weather data provided by GSODR.">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -48,10 +51,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/Getting_started_with_Docker.html">Getting started with Docker</a>
+      <a href="articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GRID Use Case</a>
     </li>
     <li>
-      <a href="articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GRID Use Case</a>
+      <a href="articles/Getting_started_with_Docker.html">Getting started with Docker</a>
     </li>
   </ul>
 </li>
@@ -118,7 +121,7 @@
 <a href="#the-r-package" class="anchor"></a>The R package</h3>
 <p>This repository is organized as an R package. There are no actual R functions in this package - all the R code is in the Rmd file. I simply used the R package structure to help manage dependencies, to take advantage of continuous integration for automated code testing, and so I didn’t have to think too much about how to organise the files.</p>
 <p>To download the package source as you see it on GitHub, for offline browsing, use this line at the shell prompt (assuming you have Git installed on your computer):</p>
-<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">git clone https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>adamhsparks<span class="op">/</span>GRID.git</a></code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">git clone https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>adamhsparks<span class="op">/</span>GRID.git</a></code></pre></div>
 <p>Once the download is complete, open the <code>GRID.Rproj</code> in RStudio to begin working with the package and compendium files.</p>
 <p>The package has a number of dependencies on other R packages, and programs outside of R. These are listed at the bottom of this README. Installing these can be time-consuming and complicated, so we’ve done two things to simpify access to the compendium. First is that we have used <a href="https://cran.r-project.org/web/packages/checkpoint/index.html"><em>checkpoint</em></a>, which will install packages as they existed on CRAN at a specific date as a part of your local library. If all works well, these will be installed on your computer when you open <code>GRID.Rproj</code> in RStudio. Second is our Docker image that includes all the necessary software, code and data to run our analysis. The Docker image may give a quicker entry point to the project, and is more self-contained, so might save some fiddling with installing things.</p>
 </div>
@@ -135,7 +138,7 @@
 <h3 class="hasAnchor">
 <a href="#licenses" class="anchor"></a>Licenses</h3>
 <p>Manuscript: <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p>
-<p>Code: <a href="http://opensource.org/licenses/MIT">MIT</a> year: 2017, copyright holder: Adam H Sparks</p>
+<p>Code: <a href="http://opensource.org/licenses/MIT">MIT</a> year: 2018, copyright holder: Adam H Sparks</p>
 <p>Data: <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC-0</a> attribution requested in reuse</p>
 </div>
 <div id="dependencies" class="section level3">
@@ -153,7 +156,7 @@
 <h3 class="hasAnchor">
 <a href="#credits" class="anchor"></a>Credits</h3>
 <p>This research compendium was based on <a href="https://github.com/benmarwick/researchcompendium" class="uri">https://github.com/benmarwick/researchcompendium</a> but not forked from because it was already under development when I found Ben’s.</p>
-<p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+<p>Please note that this project is released with a <a href="CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
 </div>
@@ -169,16 +172,16 @@
 </li>
 </ul>
 <h2>License</h2>
-<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE.html">LICENSE</a></p>
+<p><a href="license.html">Full license</a><br><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a><small></small></small></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Adam H. Sparks <br><small class="roles"> Author, maintainer </small> </li>
-<li>Andrew Nelson <br><small class="roles"> Author </small> </li>
-<li>Jorrel Khalil S. Aunario <br><small class="roles"> Author </small> </li>
+<li>Adam H. Sparks <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Andrew Nelson <br><small class="roles"> Author </small>  </li>
+<li>Jorrel Khalil S. Aunario <br><small class="roles"> Author </small>  </li>
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/adamhsparks/GRID/commits/master"><img src="https://img.shields.io/badge/last%20change-2017--12--11-brightgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="https://github.com/adamhsparks/GRID/commits/master"><img src="https://img.shields.io/badge/last%20change-2018--03--18-brightgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="http://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="Licence"></a></li>
 <li><a href="https://travis-ci.org/adamhsparks/GRID"><img src="https://travis-ci.org/adamhsparks/GRID.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://ci.appveyor.com/project/adamhsparks/GRID"><img src="https://ci.appveyor.com/api/projects/status/github/adamhsparks/GRID?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
@@ -194,7 +197,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

@@ -1,7 +1,7 @@
 GRID, GSOD(R) Interoplated Data
 ================
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2017--12--11-brightgreen.svg)](https://github.com/adamhsparks/GRID/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--03--18-brightgreen.svg)](https://github.com/adamhsparks/GRID/commits/master)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 [![Travis-CI Build
 Status](https://travis-ci.org/adamhsparks/GRID.svg?branch=master)](https://travis-ci.org/adamhsparks/GRID)
@@ -119,7 +119,7 @@ anyone wanting to use this package to generate the vignette, etc.
 
 Manuscript: [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 
-Code: [MIT](http://opensource.org/licenses/MIT) year: 2017, copyright
+Code: [MIT](http://opensource.org/licenses/MIT) year: 2018, copyright
 holder: Adam H Sparks
 
 Data: [CC-0](http://creativecommons.org/publicdomain/zero/1.0/)
