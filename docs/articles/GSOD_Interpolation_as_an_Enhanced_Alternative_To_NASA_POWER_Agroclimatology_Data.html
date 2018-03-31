@@ -18,7 +18,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -27,8 +27,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">GRID</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">GRID</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -38,7 +42,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/GRID.html">Get Started</a>
+  <a href="../articles/GRID.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -76,19 +80,18 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>GRID Use Case</h1>
                         <h4 class="author">Adam H. Sparks - Centre for Crop Health, USQ</h4>
             
       
-      <small>Source: <a href="https:/github.com/adamhsparks/GRID/blob/master/vignettes/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.Rmd"><code>vignettes/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.Rmd</code></a></small>
+      <small>Source: <a href="https://github.com/adamhsparks/GRID/blob/master/vignettes/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.Rmd"><code>vignettes/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.Rmd</code></a></small>
 
     </div>
 
     
     
-<div class="contents">
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
@@ -169,13 +172,13 @@
 <pre><code>## ─ Session info ──────────────────────────────────────────────────────────
 ##  setting  value                       
 ##  version  R version 3.4.4 (2018-03-15)
-##  os       macOS High Sierra 10.13.3   
+##  os       macOS High Sierra 10.13.4   
 ##  system   x86_64, darwin17.4.0        
 ##  ui       unknown                     
 ##  language (EN)                        
 ##  collate  en_AU.UTF-8                 
 ##  tz       Australia/Brisbane          
-##  date     2018-03-18                  
+##  date     2018-03-31                  
 ## 
 ## ─ Packages ──────────────────────────────────────────────────────────────
 ##  package     * version    date      
@@ -187,13 +190,13 @@
 ##  desc          1.1.1      2017-08-03
 ##  digest        0.6.15     2018-01-28
 ##  evaluate      0.10.1     2017-06-24
-##  fs            1.2.0      2018-03-13
+##  fs            1.2.2      2018-03-21
 ##  htmltools     0.3.6      2017-04-28
 ##  knitr         1.20       2018-02-20
 ##  magrittr      1.5        2014-11-22
 ##  MASS          7.3-49     2018-02-23
 ##  memoise       1.1.0      2017-04-21
-##  pkgdown       0.1.0.9000 2018-03-17
+##  pkgdown       0.1.0.9000 2018-03-30
 ##  R6            2.2.2      2017-06-17
 ##  Rcpp          0.12.16    2018-03-13
 ##  rlang         0.2.0      2018-02-20
@@ -216,13 +219,13 @@
 ##  cran (@1.1.1)                          
 ##  cran (@0.6.15)                         
 ##  cran (@0.10.1)                         
-##  CRAN (R 3.4.4)                         
+##  cran (@1.2.2)                          
 ##  cran (@0.3.6)                          
 ##  CRAN (R 3.4.4)                         
 ##  CRAN (R 3.4.2)                         
 ##  CRAN (R 3.4.4)                         
 ##  CRAN (R 3.4.2)                         
-##  Github (r-lib/pkgdown@7cbafcd)         
+##  Github (r-lib/pkgdown@7d8b488)         
 ##  CRAN (R 3.4.2)                         
 ##  CRAN (R 3.4.4)                         
 ##  CRAN (R 3.4.4)                         
@@ -236,7 +239,6 @@
 ##  Github (r-lib/withr@79d7b0d)           
 ##  cran (@1.2.0)                          
 ##  CRAN (R 3.4.4)</code></pre>
-</div>
 </div>
 </div>
   </div>
@@ -277,6 +279,8 @@
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

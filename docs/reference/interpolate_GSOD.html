@@ -31,6 +31,8 @@
 function to process multiple years of GSOD data for interpolation, though a
 single year may be used." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -38,6 +40,8 @@ single year may be used." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -53,8 +57,12 @@ single year may be used." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">GRID</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">GRID</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -64,7 +72,7 @@ single year may be used." />
   </a>
 </li>
 <li>
-  <a href="../articles/GRID.html">Get Started</a>
+  <a href="../articles/GRID.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -94,6 +102,7 @@ single year may be used." />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -101,11 +110,11 @@ single year may be used." />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Interpolate GSOD Data to a Gridded Surface</h1>
-    <small>Source: <a href='https:/github.com/adamhsparks/GRID/blob/master/R/interpolate_gsod.R'><code>R/interpolate_gsod.R</code></a></small>
+    <small>Source: <a href='https://github.com/adamhsparks/GRID/blob/master/R/interpolate_gsod.R'><code>R/interpolate_gsod.R</code></a></small>
     </div>
 
     
@@ -117,7 +126,7 @@ single year may be used.</p>
     <pre class="usage"><span class='fu'>interpolate_GSOD</span>(<span class='kw'>file_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -192,6 +201,8 @@ Windows OS or if not specified.</p></td>
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

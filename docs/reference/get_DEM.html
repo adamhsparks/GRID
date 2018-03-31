@@ -32,6 +32,8 @@ aggregates to a larger spatial resolution and crops at -60/60 degrees
 latitude for use with other weather data that provide rainfall, e.g.
 NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -39,6 +41,8 @@ NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -54,8 +58,12 @@ NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">GRID</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">GRID</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -65,7 +73,7 @@ NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises." />
   </a>
 </li>
 <li>
-  <a href="../articles/GRID.html">Get Started</a>
+  <a href="../articles/GRID.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -95,6 +103,7 @@ NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises." />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -102,11 +111,11 @@ NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises." />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data</h1>
-    <small>Source: <a href='https:/github.com/adamhsparks/GRID/blob/master/R/get_DEM.R'><code>R/get_DEM.R</code></a></small>
+    <small>Source: <a href='https://github.com/adamhsparks/GRID/blob/master/R/get_DEM.R'><code>R/get_DEM.R</code></a></small>
     </div>
 
     
@@ -118,7 +127,7 @@ NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises.</p>
 
     <pre class="usage"><span class='fu'>get_DEM</span>(<span class='kw'>resolution</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -174,6 +183,8 @@ aggregated by the requested factor</p>
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>
