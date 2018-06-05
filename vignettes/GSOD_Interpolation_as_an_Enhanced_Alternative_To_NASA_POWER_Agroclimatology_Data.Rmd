@@ -50,10 +50,10 @@ _GRID_ offers customised functionality, `get_DEM()` to download a digital
 elevation model based on the Shuttle Radar Topography Mission (SRTM) from
 [WorldClim](https://wwww.worldclim.org/) and aggregated it to:
 
-* 1 degree (matching [NASA - POWER](https://power.larc.nasa.gov/) data, which
-can provide rainfall),
+* 1 degree (matching historical [NASA - POWER](https://power.larc.nasa.gov/)
+data, which could provide rainfall),
 
-* 0.5 degree (matching future [NASA - POWER](https://power.larc.nasa.gov/) data,
+* 0.5 degree (matching [NASA - POWER](https://power.larc.nasa.gov/) data,
 which can provide rainfall),
 
 * 0.25 degree (matching [CHIRPS](http://chg.geog.ucsb.edu/data/chirps/) data,
