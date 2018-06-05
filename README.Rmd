@@ -22,7 +22,7 @@ development versions and may have changed since the report was published
 
 ### Authors  of this repository:
 
-Adam H Sparks (adamhsparks@gmail.com)
+Adam H Sparks (<adamhsparks@gmail.com>)
 
 ### Published in: 
 
