@@ -11,7 +11,7 @@ interpolate_GSOD(file_list = NULL, dem = NULL, dsn = NULL, vars = NULL,
 \item{file_list}{A \code{\link[base]{list}} of data frames or CSV files of
 GSOD data created by \link{get_GSOD}.}
 
-\item{dem}{Digital elevation model that has been geted and processed using
+\item{dem}{Digital elevation model that has been fetched and processed using
 \code{\link{get_DEM}}.}
 
 \item{dsn}{Optional. Directory where resulting GeoTIFF files are to be saved.}
