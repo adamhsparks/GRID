@@ -1,13 +1,16 @@
 GRID, GSOD(R) Interoplated Data
 ================
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2017--12--11-brightgreen.svg)](https://github.com/adamhsparks/GRID/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--06--05-brightgreen.svg)](https://github.com/adamhsparks/GRID/commits/master)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 [![Travis-CI Build
 Status](https://travis-ci.org/adamhsparks/GRID.svg?branch=master)](https://travis-ci.org/adamhsparks/GRID)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/adamhsparks/GRID?branch=master&svg=true)](https://ci.appveyor.com/project/adamhsparks/GRID)
 [![codecov.io](https://codecov.io/github/adamhsparks/GRID/coverage.svg?branch=master)](https://codecov.io/github/adamhsparks/GRID?branch=master)
+[![Project Status: WIP – Initial development is in progress, but there
+has not yet been a stable, usable release suitable for the
+public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 
 ## Research compendium for a report on interpolating GSOD weather data
 
@@ -119,7 +122,7 @@ anyone wanting to use this package to generate the vignette, etc.
 
 Manuscript: [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 
-Code: [MIT](http://opensource.org/licenses/MIT) year: 2017, copyright
+Code: [MIT](http://opensource.org/licenses/MIT) year: 2018, copyright
 holder: Adam H Sparks
 
 Data: [CC-0](http://creativecommons.org/publicdomain/zero/1.0/)
