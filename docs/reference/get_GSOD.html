@@ -18,13 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Get GSOD Data and Subset Fields for Interpolation — get_GSOD" />
+
+<meta property="og:description" content="This function can be wrapped in an lapply function to
+retrieve and save multiple years of GSOD data for interpolation, though it
+may be used to retrieve GSOD data and interpolate files on-the-fly. See
+vignette(&quot;GRID&quot;) for more details and examples." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +62,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">GRID</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">GRID</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -58,7 +77,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/GRID.html">Get Started</a>
+  <a href="../articles/GRID.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -71,10 +90,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Getting_started_with_Docker.html">Getting started with Docker</a>
+      <a href="../articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GRID Use Case</a>
     </li>
     <li>
-      <a href="../articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GRID Use Case</a>
+      <a href="../articles/Getting_started_with_Docker.html">Getting started with Docker</a>
     </li>
   </ul>
 </li>
@@ -88,6 +107,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,22 +115,26 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get GSOD Data and Subset Fields for Interpolation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/adamhsparks/GRID/blob/master/R/get_GSOD.R'><code>R/get_GSOD.R</code></a></small>
+    <div class="hidden name"><code>get_GSOD.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function can be wrapped in an <code><a href='http://www.rdocumentation.org/packages/base/topics/lapply'>lapply</a></code> function to
 retrieve and save multiple years of GSOD data for interpolation, though it
 may be used to retrieve GSOD data and interpolate files on-the-fly. See
 <code><a href='../articles/GRID.html'>vignette("GRID")</a></code> for more details and examples.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>get_GSOD</span>(<span class='kw'>years</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -191,11 +215,14 @@ Hole-filled SRTM for the globe Version 4, available from the CGIAR-CSI SRTM
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
