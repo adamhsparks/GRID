@@ -1,5 +1,5 @@
 ---
-title: "GRID Use Case"
+title: "glint Use Case"
 author: "Adam H. Sparks - Centre for Crop Health, USQ"
 output: rmarkdown::html_vignette
 vignette: >
@@ -23,18 +23,18 @@ to reproduce these data using freely available data, software and methodologies.
 
 # Daily Weather Data Cleaning, Thin Plate Splining and Interpolation
 
-The _GRID_ package makes this process as simple as possible. Described below are
+The __glint__ package makes this process as simple as possible. Described below are
 the steps that the package uses internally to create gridded weather data from
 the GSOD data.
 
 ## Downloading GSOD Data
 
-_GRID_ offers customised functionality to download GSOD data, `get_GSOD()`
+_glint_ offers customised functionality to download GSOD data, `get_GSOD()`
 using functionality from the [_GSODR_](https://ropensci.github.io/GSODR/)
-package. _GRID_ will provide only the data necessary for interpolation,
+package. _glint_ will provide only the data necessary for interpolation,
 excluding the other data that GSOD provides while omitting any station that has
 more than a maximum five missing days to help ensure data quality. The four
-variables that _GRID_ can interpolate are:
+variables that _glint_ can interpolate are:
 
 * TEMP - Mean daily temperature,
 
@@ -46,7 +46,7 @@ variables that _GRID_ can interpolate are:
 
 ## Downloading the Digital Elevation Model
 
-_GRID_ offers customised functionality, `get_DEM()` to download a digital
+_glint_ offers customised functionality, `get_DEM()` to download a digital
 elevation model based on the Shuttle Radar Topography Mission (SRTM) from
 [WorldClim](https://wwww.worldclim.org/) and aggregated it to:
 
@@ -61,7 +61,7 @@ which can provide rainfall)
 
 ## Interpolating the GSOD Data
 
-_GRID_ offers a simple function, `interpolate_GSOD()`, to automate error
+_glint_ offers a simple function, `interpolate_GSOD()`, to automate error
 checking, interpolation and saving GeoTIFF files of the resulting data.
 
 When using the `interpolate_GSOD()` function, GSOD data are first checked for

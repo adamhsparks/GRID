@@ -1,22 +1,22 @@
 
 #' Interpolate GSOD Data to a Gridded Surface
 #'
-#' This function is designed to be wrapped in an \code{\link[base]{lapply}}
+#' This function is designed to be wrapped in an `[base::lapply()]`
 #' function to process multiple years of GSOD data for interpolation, though a
 #' single year may be used.
 #'
-#' @param file_list A \code{\link[base]{list}} of data frames or CSV files of
-#' GSOD data created by \link{get_GSOD}.
+#' @param file_list A `[base::list()]` of data frames or CSV files of
+#' GSOD data created by `make_GSOD_set()`.
 #' @param dem Digital elevation model that has been fetched and processed using
-#' \code{\link{get_DEM}}.
+#' `get_DEM()`.
 #' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
-#' @param vars Weather variables to interpolate. Possible values are,
-#' \code{TEMP}, \code{MAX}, \code{MIN}, \code{RH}. Defaults to \code{TEMP}.
+#' @param vars Weather variables to interpolate. Possible values are
+#' `TEMP`, `MAX`, `MIN` and `RH`. Defaults to `TEMP`.
 #' @param cores Number of cores to use for parallel processing. Defaults to 1 on
-#' Windows OS or if not specified.
+#' Windows OS or if not otherwise specified.
 #'
 #' @return
-#' A \code{\link[raster]{stack}}
+#' A `[raster::stack()]` of daily interpolated weather variables.
 #'
 #' @export
 #'
@@ -55,7 +55,7 @@ interpolate_GSOD <- function(file_list = NULL,
   # Create a list of data frames by YDAY
   GSOD <- split(GSOD, as.factor(GSOD$YDAY))
 
-  # Apply function for each wvar that is specified
+  # Apply function for each `wvar` that is specified
   if ("TEMP" %in% vars) {
     TEMP <- .create_stack(
       GSOD = GSOD,

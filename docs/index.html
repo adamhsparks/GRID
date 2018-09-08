@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GSOD Interpolated Data in R • GRID</title>
+<title>Global (GSOD) Interpolated Temperatures • glint</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="GSOD Interpolated Data in R">
+<script src="pkgdown.js"></script><meta property="og:title" content="Global (GSOD) Interpolated Temperatures">
 <meta property="og:description" content="Interpolate GSOD weather data provided by GSODR.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -28,7 +28,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">GRID</a>
+        <a class="navbar-link" href="index.html">glint</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1.9000</span>
       </span>
     </div>
@@ -42,7 +42,7 @@
   </a>
 </li>
 <li>
-  <a href="articles/GRID.html">Get started</a>
+  <a href="articles/glint.html">Get started</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
@@ -55,7 +55,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GRID Use Case</a>
+      <a href="articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">glint Use Case</a>
     </li>
     <li>
       <a href="articles/Getting_started_with_Docker.html">Getting started with Docker</a>
@@ -65,7 +65,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/adamhsparks/GRID">
+  <a href="https://github.com/adamhsparks/glint">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -168,9 +168,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/adamhsparks/GRID">https://​github.com/​adamhsparks/​GRID</a>
+<li>Browse source code at <br><a href="https://github.com/adamhsparks/glint">https://​github.com/​adamhsparks/​glint</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/adamhsparks/GRID/issues">https://​github.com/​adamhsparks/​GRID/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/adamhsparks/glint/issues">https://​github.com/​adamhsparks/​glint/​issues</a>
 </li>
 </ul>
 </div>
@@ -187,14 +187,14 @@
 <ul class="list-unstyled">
 <li>Adam H. Sparks <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-0061-8359" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" height="16"></a> </li>
 <li>Andrew Nelson <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-7249-3778" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" height="16"></a> </li>
-<li>Jorrel Khalil S. Aunario <br><small class="roles"> Author </small>  </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/adamhsparks/GRID/commits/master"><img src="https://img.shields.io/badge/last%20change-2018--06--05-brightgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="https://github.com/adamhsparks/GRID/commits/master"><img src="https://img.shields.io/badge/last%20change-2018--09--08-brightgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="http://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="Licence"></a></li>
 <li><a href="https://travis-ci.org/adamhsparks/GRID"><img src="https://travis-ci.org/adamhsparks/GRID.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://ci.appveyor.com/project/adamhsparks/GRID"><img src="https://ci.appveyor.com/api/projects/status/github/adamhsparks/GRID?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
@@ -208,7 +208,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Adam H. Sparks, Andrew Nelson, Jorrel Khalil S. Aunario.</p>
+  <p>Developed by Adam H. Sparks, Andrew Nelson.</p>
 </div>
 
 <div class="pkgdown">

@@ -1,6 +1,6 @@
-Package: GRID
+Package: glint
 Type: Package
-Title: GSOD Interpolated Data in R
+Title: Global (GSOD) Interpolated Temperatures
 Version: 0.0.1.9000
 Authors@R: c(person(given = "Adam H.", family = "Sparks",
     role = c("aut", "cre"), email = "adamhsparks@gmail.com",
@@ -9,9 +9,9 @@ Authors@R: c(person(given = "Adam H.", family = "Sparks",
     email = "dr.andy.nelson@gmail.com",
     comment = c(ORCID = "0000-0002-7249-3778")),
     person(given = "Jorrel Khalil S.", family = "Aunario",
-    role = "aut", email = "jaunario@gmail.com"))
-URL: https://github.com/adamhsparks/GRID
-BugReports: https://github.com/adamhsparks/GRID/issues
+    role = "ctb", email = "jaunario@gmail.com"))
+URL: https://github.com/adamhsparks/glint
+BugReports: https://github.com/adamhsparks/glint/issues
 Description: Interpolate GSOD weather data provided by GSODR.
 Depends:
     R (>= 3.2.0)
@@ -36,7 +36,8 @@ Suggests:
     sessioninfo,
     testthat,
     viridis
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
+Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 NeedsCompilation: no
 Repository: CRAN

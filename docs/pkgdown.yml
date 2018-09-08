@@ -1,8 +1,8 @@
-pandoc: 2.2.1
+pandoc: 2.2.3.2
 pkgdown: 1.1.0
 pkgdown_sha: ~
 articles:
-  GRID: GRID.html
   GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data: GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html
   Getting_started_with_Docker: Getting_started_with_Docker.html
+  glint: glint.html
 

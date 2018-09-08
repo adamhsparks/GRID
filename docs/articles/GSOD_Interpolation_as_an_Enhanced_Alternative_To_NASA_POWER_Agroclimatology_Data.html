@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRID Use Case • GRID</title>
+<title>glint Use Case • glint</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="GRID Use Case">
+<script src="../pkgdown.js"></script><meta property="og:title" content="glint Use Case">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -28,7 +28,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">GRID</a>
+        <a class="navbar-link" href="../index.html">glint</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1.9000</span>
       </span>
     </div>
@@ -42,7 +42,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/GRID.html">Get started</a>
+  <a href="../articles/glint.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -55,7 +55,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">GRID Use Case</a>
+      <a href="../articles/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.html">glint Use Case</a>
     </li>
     <li>
       <a href="../articles/Getting_started_with_Docker.html">Getting started with Docker</a>
@@ -65,7 +65,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/adamhsparks/GRID">
+  <a href="https://github.com/adamhsparks/glint">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -82,11 +82,11 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>GRID Use Case</h1>
+      <h1>glint Use Case</h1>
                         <h4 class="author">Adam H. Sparks - Centre for Crop Health, USQ</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/adamhsparks/GRID/blob/master/vignettes/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.Rmd"><code>vignettes/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/adamhsparks/glint/blob/master/vignettes/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.Rmd"><code>vignettes/GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.Rmd</code></a></small>
       <div class="hidden name"><code>GSOD_Interpolation_as_an_Enhanced_Alternative_To_NASA_POWER_Agroclimatology_Data.Rmd</code></div>
 
     </div>
@@ -101,11 +101,11 @@
 <div id="daily-weather-data-cleaning-thin-plate-splining-and-interpolation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#daily-weather-data-cleaning-thin-plate-splining-and-interpolation" class="anchor"></a>Daily Weather Data Cleaning, Thin Plate Splining and Interpolation</h1>
-<p>The <em>GRID</em> package makes this process as simple as possible. Described below are the steps that the package uses internally to create gridded weather data from the GSOD data.</p>
+<p>The <strong>glint</strong> package makes this process as simple as possible. Described below are the steps that the package uses internally to create gridded weather data from the GSOD data.</p>
 <div id="downloading-gsod-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#downloading-gsod-data" class="anchor"></a>Downloading GSOD Data</h2>
-<p><em>GRID</em> offers customised functionality to download GSOD data, <code><a href="../reference/get_GSOD.html">get_GSOD()</a></code> using functionality from the <a href="https://ropensci.github.io/GSODR/"><em>GSODR</em></a> package. <em>GRID</em> will provide only the data necessary for interpolation, excluding the other data that GSOD provides while omitting any station that has more than a maximum five missing days to help ensure data quality. The four variables that <em>GRID</em> can interpolate are:</p>
+<p><em>glint</em> offers customised functionality to download GSOD data, <code>get_GSOD()</code> using functionality from the <a href="https://ropensci.github.io/GSODR/"><em>GSODR</em></a> package. <em>glint</em> will provide only the data necessary for interpolation, excluding the other data that GSOD provides while omitting any station that has more than a maximum five missing days to help ensure data quality. The four variables that <em>glint</em> can interpolate are:</p>
 <ul>
 <li><p>TEMP - Mean daily temperature,</p></li>
 <li><p>MAX - Daily maximum temperature,</p></li>
@@ -116,7 +116,7 @@
 <div id="downloading-the-digital-elevation-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#downloading-the-digital-elevation-model" class="anchor"></a>Downloading the Digital Elevation Model</h2>
-<p><em>GRID</em> offers customised functionality, <code><a href="../reference/get_DEM.html">get_DEM()</a></code> to download a digital elevation model based on the Shuttle Radar Topography Mission (SRTM) from <a href="https://wwww.worldclim.org/">WorldClim</a> and aggregated it to:</p>
+<p><em>glint</em> offers customised functionality, <code>get_DEM()</code> to download a digital elevation model based on the Shuttle Radar Topography Mission (SRTM) from <a href="https://wwww.worldclim.org/">WorldClim</a> and aggregated it to:</p>
 <ul>
 <li><p>1 degree (matching historical <a href="https://power.larc.nasa.gov/">NASA - POWER</a> data, which could provide rainfall),</p></li>
 <li><p>0.5 degree (matching <a href="https://power.larc.nasa.gov/">NASA - POWER</a> data, which can provide rainfall),</p></li>
@@ -126,7 +126,7 @@
 <div id="interpolating-the-gsod-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#interpolating-the-gsod-data" class="anchor"></a>Interpolating the GSOD Data</h2>
-<p><em>GRID</em> offers a simple function, <code><a href="../reference/interpolate_GSOD.html">interpolate_GSOD()</a></code>, to automate error checking, interpolation and saving GeoTIFF files of the resulting data.</p>
+<p><em>glint</em> offers a simple function, <code><a href="../reference/interpolate_GSOD.html">interpolate_GSOD()</a></code>, to automate error checking, interpolation and saving GeoTIFF files of the resulting data.</p>
 <p>When using the <code><a href="../reference/interpolate_GSOD.html">interpolate_GSOD()</a></code> function, GSOD data are first checked for consistency using <code>boxplot.stats()</code> to identify and remove daily outliers for any variable requested.</p>
 <p>Once the GSOD data are cleaned, thin plate splining, the <code>Tps()</code> function, from <em>fields</em> is used to create an object that can then be used to create an interpolated surface of temperatures using the SRTM DEM with the <code>interpolate()</code> function from <em>raster</em>.</p>
 <p>The data are then returned in a list of raster stacks by weather variable in the R session or saved to disk in GeoTIFF file format in an INT2S format with LZW compression for saving disk space.</p>
@@ -144,7 +144,7 @@
 <div id="step-2-download-the-digital-elevation-model-and-aggregate-to-1-degree" class="section level3">
 <h3 class="hasAnchor">
 <a href="#step-2-download-the-digital-elevation-model-and-aggregate-to-1-degree" class="anchor"></a>Step 2: Download the Digital Elevation Model and Aggregate to 1 Degree</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_DEM.html">get_DEM</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw">get_DEM</span>()</a></code></pre></div>
 </div>
 <div id="step-3-interpolate-the-gsod-data-from-on-disk-files" class="section level3">
 <h3 class="hasAnchor">
@@ -172,45 +172,45 @@
 <a href="#reproducibility" class="anchor"></a>Reproducibility</h2>
 <pre><code>## ─ Session info ──────────────────────────────────────────────────────────
 ##  setting  value                       
-##  version  R version 3.5.0 (2018-04-23)
-##  os       macOS Sierra 10.12.6        
-##  system   x86_64, darwin16.7.0        
+##  version  R version 3.5.1 (2018-07-02)
+##  os       macOS High Sierra 10.13.6   
+##  system   x86_64, darwin17.7.0        
 ##  ui       X11                         
 ##  language (EN)                        
 ##  collate  en_AU.UTF-8                 
 ##  tz       Australia/Brisbane          
-##  date     2018-06-05                  
+##  date     2018-09-08                  
 ## 
 ## ─ Packages ──────────────────────────────────────────────────────────────
 ##  package     * version date       source        
-##  assertthat    0.2.0   2017-04-11 CRAN (R 3.5.0)
-##  backports     1.1.2   2017-12-13 CRAN (R 3.5.0)
-##  clisymbols    1.2.0   2017-05-21 CRAN (R 3.5.0)
-##  commonmark    1.5     2018-04-28 CRAN (R 3.5.0)
-##  crayon        1.3.4   2017-09-16 CRAN (R 3.5.0)
-##  desc          1.2.0   2018-05-01 CRAN (R 3.5.0)
-##  digest        0.6.15  2018-01-28 CRAN (R 3.5.0)
-##  evaluate      0.10.1  2017-06-24 CRAN (R 3.5.0)
-##  fs            1.2.2   2018-03-21 CRAN (R 3.5.0)
-##  htmltools     0.3.6   2017-04-28 CRAN (R 3.5.0)
-##  knitr         1.20    2018-02-20 CRAN (R 3.5.0)
-##  magrittr      1.5     2014-11-22 CRAN (R 3.5.0)
-##  MASS          7.3-50  2018-04-30 CRAN (R 3.5.0)
-##  memoise       1.1.0   2017-04-21 CRAN (R 3.5.0)
-##  pkgdown       1.1.0   2018-06-02 cran (@1.1.0) 
-##  R6            2.2.2   2017-06-17 CRAN (R 3.5.0)
-##  Rcpp          0.12.17 2018-05-18 CRAN (R 3.5.0)
-##  rlang         0.2.1   2018-05-30 cran (@0.2.1) 
-##  rmarkdown     1.9     2018-03-01 CRAN (R 3.5.0)
-##  roxygen2      6.0.1   2017-02-06 CRAN (R 3.5.0)
-##  rprojroot     1.3-2   2018-01-03 CRAN (R 3.5.0)
-##  rstudioapi    0.7     2017-09-07 CRAN (R 3.5.0)
-##  sessioninfo   1.0.0   2017-06-21 CRAN (R 3.5.0)
-##  stringi       1.2.2   2018-05-02 CRAN (R 3.5.0)
-##  stringr       1.3.1   2018-05-10 CRAN (R 3.5.0)
-##  withr         2.1.2   2018-03-15 CRAN (R 3.5.0)
-##  xml2          1.2.0   2018-01-24 CRAN (R 3.5.0)
-##  yaml          2.1.19  2018-05-01 CRAN (R 3.5.0)</code></pre>
+##  assertthat    0.2.0   2017-04-11 CRAN (R 3.5.1)
+##  backports     1.1.2   2017-12-13 CRAN (R 3.5.1)
+##  clisymbols    1.2.0   2017-05-21 CRAN (R 3.5.1)
+##  commonmark    1.5     2018-04-28 CRAN (R 3.5.1)
+##  crayon        1.3.4   2017-09-16 CRAN (R 3.5.1)
+##  desc          1.2.0   2018-05-01 CRAN (R 3.5.1)
+##  digest        0.6.16  2018-08-22 CRAN (R 3.5.1)
+##  evaluate      0.11    2018-07-17 CRAN (R 3.5.1)
+##  fs            1.2.6   2018-08-23 CRAN (R 3.5.1)
+##  htmltools     0.3.6   2017-04-28 CRAN (R 3.5.1)
+##  knitr         1.20    2018-02-20 CRAN (R 3.5.1)
+##  magrittr      1.5     2014-11-22 CRAN (R 3.5.1)
+##  MASS          7.3-50  2018-04-30 CRAN (R 3.5.1)
+##  memoise       1.1.0   2017-04-21 CRAN (R 3.5.1)
+##  pkgdown       1.1.0   2018-06-02 CRAN (R 3.5.1)
+##  R6            2.2.2   2017-06-17 CRAN (R 3.5.1)
+##  Rcpp          0.12.18 2018-07-23 CRAN (R 3.5.1)
+##  rlang         0.2.2   2018-08-16 CRAN (R 3.5.1)
+##  rmarkdown     1.10    2018-06-11 CRAN (R 3.5.1)
+##  roxygen2      6.1.0   2018-07-27 CRAN (R 3.5.1)
+##  rprojroot     1.3-2   2018-01-03 CRAN (R 3.5.1)
+##  rstudioapi    0.7     2017-09-07 CRAN (R 3.5.1)
+##  sessioninfo   1.0.0   2017-06-21 CRAN (R 3.5.1)
+##  stringi       1.2.4   2018-07-20 CRAN (R 3.5.1)
+##  stringr       1.3.1   2018-05-10 CRAN (R 3.5.1)
+##  withr         2.1.2   2018-03-15 CRAN (R 3.5.1)
+##  xml2          1.2.0   2018-01-24 CRAN (R 3.5.1)
+##  yaml          2.2.0   2018-07-25 CRAN (R 3.5.1)</code></pre>
 </div>
 </div>
   </div>
@@ -242,7 +242,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Adam H. Sparks, Andrew Nelson, Jorrel Khalil S. Aunario.</p>
+  <p>Developed by Adam H. Sparks, Andrew Nelson.</p>
 </div>
 
 <div class="pkgdown">

@@ -1,31 +1,37 @@
 
 #' Get and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data
 #'
-#' Getes a digital elevation model (DEM) from WorldClim data, crops and
+#' Fetches a digital elevation model (DEM) from WorldClim data, crops and
 #' aggregates to a larger spatial resolution and crops at -60/60 degrees
 #' latitude for use with other weather data that provide rainfall, \emph{e.g.}
-#' NASA - POWER at 1 arc degree. Mainly for use in crop modelling exercises.
+#' NASA - POWER at 0.5 arc degrees or TRMM at 0.25 arc degrees. Mainly for use in
+#' crop modelling exercises.
 #'
 #' @param resolution Resolution to aggregate the digital elevation model to in
-#' arc-degrees, e.g. 1 = 1 arc degree, .25 = one quarter arc degree. Valid
-#' options are 1, .5 and .25 degrees.
+#' arc-degrees, e.g. 1 = 1 arc degree, 0.5 = one half arc degree, 0.25 = one
+#' quarter arc degree. Valid options are `1`, `0.5` and `0.25`.
 #' @param dsn Optional. Directory where resulting DEM file is to be saved. If
 #' unspecified a spatial object is returned in the R session. If a DEM exists,
 #' it will be overwritten with the new one of the same resolution. If a new
 #' resolution is specified, a new file will be created.
 #'
-#' @return A digital elevation model cropped to -60/60 degrees latitude and
-#' aggregated by the requested factor
+#' @return A `[raster::raster()]` object of a digital elevation model cropped to
+#' -60/60 degrees latitude and aggregated by the requested factor.
+#'
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
+#'
 #' @export
 #'
 #' @examples
 #'
 #' \dontrun{
-#' # Get DEM and aggregate to 1 arc degree
-#' DEM <- get_DEM(dsn = "~/Data/DEM")
+#' # Get DEM and aggregate to 0.5 arc degree, saving it to a local "~/Data/DEM"
+#' directory.
+#'
+#' DEM <- make_DEM(dsn = "~/Data/DEM")
 #' }
 #'
-get_DEM <- function(resolution = NULL, dsn = NULL) {
+make_DEM <- function(resolution = NULL, dsn = NULL) {
 
   dsn <- .validate_dsn(dsn)
   agg <- .validate_resolution(resolution)
@@ -61,14 +67,14 @@ get_DEM <- function(resolution = NULL, dsn = NULL) {
 
   # if dsn is specified, write a raster file to disk
   if (!is.null(dsn)) {
-  raster::writeRaster(
-    z,
-    filename = paste0(dsn, "/", "SRTM_DEM_", resolution, ".tiff"),
-    format = "GTiff",
-    dataType = "INT2S",
-    options = c("COMPRESS=LZW", "TFW=YES"),
-    overwrite = TRUE
-  )
+    raster::writeRaster(
+      z,
+      filename = paste0(dsn, "/", "SRTM_DEM_", resolution, ".tiff"),
+      format = "GTiff",
+      dataType = "INT2S",
+      options = c("COMPRESS=LZW", "TFW=YES"),
+      overwrite = TRUE
+    )
   }
 
   return(z)

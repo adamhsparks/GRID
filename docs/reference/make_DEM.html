@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Interpolate GSOD Data to a Gridded Surface — interpolate_GSOD • glint</title>
+<title>Get and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data — make_DEM • glint</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,13 @@
 
 
 
-<meta property="og:title" content="Interpolate GSOD Data to a Gridded Surface — interpolate_GSOD" />
+<meta property="og:title" content="Get and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data — make_DEM" />
 
-<meta property="og:description" content="This function is designed to be wrapped in an [base::lapply()]
-function to process multiple years of GSOD data for interpolation, though a
-single year may be used." />
+<meta property="og:description" content="Fetches a digital elevation model (DEM) from WorldClim data, crops and
+aggregates to a larger spatial resolution and crops at -60/60 degrees
+latitude for use with other weather data that provide rainfall, e.g.
+NASA - POWER at 0.5 arc degrees or TRMM at 0.25 arc degrees. Mainly for use in
+crop modelling exercises." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -117,70 +119,54 @@ single year may be used." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Interpolate GSOD Data to a Gridded Surface</h1>
-    <small class="dont-index">Source: <a href='https://github.com/adamhsparks/glint/blob/master/R/interpolate_gsod.R'><code>R/interpolate_gsod.R</code></a></small>
-    <div class="hidden name"><code>interpolate_GSOD.Rd</code></div>
+    <h1>Get and Aggregate a Digital Elevation Model for Use in Interpolating GSOD Data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/adamhsparks/glint/blob/master/R/make_DEM.R'><code>R/make_DEM.R</code></a></small>
+    <div class="hidden name"><code>make_DEM.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function is designed to be wrapped in an <code>[base::lapply()]</code>
-function to process multiple years of GSOD data for interpolation, though a
-single year may be used.</p>
+    <p>Fetches a digital elevation model (DEM) from WorldClim data, crops and
+aggregates to a larger spatial resolution and crops at -60/60 degrees
+latitude for use with other weather data that provide rainfall, <em>e.g.</em>
+NASA - POWER at 0.5 arc degrees or TRMM at 0.25 arc degrees. Mainly for use in
+crop modelling exercises.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>interpolate_GSOD</span>(<span class='kw'>file_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>make_DEM</span>(<span class='kw'>resolution</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file_list</th>
-      <td><p>A <code>[base::list()]</code> of data frames or CSV files of
-GSOD data created by <code><a href='make_GSOD_set.html'>make_GSOD_set()</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>dem</th>
-      <td><p>Digital elevation model that has been fetched and processed using
-<code>get_DEM()</code>.</p></td>
+      <th>resolution</th>
+      <td><p>Resolution to aggregate the digital elevation model to in
+arc-degrees, e.g. 1 = 1 arc degree, 0.5 = one half arc degree, 0.25 = one
+quarter arc degree. Valid options are <code>1</code>, <code>0.5</code> and <code>0.25</code>.</p></td>
     </tr>
     <tr>
       <th>dsn</th>
-      <td><p>Optional. Directory where resulting GeoTIFF files are to be saved.</p></td>
-    </tr>
-    <tr>
-      <th>vars</th>
-      <td><p>Weather variables to interpolate. Possible values are
-<code>TEMP</code>, <code>MAX</code>, <code>MIN</code> and <code>RH</code>. Defaults to <code>TEMP</code>.</p></td>
-    </tr>
-    <tr>
-      <th>cores</th>
-      <td><p>Number of cores to use for parallel processing. Defaults to 1 on
-Windows OS or if not otherwise specified.</p></td>
+      <td><p>Optional. Directory where resulting DEM file is to be saved. If
+unspecified a spatial object is returned in the R session. If a DEM exists,
+it will be overwritten with the new one of the same resolution. If a new
+resolution is specified, a new file will be created.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>[raster::stack()]</code> of daily interpolated weather variables.</p>
+    <p>A <code>[raster::raster()]</code> object of a digital elevation model cropped to
+-60/60 degrees latitude and aggregated by the requested factor.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Get and aggregate the raster digital elevation model</span>
-<span class='no'>dem</span> <span class='kw'>&lt;-</span> <span class='fu'>get_DEM</span>()
+    <pre class="examples"><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='co'># Get DEM and aggregate to 0.5 arc degree, saving it to a local "~/Data/DEM"</span>
+<span class='no'>directory.</span>
 
-<span class='co'># Create a list of GSOD files</span>
-<span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'>list.files</span>(<span class='st'>"~/Data/GSOD"</span>, <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='co'># Run the function for MAX and MIN temperature on a *nix system using 2 cores</span>
-<span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>,
-<span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Cache/GTiff"</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"MAX"</span>, <span class='st'>"MIN"</span>), <span class='kw'>cores</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-
-<span class='co'># Run the function for MAX and MIN temperature using 1 core, will work on Win</span>
-<span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='st'>"MAX"</span>)
+<span class='no'>DEM</span> <span class='kw'>&lt;-</span> <span class='fu'>make_DEM</span>(<span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Data/DEM"</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
@@ -193,6 +179,10 @@ Windows OS or if not otherwise specified.</p></td>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
+
+    <h2>Author</h2>
+    
+Adam H. Sparks, <a href='mailto:adamhsparks@gmail.com'>adamhsparks@gmail.com</a>
 
   </div>
 </div>

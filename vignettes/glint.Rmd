@@ -1,33 +1,33 @@
 ---
-title: "GRID"
+title: "glint - Global (GSOD) Interpolated Temperatures"
 author: "Adam H. Sparks - Centre for Crop Health, USQ"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{GRID}
+  %\VignetteIndexEntry{glint}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(GRID)
+library(glint)
 ```
 
 ## Using get_DEM
 
-Get a digital elevation model (DEM) from WorldClim data, aggregate to 1 arc
-degree and crop at -60/60 degrees latitude and return a spatial object in the
+Get a digital elevation model (DEM) from WorldClim data, aggregate to 0.5 arc
+degrees and crop at -60/60 degrees latitude and return a spatial object in the
 current R session.
 
 ```{r R_DEM, eval=FALSE}
-DEM <- get_DEM()
+DEM <- make_DEM()
 ```
 
-Get a digital elevation model (DEM) from WorldClim data and aggregate to 1 arc
-degree.
+Get a digital elevation model (DEM) from WorldClim data and aggregate to 0.5 arc
+degrees.
 
 ```{r dsn_DEM, eval=FALSE}
-DEM <- get_DEM()
+DEM <- make_DEM()
 ```
 
 Get a digital elevation model (DEM) from WorldClim data, aggregate to 15 arc
@@ -35,7 +35,7 @@ minutes and crop at -60/60 degrees latitude and save a GeoTIFF file of the
 resulting DEM to local disk.
 
 ```{r dsn_DEM_0.25, eval=FALSE}
-DEM <- get_DEM(resolution = .25, dsn = "~/GSOD")
+DEM <- make_DEM(resolution = 0.25, dsn = "~/GSOD")
 ```
 
 ## Using get_GSOD
@@ -43,7 +43,7 @@ DEM <- get_DEM(resolution = .25, dsn = "~/GSOD")
 Get GSOD data for 1998 to 2000.
 
 ```{r get_GSOD, eval=FALSE}
-gsod <- get_GSOD(years = 1998:2000)
+gsod <- make_GSOD_set(years = 1998:2000)
 ```
 
 ## Using interpolate_gsod with a list of data frames
@@ -61,11 +61,11 @@ gsod <- get_GSOD(years = 1998:2000)
 
 ```{r in_memory, eval=FALSE}
 # Create a list of GSOD files
-gsod_list <- get_GSOD(years = 1998:1999)
+gsod_list <- make_GSOD_set(years = 1998:1999)
 
 # Get and aggregate the raster digital elevation model
-dem <- get_DEM()
+dem <- make_DEM()
 
 # Run the function for MAX and MIN temperature
-lapply(X = gsod_list, FUN = interp, dem = dem, vars = c("MAX", "MIN"))
+lapply(X = gsod_list, FUN = interpolate_GSOD, dem = dem, vars = c("MAX", "MIN"))
 ```

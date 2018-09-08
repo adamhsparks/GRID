@@ -1,17 +1,17 @@
 
-#' Get GSOD Data and Subset Fields for Interpolation
+#' Make a Data Set of GSOD Data Suitable for Interpolation
 #'
-#' This function can be wrapped in an \code{\link[base]{lapply}} function to
+#' This function can be wrapped in an `[base::lapply()]` function to
 #' retrieve and save multiple years of GSOD data for interpolation, though it
 #' may be used to retrieve GSOD data and interpolate files on-the-fly. See
-#' \code{vignette("GRID")} for more details and examples.
+#' `vignette("GRID")` for more details and examples.
 #'
 #' @details This function will get GSOD data using
-#' \code{\link[GSODR]{get_GSOD}} and save a CSV file containing only the
+#' `[GSODR::get_GSOD()]` and save a CSV file containing only the
 #' following fields to use in interpolating a global surface between 60 and -60
 #' degrees latitude.
 #' \describe{
-#' \item{STNID}{A unique station id number that can be us ed to identify the
+#' \item{STNID}{A unique station id number that can be used to identify the
 #' station and link with GSODR data for station metadata.}
 #' \item{LON}{Longitude in decimal degrees.}
 #' \item{LAT}{Latitude in decimal degrees.}
@@ -24,7 +24,7 @@
 #'  Missing = NA;}
 #' \item{MIN}{Minimum temperature reported during the day in Celsius to tenths.
 #'  Missing = NA;}
-#' \item{RH}{Mean daily relative humidity.}
+#' \item{RH}{Mean daily relative humidity. Missing = NA.}
 #' }
 #'
 #' @param years A numeric vector of years of GSOD data to get for
@@ -34,23 +34,27 @@
 #'
 #' @references Jarvis, A., Reuter, H. I., Nelson, A., Guevara, E. (2008)
 #' Hole-filled SRTM for the globe Version 4, available from the CGIAR-CSI SRTM
-#' 90m Database (http://srtm.csi.cgiar.org)
+#' 90m Database (<http://srtm.csi.cgiar.org>)
 #'
-#' @return List of data frames
+#' @return A `[base::list()]` of `[base::data.frame]` objects containing GSOD
+#' data suitable for interpolation using `[interpolate_gsod()]`
+#'
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
+#'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #'
 #' # Get one year of GSOD data
-#' gsod_1998 <- get_GSOD(years = 1998)
+#' gsod_1998 <- make_GSOD_set(years = 1998)
 #'
 #' # Get multiple years of GSOD data and save to disk
 #' years <- as.list(seq(from = 1983, to = 2017, by = 1))
-#' lapply(X = years, FUN = get_GSOD, dsn = "~/Data/GSOD")
+#' lapply(X = years, FUN = make_GSOD_set, dsn = "~/Data/GSOD")
 #' }
 
-get_GSOD <- function(years = NULL, dsn = NULL) {
+make_GSOD_set <- function(years = NULL, dsn = NULL) {
   # check user inputs, see internal_functions.R for these functions
   year_list <- .validate_year(years)
   dsn <- .validate_dsn(dsn)

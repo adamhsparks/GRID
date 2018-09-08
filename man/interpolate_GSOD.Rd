@@ -4,29 +4,29 @@
 \alias{interpolate_GSOD}
 \title{Interpolate GSOD Data to a Gridded Surface}
 \usage{
-interpolate_GSOD(file_list = NULL, dem = NULL, dsn = NULL, vars = NULL,
-  cores = NULL)
+interpolate_GSOD(file_list = NULL, dem = NULL, dsn = NULL,
+  vars = NULL, cores = NULL)
 }
 \arguments{
-\item{file_list}{A \code{\link[base]{list}} of data frames or CSV files of
-GSOD data created by \link{get_GSOD}.}
+\item{file_list}{A \code{[base::list()]} of data frames or CSV files of
+GSOD data created by \code{make_GSOD_set()}.}
 
 \item{dem}{Digital elevation model that has been fetched and processed using
-\code{\link{get_DEM}}.}
+\code{get_DEM()}.}
 
 \item{dsn}{Optional. Directory where resulting GeoTIFF files are to be saved.}
 
-\item{vars}{Weather variables to interpolate. Possible values are,
-\code{TEMP}, \code{MAX}, \code{MIN}, \code{RH}. Defaults to \code{TEMP}.}
+\item{vars}{Weather variables to interpolate. Possible values are
+\code{TEMP}, \code{MAX}, \code{MIN} and \code{RH}. Defaults to \code{TEMP}.}
 
 \item{cores}{Number of cores to use for parallel processing. Defaults to 1 on
-Windows OS or if not specified.}
+Windows OS or if not otherwise specified.}
 }
 \value{
-A \code{\link[raster]{stack}}
+A \code{[raster::stack()]} of daily interpolated weather variables.
 }
 \description{
-This function is designed to be wrapped in an \code{\link[base]{lapply}}
+This function is designed to be wrapped in an \code{[base::lapply()]}
 function to process multiple years of GSOD data for interpolation, though a
 single year may be used.
 }

@@ -68,7 +68,7 @@
 .stack_lists <- function(X, wvar) {
   X <- raster::stack(X[seq_along(X)])
   X <- stats::setNames(X,
-                  paste0(wvar, "_", 1:raster::nlayers(X)))
+                       paste0(wvar, "_", 1:raster::nlayers(X)))
 }
 
 #' @noRd
@@ -107,17 +107,15 @@
 
 #' @noRd
 .validate_dsn <- function(dsn) {
-  if (!is.null(dsn)) {
-    if (substr(dsn, nchar(dsn) - 1, nchar(dsn)) == "//") {
-      dsn <- substr(dsn, 1, nchar(dsn) - 2)
-    } else if (substr(dsn, nchar(dsn), nchar(dsn)) == "/" |
-               substr(dsn, nchar(dsn), nchar(dsn)) == "\\") {
-      dsn <- substr(dsn, 1, nchar(dsn) - 1)
-    } else if (!dir.exists(dsn) & !dir.exists(dsn)) {
-      stop("\nThis dsn does not exist: ", dsn, ".\n")
-    } else {
-      dsn <- dsn
-    }
+  if (substr(dsn, nchar(dsn) - 1, nchar(dsn)) == "//") {
+    dsn <- substr(dsn, 1, nchar(dsn) - 2)
+  } else if (substr(dsn, nchar(dsn), nchar(dsn)) == "/" |
+             substr(dsn, nchar(dsn), nchar(dsn)) == "\\") {
+    dsn <- substr(dsn, 1, nchar(dsn) - 1)
+  } else if (!dir.exists(dsn) & !dir.exists(dsn)) {
+    stop("\nThis dsn does not exist: ", dsn, ".\n")
+  } else {
+    dsn <- dsn
   }
 }
 
@@ -133,14 +131,14 @@
 
 #' @noRd
 .validate_resolution <- function(resolution) {
-  if (any(resolution %notin% c(NULL, .25, .5, 1))) {
+  if (any(resolution %notin% c(NULL, 0.25, 0.5, 1))) {
     stop("The resolution you have specified is not valid.\n",
-         "It should be one of: 1, .5 or .25.")
+         "It should be one of: 1, 0.5 or 0.25.")
   } else if (is.null(resolution)) {
     agg <- 12
   } else {
-    agg <- dplyr::case_when(resolution == .25 ~ 3,
-                            resolution == .5 ~ 6,
+    agg <- dplyr::case_when(resolution == 0.25 ~ 3,
+                            resolution == 0.5 ~ 6,
                             resolution == 1 ~ 12)
   }
 }
