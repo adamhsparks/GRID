@@ -23,7 +23,7 @@ to reproduce these data using freely available data, software and methodologies.
 
 # Daily Weather Data Cleaning, Thin Plate Splining and Interpolation
 
-The __glint__ package makes this process as simple as possible. Described below are
+The _glint_ package makes this process as simple as possible. Described below are
 the steps that the package uses internally to create gridded weather data from
 the GSOD data.
 
@@ -46,7 +46,7 @@ variables that _glint_ can interpolate are:
 
 ## Downloading the Digital Elevation Model
 
-_glint_ offers customised functionality, `get_DEM()` to download a digital
+_glint_ offers customised functionality, `make_DEM()` to download a digital
 elevation model based on the Shuttle Radar Topography Mission (SRTM) from
 [WorldClim](https://wwww.worldclim.org/) and aggregated it to:
 
@@ -88,13 +88,13 @@ performing this operation.
 
 ```{r get_GSOD, eval=FALSE, message='hide', results='hide'}
 years <- as.list(seq(from = 1983, to = 2016, by = 1))
-lapply(X = years, FUN = get_GSOD, dsn = "~/Data/GSOD")
+lapply(X = years, FUN = make_GSOD_set, dsn = "~/Data/GSOD")
 ```
 
 ### Step 2: Download the Digital Elevation Model and Aggregate to 1 Degree
 
 ```{r get_DEM, eval=FALSE, message='hide', results='hide'}
-DEM <- get_DEM()
+DEM <- make_DEM()
 ```
 ### Step 3: Interpolate the GSOD Data from On-disk Files
 

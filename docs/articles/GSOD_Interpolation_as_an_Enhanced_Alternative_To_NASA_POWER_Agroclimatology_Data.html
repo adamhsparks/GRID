@@ -101,7 +101,7 @@
 <div id="daily-weather-data-cleaning-thin-plate-splining-and-interpolation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#daily-weather-data-cleaning-thin-plate-splining-and-interpolation" class="anchor"></a>Daily Weather Data Cleaning, Thin Plate Splining and Interpolation</h1>
-<p>The <strong>glint</strong> package makes this process as simple as possible. Described below are the steps that the package uses internally to create gridded weather data from the GSOD data.</p>
+<p>The <em>glint</em> package makes this process as simple as possible. Described below are the steps that the package uses internally to create gridded weather data from the GSOD data.</p>
 <div id="downloading-gsod-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#downloading-gsod-data" class="anchor"></a>Downloading GSOD Data</h2>
@@ -116,7 +116,7 @@
 <div id="downloading-the-digital-elevation-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#downloading-the-digital-elevation-model" class="anchor"></a>Downloading the Digital Elevation Model</h2>
-<p><em>glint</em> offers customised functionality, <code>get_DEM()</code> to download a digital elevation model based on the Shuttle Radar Topography Mission (SRTM) from <a href="https://wwww.worldclim.org/">WorldClim</a> and aggregated it to:</p>
+<p><em>glint</em> offers customised functionality, <code><a href="../reference/make_DEM.html">make_DEM()</a></code> to download a digital elevation model based on the Shuttle Radar Topography Mission (SRTM) from <a href="https://wwww.worldclim.org/">WorldClim</a> and aggregated it to:</p>
 <ul>
 <li><p>1 degree (matching historical <a href="https://power.larc.nasa.gov/">NASA - POWER</a> data, which could provide rainfall),</p></li>
 <li><p>0.5 degree (matching <a href="https://power.larc.nasa.gov/">NASA - POWER</a> data, which can provide rainfall),</p></li>
@@ -139,12 +139,12 @@
 <h3 class="hasAnchor">
 <a href="#step-1-download-the-gsod-data" class="anchor"></a>Step 1: Download the GSOD data</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">years &lt;-<span class="st"> </span><span class="kw">as.list</span>(<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1983</span>, <span class="dt">to =</span> <span class="dv">2016</span>, <span class="dt">by =</span> <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">lapply</span>(<span class="dt">X =</span> years, <span class="dt">FUN =</span> get_GSOD, <span class="dt">dsn =</span> <span class="st">"~/Data/GSOD"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">lapply</span>(<span class="dt">X =</span> years, <span class="dt">FUN =</span> make_GSOD_set, <span class="dt">dsn =</span> <span class="st">"~/Data/GSOD"</span>)</a></code></pre></div>
 </div>
 <div id="step-2-download-the-digital-elevation-model-and-aggregate-to-1-degree" class="section level3">
 <h3 class="hasAnchor">
 <a href="#step-2-download-the-digital-elevation-model-and-aggregate-to-1-degree" class="anchor"></a>Step 2: Download the Digital Elevation Model and Aggregate to 1 Degree</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw">get_DEM</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_DEM.html">make_DEM</a></span>()</a></code></pre></div>
 </div>
 <div id="step-3-interpolate-the-gsod-data-from-on-disk-files" class="section level3">
 <h3 class="hasAnchor">
