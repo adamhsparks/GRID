@@ -1,13 +1,13 @@
-GRID, GSOD(R) Interoplated Data
+glint - GLobal (GSOD) INteroplated Temperatures
 ================
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--06--05-brightgreen.svg)](https://github.com/adamhsparks/GRID/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--09--09-brightgreen.svg)](https://github.com/adamhsparks/glint/commits/master)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 [![Travis-CI Build
-Status](https://travis-ci.org/adamhsparks/GRID.svg?branch=master)](https://travis-ci.org/adamhsparks/GRID)
+Status](https://travis-ci.org/adamhsparks/glint.svg?branch=master)](https://travis-ci.org/adamhsparks/glint)
 [![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/adamhsparks/GRID?branch=master&svg=true)](https://ci.appveyor.com/project/adamhsparks/GRID)
-[![codecov.io](https://codecov.io/github/adamhsparks/GRID/coverage.svg?branch=master)](https://codecov.io/github/adamhsparks/GRID?branch=master)
+Status](https://ci.appveyor.com/api/projects/status/github/adamhsparks/glint?branch=master&svg=true)](https://ci.appveyor.com/project/adamhsparks/glint)
+[![codecov.io](https://codecov.io/github/adamhsparks/glint/coverage.svg?branch=master)](https://codecov.io/github/adamhsparks/glint?branch=master)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
@@ -19,7 +19,7 @@ public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus
 <http://dx.doi.org/xxxxxxx>
 
 The files at the URL above will generate the results as found in the
-publication. The files hosted at <https://github.com/adamhsparks/GRID>
+publication. The files hosted at <https://github.com/adamhsparks/glint>
 are the development versions and may have changed since the report was
 published
 
@@ -66,11 +66,11 @@ browsing, use this line at the shell prompt (assuming you have Git
 installed on your computer):
 
 ``` r
-git clone https://github.com/adamhsparks/GRID.git
+git clone https://github.com/adamhsparks/glint.git
 ```
 
-Once the download is complete, open the `GRID.Rproj` in RStudio to begin
-working with the package and compendium files.
+Once the download is complete, open the `glint.Rproj` in RStudio to
+begin working with the package and compendium files.
 
 The package has a number of dependencies on other R packages, and
 programs outside of R. These are listed at the bottom of this README.
@@ -80,11 +80,11 @@ used
 [*checkpoint*](https://cran.r-project.org/web/packages/checkpoint/index.html),
 which will install packages as they existed on CRAN at a specific date
 as a part of your local library. If all works well, these will be
-installed on your computer when you open `GRID.Rproj` in RStudio. Second
-is our Docker image that includes all the necessary software, code and
-data to run our analysis. The Docker image may give a quicker entry
-point to the project, and is more self-contained, so might save some
-fiddling with installing things.
+installed on your computer when you open `glint.Rproj` in RStudio.
+Second is our Docker image that includes all the necessary software,
+code and data to run our analysis. The Docker image may give a quicker
+entry point to the project, and is more self-contained, so might save
+some fiddling with installing things.
 
 ### The Docker image
 
@@ -98,7 +98,7 @@ package and other compendium files. To launch the Docker image for this
 project, first, [install Docker](https://docs.docker.com/installation/)
 on your computer. At the Docker prompt, enter:
 
-`$ docker run -dp 8787:8787 adamhsparks/GRID`
+`$ docker run -dp 8787:8787 adamhsparks/glint`
 
 This will start a server instance of RStudio. Then open your web browser
 at localhost:8787 or or run `docker-machine ip default` in the shell to

@@ -1,4 +1,4 @@
 library(testthat)
-library(GRID)
+library(glint)
 
-test_check("GRID")
+test_check("glint")

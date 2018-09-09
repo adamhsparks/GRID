@@ -4,7 +4,7 @@
 #' This function can be wrapped in an `[base::lapply()]` function to
 #' retrieve and save multiple years of GSOD data for interpolation, though it
 #' may be used to retrieve GSOD data and interpolate files on-the-fly. See
-#' `vignette("GRID")` for more details and examples.
+#' `vignette("glint")` for more details and examples.
 #'
 #' @details This function will get GSOD data using
 #' `[GSODR::get_GSOD()]` and save a CSV file containing only the
