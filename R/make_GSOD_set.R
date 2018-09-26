@@ -85,7 +85,7 @@ make_GSOD_set <- function(years = NULL, dsn = NULL) {
   # create a list of data frames to return
   weather <- split(weather, weather$YEAR)
 
-  # if dsn is specifed write data frames to files, see internal_funtions.R
+  # if dsn is specifed write data frames to files, see internal_functions.R
   # for .write_gsod()
   if (!is.null(dsn)) {
     lapply(X =  weather, FUN = .write_GSOD, dsn = dsn)

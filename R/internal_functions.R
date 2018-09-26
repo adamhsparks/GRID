@@ -1,6 +1,18 @@
 
 `%notin%` <- Negate("%in%")
 
+#' Create a raster stack object of weather variables
+#'
+#' Creates raster stacks of weather variables
+#'
+#' @param GSOD A list of GSOD dataframes `split` by day
+#' @param wvar Weather variable to interpolate
+#' @param dem Digital elevation model that has been fetched and processed using
+#' `get_DEM()`.
+#' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
+#' @param cores Number of cores to use for parallel processing. Defaults to 1 on
+#' Windows OS or if not otherwise specified.
+#'
 #' @noRd
 .create_stack <- function(GSOD, wvar, dem, dsn, cores) {
   Y <- parallel::mclapply(
@@ -16,8 +28,19 @@
   return(Y)
 }
 
+#' Create an interpolated surface of a weather variable
+#'
+#' Called from `.create_stack()`, does the heavy lifting of checking for
+#' outliers and then interpolating the data
+#'
+#' @param GSOD A list of GSOD dataframes `split` by day
+#' @param wvar Weather variable to interpolate
+#' @param dem Digital elevation model that has been fetched and processed using
+#' `get_DEM()`.
+#' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
+#'
 #' @noRd
-.interpolate_raster <- function(GSOD, wvar, dsn, dem, year) {
+.interpolate_raster <- function(GSOD, wvar, dsn, dem) {
   # create data frame for individual weather vars for interpolation
   y <-
     data.frame(GSOD["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"],
@@ -64,6 +87,13 @@
   return(tps_pred)
 }
 
+#' Create a Stack From Lists of Raster Objects
+#'
+#' Called from `.create_stack()` at the end of the function to create a raster
+#' stack of layers from lists resulting from using `mclapply()`
+#'
+#' @param X A list of interpolated weather variable surfaces
+#' @param wvar Interpolated weather variable
 #' @noRd
 .stack_lists <- function(X, wvar) {
   X <- raster::stack(X[seq_along(X)])
@@ -80,6 +110,11 @@
   }
 }
 
+#' Check OS to See if Parallel Processing Can Be Used or Not
+#'
+#' Checks to see if the system running the processes is capable of using
+#' parallel processing or not (Windows).
+#'
 #' @noRd
 # check OS and set cores to 1 if NULL, Windows OS or unknown
 # make sure that number of cores specifed less than number available
@@ -105,6 +140,12 @@
   }
 }
 
+#' Check User Entered DSN Value
+#'
+#' Verifies that the dsn argument entered by the user is valid and exists for
+#' writing files out
+#' @param dsn User supplied value of directory to write files to
+#'
 #' @noRd
 .validate_dsn <- function(dsn) {
   if (substr(dsn, nchar(dsn) - 1, nchar(dsn)) == "//") {
@@ -119,6 +160,12 @@
   }
 }
 
+#' Validate Max Missing Argument
+#'
+#' Validates argument for max missing to make sure it is positive as entered by
+#' the user
+#' @param missing User supplied value for the maximum number of missing values
+#' allowed
 #' @noRd
 .validate_max_missing <- function(missing) {
   if (!is.null(missing)) {
@@ -129,6 +176,11 @@
   }
 }
 
+#' Validate User Entered Spatial Resolution
+#'
+#' Validates user supplied values for the resolution to which the DEM should be
+#' aggregated.
+#' @param resolution User supplied value for the desired resolution
 #' @noRd
 .validate_resolution <- function(resolution) {
   if (any(resolution %notin% c(NULL, 0.25, 0.5, 1))) {
@@ -142,7 +194,13 @@
                             resolution == 1 ~ 12)
   }
 }
-
+#' Validate User Entered Weather Variables
+#'
+#' Validates user supplied weather variables to ensure that they are all valid.
+#' Defaults to TEMP if not supplied.
+#'
+#' @param vars Users supplied value(s) for weather variables to interpolate
+#'
 #' @noRd
 .validate_vars <- function(vars) {
   if (is.null(vars)) {
@@ -158,6 +216,11 @@
   return(vars)
 }
 
+#' Validate User Entered Year Variable
+#'
+#' Validates user supplied year argument. If not specified defaults to current.
+#' @param years User supplied value(s) for years of weather to interpolate
+#'
 #' @noRd
 # check year list, if not specified default to current year
 .validate_year <- function(years) {
@@ -173,6 +236,13 @@
   }
 }
 
+#' Write a Compressed CSV File to Disk
+#'
+#' Writes compressed CSV files of weather data to disk.
+#' @param weather A data set from the NCEI GSOD FTP server that is slimmed
+#' down to only variables necessary for interpolation and Temp, Max, Min and RH
+#' to save disk space
+#' @param dsn User supplied value of directory to write files to
 #' @noRd
 .write_GSOD <- function(weather, dsn) {
   # create YEAR object for naming object out

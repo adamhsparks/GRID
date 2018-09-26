@@ -18,7 +18,7 @@
 #' @return
 #' A `[raster::stack()]` of daily interpolated weather variables.
 #'
-#' @export
+#' @author \email{adamhsparks@@gmail.com}
 #'
 #' @examples
 #' \dontrun{
@@ -36,7 +36,7 @@
 #' GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
 #' }
 #'
-
+#' @export
 interpolate_GSOD <- function(file_list = NULL,
                              dem = NULL,
                              dsn = NULL,

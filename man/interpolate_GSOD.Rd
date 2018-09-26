@@ -47,3 +47,6 @@ GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
 }
 
 }
+\author{
+\email{adamhsparks@gmail.com}
+}
