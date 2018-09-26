@@ -1,12 +1,12 @@
 glint - GLobal (GSOD) INteroplated Temperatures
 ================
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--09--09-brightgreen.svg)](https://github.com/adamhsparks/glint/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--09--26-brightgreen.svg)](https://github.com/adamhsparks/glint/commits/master)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 [![Travis-CI Build
 Status](https://travis-ci.org/adamhsparks/glint.svg?branch=master)](https://travis-ci.org/adamhsparks/glint)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/adamhsparks/glint?branch=master&svg=true)](https://ci.appveyor.com/project/adamhsparks/glint)
+[![Build
+status](https://ci.appveyor.com/api/projects/status/b0c4fmvn6ndpp3w0/branch/master?svg=true)](https://ci.appveyor.com/project/adamhsparks/glint/branch/master)
 [![codecov.io](https://codecov.io/github/adamhsparks/glint/coverage.svg?branch=master)](https://codecov.io/github/adamhsparks/glint?branch=master)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
