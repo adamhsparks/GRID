@@ -1,7 +1,19 @@
+#' Add %notin% Function
+#'
+#' Negates `%in%`` for easier matching.
+#'
+#' @param x A character string to match.
+#' @param table A table containing values to match `x` against.
+#'
+#' @return A function to use for checking if something is not in a table
+#'
+#' @noRd
+`%notin%` <- function(x, table) {
+  # Same as !(x %in% table)
+  match(x, table, nomatch = 0L) == 0L
+}
 
-`%notin%` <- Negate("%in%")
-
-#' Create a raster stack object of weather variables
+#' Create a Raster Stack Object of Weather Variables
 #'
 #' Creates raster stacks of weather variables
 #'
@@ -28,7 +40,7 @@
   return(Y)
 }
 
-#' Create an interpolated surface of a weather variable
+#' Create an Interpolated Surface of a Weather Variable
 #'
 #' Called from `.create_stack()`, does the heavy lifting of checking for
 #' outliers and then interpolating the data
