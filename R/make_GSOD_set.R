@@ -1,22 +1,23 @@
 
-#' Make a Data Set of GSOD Data Suitable for Interpolation
+#' Make a Data Set of \acronym{GSOD} Data Suitable for Interpolation
 #'
 #' This function can be wrapped in an `[base::lapply()]` function to
-#' retrieve and save multiple years of GSOD data for interpolation, though it
-#' may be used to retrieve GSOD data and interpolate files on-the-fly. See
-#' `vignette("glint")` for more details and examples.
+#' retrieve and save multiple years of \acronym{GSOD} data for interpolation,
+#' though it may be used to retrieve GSOD data and interpolate files on-the-fly.
+#' See `[utils::vignette("glint")]` for more details and examples.
 #'
-#' @details This function will get GSOD data using
+#' @details This function will get \acronym{GSOD} data using
 #' `[GSODR::get_GSOD()]` and save a CSV file containing only the
 #' following fields to use in interpolating a global surface between 60 and -60
 #' degrees latitude.
 #' \describe{
 #' \item{STNID}{A unique station id number that can be used to identify the
-#' station and link with GSODR data for station metadata.}
+#' station and link with \pkg{GSODR} data for station metadata.}
 #' \item{LON}{Longitude in decimal degrees.}
 #' \item{LAT}{Latitude in decimal degrees.}
 #' \item{ELEV_M_SRTM_90m}{Elevation in metres corrected for possible errors,
-#' derived from the CGIAR-CSI SRTM 90m database (Jarvis et al. 2008).}
+#' derived from the \acronym{CGIAR-CSI} \acronym{SRTM} 90m database (Jarvis et
+#' al. 2008).}
 #' \item{YEAR}{The year (YYYY).}
 #' \item{YDAY}{Sequential day of year.}
 #' \item{TEMP}{Mean daily temperature in degrees C to tenths. Missing = NA.}
@@ -27,32 +28,32 @@
 #' \item{RH}{Mean daily relative humidity. Missing = NA.}
 #' }
 #'
-#' @param years A numeric vector of years of GSOD data to get for
-#' interpolation. Defaults to current year.
-#' @param dsn Optional. A filepath where resulting CSV files are to be saved on
+#' @param years A numeric vector of years of \acronym{GSOD} data to get for
+#' interpolation.  Defaults to current year.
+#' @param dsn Optional.  A filepath where resulting CSV files are to be saved on
 #' local disk. If unspecified a tidy data frame is returned in the R session.
 #'
 #' @references Jarvis, A., Reuter, H. I., Nelson, A., Guevara, E. (2008)
 #' Hole-filled SRTM for the globe Version 4, available from the CGIAR-CSI SRTM
 #' 90m Database (<http://srtm.csi.cgiar.org>)
 #'
-#' @return A `[base::list()]` of `[base::data.frame]` objects containing GSOD
-#' data suitable for interpolation using `[interpolate_gsod()]`
+#' @return A `[base::list()]` of `[base::data.frame]` objects containing
+#' \acronym{GSOD} data suitable for interpolation using `[interpolate_gsod()]`
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #'
-#' @export
-#'
 #' @examples
-#' \dontrun{
-#'
+#' \donttest{
 #' # Get one year of GSOD data
 #' gsod_1998 <- make_GSOD_set(years = 1998)
+#' }
 #'
+#' \dontrun{
 #' # Get multiple years of GSOD data and save to disk
 #' years <- as.list(seq(from = 1983, to = 2017, by = 1))
 #' lapply(X = years, FUN = make_GSOD_set, dsn = "~/Data/GSOD")
 #' }
+#' @export make_GSOD_set
 
 make_GSOD_set <- function(years = NULL, dsn = NULL) {
   # check user inputs, see internal_functions.R for these functions

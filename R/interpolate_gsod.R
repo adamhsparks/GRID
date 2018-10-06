@@ -1,9 +1,9 @@
 
-#' Interpolate GSOD Data to a Gridded Surface
+#' Interpolate \acronym{GSOD} Data to a Gridded Surface
 #'
 #' This function is designed to be wrapped in an `[base::lapply()]`
-#' function to process multiple years of GSOD data for interpolation, though a
-#' single year may be used.
+#' function to process multiple years of \acronym{GSOD} data for interpolation,
+#' though a single year may be used.
 #'
 #' @param file_list A `[base::list()]` of data frames or CSV files of
 #' GSOD data created by `make_GSOD_set()`.
@@ -36,7 +36,8 @@
 #' GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
 #' }
 #'
-#' @export
+#' @export interpolate_GSOD
+
 interpolate_GSOD <- function(file_list = NULL,
                              dem = NULL,
                              dsn = NULL,

@@ -2,39 +2,40 @@
 % Please edit documentation in R/make_GSOD_set.R
 \name{make_GSOD_set}
 \alias{make_GSOD_set}
-\title{Make a Data Set of GSOD Data Suitable for Interpolation}
+\title{Make a Data Set of \acronym{GSOD} Data Suitable for Interpolation}
 \usage{
 make_GSOD_set(years = NULL, dsn = NULL)
 }
 \arguments{
-\item{years}{A numeric vector of years of GSOD data to get for
-interpolation. Defaults to current year.}
+\item{years}{A numeric vector of years of \acronym{GSOD} data to get for
+interpolation.  Defaults to current year.}
 
-\item{dsn}{Optional. A filepath where resulting CSV files are to be saved on
+\item{dsn}{Optional.  A filepath where resulting CSV files are to be saved on
 local disk. If unspecified a tidy data frame is returned in the R session.}
 }
 \value{
-A \code{[base::list()]} of \code{[base::data.frame]} objects containing GSOD
-data suitable for interpolation using \code{[interpolate_gsod()]}
+A \code{[base::list()]} of \code{[base::data.frame]} objects containing
+\acronym{GSOD} data suitable for interpolation using \code{[interpolate_gsod()]}
 }
 \description{
 This function can be wrapped in an \code{[base::lapply()]} function to
-retrieve and save multiple years of GSOD data for interpolation, though it
-may be used to retrieve GSOD data and interpolate files on-the-fly. See
-\code{vignette("glint")} for more details and examples.
+retrieve and save multiple years of \acronym{GSOD} data for interpolation,
+though it may be used to retrieve GSOD data and interpolate files on-the-fly.
+See \code{[utils::vignette("glint")]} for more details and examples.
 }
 \details{
-This function will get GSOD data using
+This function will get \acronym{GSOD} data using
 \code{[GSODR::get_GSOD()]} and save a CSV file containing only the
 following fields to use in interpolating a global surface between 60 and -60
 degrees latitude.
 \describe{
 \item{STNID}{A unique station id number that can be used to identify the
-station and link with GSODR data for station metadata.}
+station and link with \pkg{GSODR} data for station metadata.}
 \item{LON}{Longitude in decimal degrees.}
 \item{LAT}{Latitude in decimal degrees.}
 \item{ELEV_M_SRTM_90m}{Elevation in metres corrected for possible errors,
-derived from the CGIAR-CSI SRTM 90m database (Jarvis et al. 2008).}
+derived from the \acronym{CGIAR-CSI} \acronym{SRTM} 90m database (Jarvis et
+al. 2008).}
 \item{YEAR}{The year (YYYY).}
 \item{YDAY}{Sequential day of year.}
 \item{TEMP}{Mean daily temperature in degrees C to tenths. Missing = NA.}
@@ -46,11 +47,12 @@ Missing = NA;}
 }
 }
 \examples{
-\dontrun{
-
+\donttest{
 # Get one year of GSOD data
 gsod_1998 <- make_GSOD_set(years = 1998)
+}
 
+\dontrun{
 # Get multiple years of GSOD data and save to disk
 years <- as.list(seq(from = 1983, to = 2017, by = 1))
 lapply(X = years, FUN = make_GSOD_set, dsn = "~/Data/GSOD")

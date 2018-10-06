@@ -2,7 +2,7 @@
 % Please edit documentation in R/interpolate_gsod.R
 \name{interpolate_GSOD}
 \alias{interpolate_GSOD}
-\title{Interpolate GSOD Data to a Gridded Surface}
+\title{Interpolate \acronym{GSOD} Data to a Gridded Surface}
 \usage{
 interpolate_GSOD(file_list = NULL, dem = NULL, dsn = NULL,
   vars = NULL, cores = NULL)
@@ -27,8 +27,8 @@ A \code{[raster::stack()]} of daily interpolated weather variables.
 }
 \description{
 This function is designed to be wrapped in an \code{[base::lapply()]}
-function to process multiple years of GSOD data for interpolation, though a
-single year may be used.
+function to process multiple years of \acronym{GSOD} data for interpolation,
+though a single year may be used.
 }
 \examples{
 \dontrun{
