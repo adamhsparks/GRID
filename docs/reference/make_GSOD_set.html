@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make a Data Set of GSOD Data Suitable for Interpolation — make_GSOD_set • glint</title>
+<title>Make a Data Set of <acronym>GSOD</acronym> Data Suitable for Interpolation — make_GSOD_set • glint</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,12 +30,12 @@
 
 
 
-<meta property="og:title" content="Make a Data Set of GSOD Data Suitable for Interpolation — make_GSOD_set" />
+<meta property="og:title" content="Make a Data Set of <acronym>GSOD</acronym> Data Suitable for Interpolation — make_GSOD_set" />
 
 <meta property="og:description" content="This function can be wrapped in an [base::lapply()] function to
-retrieve and save multiple years of GSOD data for interpolation, though it
-may be used to retrieve GSOD data and interpolate files on-the-fly. See
-vignette(&quot;glint&quot;) for more details and examples." />
+retrieve and save multiple years of GSOD data for interpolation,
+though it may be used to retrieve GSOD data and interpolate files on-the-fly.
+See [utils::vignette(&quot;glint&quot;)] for more details and examples." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -118,7 +118,7 @@ vignette(&quot;glint&quot;) for more details and examples." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make a Data Set of GSOD Data Suitable for Interpolation</h1>
+    <h1>Make a Data Set of <acronym>GSOD</acronym> Data Suitable for Interpolation</h1>
     <small class="dont-index">Source: <a href='https://github.com/adamhsparks/glint/blob/master/R/make_GSOD_set.R'><code>R/make_GSOD_set.R</code></a></small>
     <div class="hidden name"><code>make_GSOD_set.Rd</code></div>
     </div>
@@ -126,9 +126,9 @@ vignette(&quot;glint&quot;) for more details and examples." />
     <div class="ref-description">
     
     <p>This function can be wrapped in an <code>[base::lapply()]</code> function to
-retrieve and save multiple years of GSOD data for interpolation, though it
-may be used to retrieve GSOD data and interpolate files on-the-fly. See
-<code><a href='../articles/glint.html'>vignette("glint")</a></code> for more details and examples.</p>
+retrieve and save multiple years of <acronym>GSOD</acronym> data for interpolation,
+though it may be used to retrieve GSOD data and interpolate files on-the-fly.
+See <code>[utils::vignette("glint")]</code> for more details and examples.</p>
     
     </div>
 
@@ -139,33 +139,34 @@ may be used to retrieve GSOD data and interpolate files on-the-fly. See
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>years</th>
-      <td><p>A numeric vector of years of GSOD data to get for
-interpolation. Defaults to current year.</p></td>
+      <td><p>A numeric vector of years of <acronym>GSOD</acronym> data to get for
+interpolation.  Defaults to current year.</p></td>
     </tr>
     <tr>
       <th>dsn</th>
-      <td><p>Optional. A filepath where resulting CSV files are to be saved on
+      <td><p>Optional.  A filepath where resulting CSV files are to be saved on
 local disk. If unspecified a tidy data frame is returned in the R session.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>[base::list()]</code> of <code>[base::data.frame]</code> objects containing GSOD
-data suitable for interpolation using <code>[interpolate_gsod()]</code></p>
+    <p>A <code>[base::list()]</code> of <code>[base::data.frame]</code> objects containing
+<acronym>GSOD</acronym> data suitable for interpolation using <code>[interpolate_gsod()]</code></p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function will get GSOD data using
+    <p>This function will get <acronym>GSOD</acronym> data using
 <code>[GSODR::get_GSOD()]</code> and save a CSV file containing only the
 following fields to use in interpolating a global surface between 60 and -60
 degrees latitude.</p><dl class='dl-horizontal'>
 <dt>STNID</dt><dd><p>A unique station id number that can be used to identify the
-station and link with GSODR data for station metadata.</p></dd>
+station and link with <span class="pkg">GSODR</span> data for station metadata.</p></dd>
 <dt>LON</dt><dd><p>Longitude in decimal degrees.</p></dd>
 <dt>LAT</dt><dd><p>Latitude in decimal degrees.</p></dd>
 <dt>ELEV_M_SRTM_90m</dt><dd><p>Elevation in metres corrected for possible errors,
-derived from the CGIAR-CSI SRTM 90m database (Jarvis et al. 2008).</p></dd>
+derived from the <acronym>CGIAR-CSI</acronym> <acronym>SRTM</acronym> 90m database (Jarvis et
+al. 2008).</p></dd>
 <dt>YEAR</dt><dd><p>The year (YYYY).</p></dd>
 <dt>YDAY</dt><dd><p>Sequential day of year.</p></dd>
 <dt>TEMP</dt><dd><p>Mean daily temperature in degrees C to tenths. Missing = NA.</p></dd>
@@ -184,10 +185,9 @@ Hole-filled SRTM for the globe Version 4, available from the CGIAR-CSI SRTM
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Get one year of GSOD data</span>
-<span class='no'>gsod_1998</span> <span class='kw'>&lt;-</span> <span class='fu'>make_GSOD_set</span>(<span class='kw'>years</span> <span class='kw'>=</span> <span class='fl'>1998</span>)
-
+    <pre class="examples"><div class='input'><span class='co'># Get one year of GSOD data</span>
+<span class='no'>gsod_1998</span> <span class='kw'>&lt;-</span> <span class='fu'>make_GSOD_set</span>(<span class='kw'>years</span> <span class='kw'>=</span> <span class='fl'>1998</span>)</div><div class='output co'>#&gt; <span class='error'>Error in if (substr(dsn, nchar(dsn) - 1, nchar(dsn)) == "//") {    dsn &lt;- substr(dsn, 1, nchar(dsn) - 2)} else if (substr(dsn, nchar(dsn), nchar(dsn)) == "/" | substr(dsn,     nchar(dsn), nchar(dsn)) == "\\") {    dsn &lt;- substr(dsn, 1, nchar(dsn) - 1)} else if (!dir.exists(dsn) &amp; !dir.exists(dsn)) {    stop("\nThis dsn does not exist: ", dsn, ".\n")} else {    dsn &lt;- dsn}: argument is of length zero</span></div><div class='input'>
+</div><span class='co'># NOT RUN {</span>
 <span class='co'># Get multiple years of GSOD data and save to disk</span>
 <span class='no'>years</span> <span class='kw'>&lt;-</span> <span class='fu'>as.list</span>(<span class='fu'>seq</span>(<span class='kw'>from</span> <span class='kw'>=</span> <span class='fl'>1983</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>2017</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>1</span>))
 <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>years</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>make_GSOD_set</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Data/GSOD"</span>)
