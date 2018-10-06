@@ -4,7 +4,7 @@
 #' Fetches a digital elevation model (DEM) from WorldClim data, crops and
 #' aggregates to a larger spatial resolution and crops at -60/60 degrees
 #' latitude for use with other weather data that provide rainfall, \emph{e.g.}
-#' \acoronym{NASA} \acronym{POWER} at 0.5 arc degrees or \acronym{TRMM} at 0.25
+#' \acronym{NASA} \acronym{POWER} at 0.5 arc degrees or \acronym{TRMM} at 0.25
 #' arc degrees. Mainly for use in crop modelling exercises.
 #'
 #' @param resolution Resolution to aggregate the digital elevation model to in
