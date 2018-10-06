@@ -1,8 +1,8 @@
 
 #' Get and Aggregate a Digital Elevation Model for Use in Interpolating \acronym{GSOD} Data
 #'
-#' Fetches a digital elevation model (DEM) from WorldClim data, crops and
-#' aggregates to a larger spatial resolution and crops at -60/60 degrees
+#' Fetches a digital elevation model (\acronym{DEM}) from WorldClim data, crops
+#' and aggregates to a larger spatial resolution and crops at -60/60 degrees
 #' latitude for use with other weather data that provide rainfall, \emph{e.g.}
 #' \acronym{NASA} \acronym{POWER} at 0.5 arc degrees or \acronym{TRMM} at 0.25
 #' arc degrees. Mainly for use in crop modelling exercises.
