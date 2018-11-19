@@ -17,8 +17,11 @@ Depends:
     R (>= 3.2.0)
 License: MIT + file LICENSE
 Imports:
+    data.table,
     dplyr,
     fields,
+    future,
+    future.apply,
     grDevices,
     GSODR,
     readr,
@@ -30,13 +33,12 @@ Suggests:
     devtools,
     ggplot2,
     knitr,
-    parallel,
     roxygen2 (>= 6.0.1),
     rmarkdown,
     sessioninfo,
     testthat,
     viridis
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 NeedsCompilation: no

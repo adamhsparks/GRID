@@ -22,19 +22,22 @@
 #' @param dem Digital elevation model that has been fetched and processed using
 #' `get_DEM()`.
 #' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
-#' @param cores Number of cores to use for parallel processing. Defaults to 1 on
-#' Windows OS or if not otherwise specified.
+#' @param cores Number of cores to use for parallel processing. Defaults to 1
+#' if not otherwise specified.
 #'
 #' @noRd
 .create_stack <- function(GSOD, wvar, dem, dsn, cores) {
-  Y <- parallel::mclapply(
+
+  if (is.null(cores)) {
+    cores <- 1
+  }
+
+  Y <- future.apply::future_lapply(
     X = GSOD,
     FUN = .interpolate_raster,
     wvar = wvar,
     dem = dem,
-    dsn = dsn,
-    mc.cores = cores,
-    mc.preschedule = FALSE
+    dsn = dsn
   )
   Y <- .stack_lists(X = Y, wvar = wvar)
   return(Y)
@@ -102,7 +105,7 @@
 #' Create a Stack From Lists of Raster Objects
 #'
 #' Called from `.create_stack()` at the end of the function to create a raster
-#' stack of layers from lists resulting from using `mclapply()`
+#' stack of layers from lists resulting from using `future_lapply()`
 #'
 #' @param X A list of interpolated weather variable surfaces
 #' @param wvar Interpolated weather variable
@@ -119,36 +122,6 @@
     stop("You must supply a list of GSOD data files for interpolation")
   } else if (typeof(file_list[[1]]) == "character") {
     file_list <- file_list
-  }
-}
-
-#' Check OS to See if Parallel Processing Can Be Used or Not
-#'
-#' Checks to see if the system running the processes is capable of using
-#' parallel processing or not (Windows).
-#'
-#' @noRd
-# check OS and set cores to 1 if NULL, Windows OS or unknown
-# make sure that number of cores specifed less than number available
-.validate_cores <- function(cores) {
-  if (is.null(cores)) {
-    cores <- 1
-  }
-
-  if (tolower(.Platform$OS.type) == "windows") {
-    cores <- 1
-  } else if (Sys.info()["sysname"] == "Darwin") {
-    if (cores <= parallel::detectCores()) {
-      cores <- cores
-    } else {
-      stop("You specified more cores than available for processing.")
-    }
-  } else if (.Platform$OS.type == "unix") {
-    if (cores <= parallel::detectCores()) {
-      cores <- cores
-    } else {
-      stop("You specified more cores than available for processing.")
-    }
   }
 }
 
@@ -199,7 +172,7 @@
     stop("The resolution you have specified is not valid.\n",
          "It should be one of: 1, 0.5 or 0.25.")
   } else if (is.null(resolution)) {
-    agg <- 12
+    agg <- 6
   } else {
     agg <- dplyr::case_when(resolution == 0.25 ~ 3,
                             resolution == 0.5 ~ 6,

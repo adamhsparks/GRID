@@ -52,7 +52,7 @@ Missing = NA;}
 gsod_1998 <- make_GSOD_set(years = 1998)
 }
 
-\dontrun{
+\donttest{
 # Get multiple years of GSOD data and save to disk
 years <- as.list(seq(from = 1983, to = 2017, by = 1))
 lapply(X = years, FUN = make_GSOD_set, dsn = "~/Data/GSOD")

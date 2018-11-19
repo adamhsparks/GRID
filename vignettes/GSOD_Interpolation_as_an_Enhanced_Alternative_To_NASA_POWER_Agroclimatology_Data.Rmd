@@ -87,28 +87,28 @@ performing this operation.
 ### Step 1: Download the GSOD data
 
 ```{r get_GSOD, eval=FALSE, message='hide', results='hide'}
-years <- as.list(seq(from = 1983, to = 2016, by = 1))
-lapply(X = years, FUN = make_GSOD_set, dsn = "~/Data/GSOD")
+years <- as.list(seq(from = 1983, to = 1984, by = 1))
+lapply(X = years, FUN = make_GSOD_set, dsn = "/mnt/GSOD")
 ```
 
-### Step 2: Download the Digital Elevation Model and Aggregate to 1 Degree
+### Step 2: Download the Digital Elevation Model and Aggregate to 0.5 Degree
 
 ```{r get_DEM, eval=FALSE, message='hide', results='hide'}
-DEM <- make_DEM()
+DEM <- make_DEM(dsn = "/mnt/DEM")
 ```
 ### Step 3: Interpolate the GSOD Data from On-disk Files
 
 ```{r list_GSOD_files, eval=FALSE, message='hide', results='hide'}
-file_list <- list.files("~/Data/GSOD", full.names = TRUE)
+file_list <- list.files("/mnt/GSOD", full.names = TRUE)
 ```
 
 For a Unix-type operating system, it is possible to run the process in parallel
 to reduce the time necessary to generate all variables. This example shows how
-to run the function and save GTiff files in "~/Cache/GTiff" using two cores.
+to run the function and save GTiff files in "~/Cache/GTiff" using threeq cores.
 
 ```{r interpolate_2_cores,  eval=FALSE, message='hide', results='hide'}
-GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
-dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"), cores = 2)
+GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = DEM,
+               dsn = "/mnt/Cache/GTiff", vars = c("MAX", "MIN"), cores = 3)
 ```
 
 #### Using a Single Core on Windows

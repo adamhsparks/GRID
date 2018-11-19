@@ -9,7 +9,8 @@ make_DEM(resolution = NULL, dsn = NULL)
 \arguments{
 \item{resolution}{Resolution to aggregate the digital elevation model to in
 arc-degrees, e.g. 1 = 1 arc degree, 0.5 = one half arc degree, 0.25 = one
-quarter arc degree. Valid options are \code{1}, \code{0.5} and \code{0.25}.}
+quarter arc degree. Valid options are \code{1}, \code{0.5} and \code{0.25}. Defaults to
+\code{0.5}, the same as \acronym{NASA} \acronym{POWER}.}
 
 \item{dsn}{Optional. Directory where resulting \acronym{DEM} file is to be
 saved. If unspecified a spatial object is returned in the R session. If a
@@ -29,7 +30,7 @@ arc degrees. Mainly for use in crop modelling exercises.
 }
 \examples{
 
-\dontrun{
+\donttest{
 # Get DEM and aggregate to 0.5 arc degree, saving it to a local "~/Data/DEM"
 directory.
 

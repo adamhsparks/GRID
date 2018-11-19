@@ -8,7 +8,7 @@ interpolate_GSOD(file_list = NULL, dem = NULL, dsn = NULL,
   vars = NULL, cores = NULL)
 }
 \arguments{
-\item{file_list}{A \code{[base::list()]} of data frames or CSV files of
+\item{file_list}{A \code{[base::list()]} of data frames or \code{CSV} files of
 GSOD data created by \code{make_GSOD_set()}.}
 
 \item{dem}{Digital elevation model that has been fetched and processed using
@@ -18,9 +18,6 @@ GSOD data created by \code{make_GSOD_set()}.}
 
 \item{vars}{Weather variables to interpolate. Possible values are
 \code{TEMP}, \code{MAX}, \code{MIN} and \code{RH}. Defaults to \code{TEMP}.}
-
-\item{cores}{Number of cores to use for parallel processing. Defaults to 1 on
-Windows OS or if not otherwise specified.}
 }
 \value{
 A \code{[raster::stack()]} of daily interpolated weather variables.
@@ -31,18 +28,21 @@ function to process multiple years of \acronym{GSOD} data for interpolation,
 though a single year may be used.
 }
 \examples{
-\dontrun{
+\donttest{
 # Get and aggregate the raster digital elevation model
 dem <- get_DEM()
 
 # Create a list of GSOD files
 files <- list.files("~/Data/GSOD", full.names = TRUE)
 
-# Run the function for MAX and MIN temperature on a *nix system using 2 cores
+# Run the function for MAX and MIN temperature on a *nix system using parallel
+# processing
+future::plan(multisession)
 GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem,
-dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"), cores = 2)
+		  dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
 
-# Run the function for MAX and MIN temperature using 1 core, will work on Win
+# Run the function for MAX and MIN temperature using a single core
+future::plan(sequential)
 GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
 }
 

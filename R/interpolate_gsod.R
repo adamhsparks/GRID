@@ -5,15 +5,13 @@
 #' function to process multiple years of \acronym{GSOD} data for interpolation,
 #' though a single year may be used.
 #'
-#' @param file_list A `[base::list()]` of data frames or CSV files of
+#' @param file_list A `[base::list()]` of data frames or `CSV` files of
 #' GSOD data created by `make_GSOD_set()`.
 #' @param dem Digital elevation model that has been fetched and processed using
 #' `get_DEM()`.
 #' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
 #' @param vars Weather variables to interpolate. Possible values are
 #' `TEMP`, `MAX`, `MIN` and `RH`. Defaults to `TEMP`.
-#' @param cores Number of cores to use for parallel processing. Defaults to 1 on
-#' Windows OS or if not otherwise specified.
 #'
 #' @return
 #' A `[raster::stack()]` of daily interpolated weather variables.
@@ -21,18 +19,21 @@
 #' @author \email{adamhsparks@@gmail.com}
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Get and aggregate the raster digital elevation model
 #' dem <- get_DEM()
 #'
 #' # Create a list of GSOD files
 #' files <- list.files("~/Data/GSOD", full.names = TRUE)
 #'
-#' # Run the function for MAX and MIN temperature on a *nix system using 2 cores
+#' # Run the function for MAX and MIN temperature on a *nix system using parallel
+#' # processing
+#' future::plan(multisession)
 #' GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem,
-#' dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"), cores = 2)
+#' 		  dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
 #'
-#' # Run the function for MAX and MIN temperature using 1 core, will work on Win
+#' # Run the function for MAX and MIN temperature using a single core
+#' future::plan(sequential)
 #' GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
 #' }
 #'
@@ -47,11 +48,10 @@ interpolate_GSOD <- function(file_list = NULL,
   dsn <- .validate_dsn(dsn)
   vars <- .validate_vars(vars)
   file_list <- .validate_files(file_list)
-  cores <- .validate_cores(cores)
 
   # Import GSOD data
   GSOD <-
-    readr::read_csv(file_list, col_types = "cdddcddddd", progress = FALSE)
+    data.table::fread(file_list)
 
   # Create a list of data frames by YDAY
   GSOD <- split(GSOD, as.factor(GSOD$YDAY))
@@ -69,7 +69,7 @@ interpolate_GSOD <- function(file_list = NULL,
     TEMP <- NULL
   }
 
-  if ("MAX" %in% vars) {
+  if ("TMAX" %in% vars) {
     MAX <- .create_stack(
       GSOD = GSOD,
       wvar = "MAX",
@@ -81,7 +81,7 @@ interpolate_GSOD <- function(file_list = NULL,
     MAX <- NULL
   }
 
-  if ("MIN" %in% vars) {
+  if ("TMIN" %in% vars) {
     MIN <- .create_stack(
       GSOD = GSOD,
       wvar = "MIN",
@@ -93,7 +93,7 @@ interpolate_GSOD <- function(file_list = NULL,
     MIN <- NULL
   }
 
-  if ("RH" %in% vars) {
+  if ("RHUM" %in% vars) {
     RH <- .create_stack(
       GSOD = GSOD,
       wvar = "RH",
@@ -107,7 +107,7 @@ interpolate_GSOD <- function(file_list = NULL,
   }
 
   # remove any null vars
-  out <- list(TEMP, MAX, MIN, RH)
+  out <- list(TEMP, TMAX, TMIN, RHUM)
   out <- out[unlist(lapply(out, length) != 0)]
 
   # create final stack of vars
