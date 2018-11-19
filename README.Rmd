@@ -103,7 +103,7 @@ Once logged in, use the Files pane (bottom right) to navigate to `/`
 `.Rproj` file for this project. Once that's open, you'll see the
 `analysis/paper` directory in the Files pane where you can find the R markdown
 document, and knit them to produce the results in the paper. More information
-about using RStudio in Docker is avaiable at the
+about using RStudio in Docker is available at the
 [Rocker](https://github.com/rocker-org)
 [wiki](https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image) pages.
  
