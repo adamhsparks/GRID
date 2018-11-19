@@ -5,7 +5,7 @@
 \title{Interpolate \acronym{GSOD} Data to a Gridded Surface}
 \usage{
 interpolate_GSOD(file_list = NULL, dem = NULL, dsn = NULL,
-  vars = NULL, cores = NULL)
+  vars = NULL)
 }
 \arguments{
 \item{file_list}{A \code{[base::list()]} of data frames or \code{CSV} files of

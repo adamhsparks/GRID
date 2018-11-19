@@ -1,20 +1,4 @@
 
-context(".validate_cores()")
-test_that(".validate_cores() sets to 1 if not specified", {
-  cores <- NULL
-  cores <- .validate_cores(cores)
-  expect_equal(cores, 1)
-})
-
-context(".validate_cores()")
-test_that(".validate_cores() sets to 1 if Windows detected", {
-  skip_on_os(c("mac", "linux", "solaris"))
-  # set cores to 4 to be sure properly set to 1 when Windows OS detected
-  cores <- 4
-  cores <- .validate_cores(cores)
-  expect_equal(cores, 1)
-})
-
 context(".validate_files()")
 test_that(".validate_files() stops if not specified", {
   files <- NULL

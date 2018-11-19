@@ -42,8 +42,7 @@
 interpolate_GSOD <- function(file_list = NULL,
                              dem = NULL,
                              dsn = NULL,
-                             vars = NULL,
-                             cores = NULL) {
+                             vars = NULL) {
   # validate user inputs, see `internal_functions.R` for these
   dsn <- .validate_dsn(dsn)
   vars <- .validate_vars(vars)
@@ -62,8 +61,7 @@ interpolate_GSOD <- function(file_list = NULL,
       GSOD = GSOD,
       wvar = "TEMP",
       dem = dem,
-      dsn = dsn,
-      cores = cores
+      dsn = dsn
     )
   } else {
     TEMP <- NULL
@@ -74,8 +72,7 @@ interpolate_GSOD <- function(file_list = NULL,
       GSOD = GSOD,
       wvar = "MAX",
       dem = dem,
-      dsn = dsn,
-      cores = cores
+      dsn = dsn
     )
   } else {
     MAX <- NULL
@@ -86,8 +83,7 @@ interpolate_GSOD <- function(file_list = NULL,
       GSOD = GSOD,
       wvar = "MIN",
       dem = dem,
-      dsn = dsn,
-      cores = cores
+      dsn = dsn
     )
   } else {
     MIN <- NULL
@@ -98,8 +94,7 @@ interpolate_GSOD <- function(file_list = NULL,
       GSOD = GSOD,
       wvar = "RH",
       dem = dem,
-      dsn = dsn,
-      cores = cores
+      dsn = dsn
     )
 
   } else {

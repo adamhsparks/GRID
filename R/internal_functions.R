@@ -22,15 +22,10 @@
 #' @param dem Digital elevation model that has been fetched and processed using
 #' `get_DEM()`.
 #' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
-#' @param cores Number of cores to use for parallel processing. Defaults to 1
 #' if not otherwise specified.
 #'
 #' @noRd
-.create_stack <- function(GSOD, wvar, dem, dsn, cores) {
-
-  if (is.null(cores)) {
-    cores <- 1
-  }
+.create_stack <- function(GSOD, wvar, dem, dsn) {
 
   Y <- future.apply::future_lapply(
     X = GSOD,

@@ -131,14 +131,14 @@ though a single year may be used.</p>
     </div>
 
     <pre class="usage"><span class='fu'>interpolate_GSOD</span>(<span class='kw'>file_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file_list</th>
-      <td><p>A <code>[base::list()]</code> of data frames or CSV files of
+      <td><p>A <code>[base::list()]</code> of data frames or <code>CSV</code> files of
 GSOD data created by <code><a href='make_GSOD_set.html'>make_GSOD_set()</a></code>.</p></td>
     </tr>
     <tr>
@@ -155,11 +155,6 @@ GSOD data created by <code><a href='make_GSOD_set.html'>make_GSOD_set()</a></cod
       <td><p>Weather variables to interpolate. Possible values are
 <code>TEMP</code>, <code>MAX</code>, <code>MIN</code> and <code>RH</code>. Defaults to <code>TEMP</code>.</p></td>
     </tr>
-    <tr>
-      <th>cores</th>
-      <td><p>Number of cores to use for parallel processing. Defaults to 1 on
-Windows OS or if not otherwise specified.</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -168,20 +163,18 @@ Windows OS or if not otherwise specified.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Get and aggregate the raster digital elevation model</span>
-<span class='no'>dem</span> <span class='kw'>&lt;-</span> <span class='fu'>get_DEM</span>()
-
+    <pre class="examples"><div class='input'><span class='co'># Get and aggregate the raster digital elevation model</span>
+<span class='no'>dem</span> <span class='kw'>&lt;-</span> <span class='fu'>get_DEM</span>()</div><div class='output co'>#&gt; <span class='error'>Error in get_DEM(): could not find function "get_DEM"</span></div><div class='input'>
 <span class='co'># Create a list of GSOD files</span>
 <span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'>list.files</span>(<span class='st'>"~/Data/GSOD"</span>, <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='co'># Run the function for MAX and MIN temperature on a *nix system using 2 cores</span>
-<span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>,
-<span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Cache/GTiff"</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"MAX"</span>, <span class='st'>"MIN"</span>), <span class='kw'>cores</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='co'># Run the function for MAX and MIN temperature on a *nix system using parallel</span>
+<span class='co'># processing</span>
+<span class='kw pkg'>future</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/future/topics/plan'>plan</a></span>(<span class='no'>multisession</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(first, envir = parent.frame(), enclos = baseenv()): object 'multisession' not found</span></div><div class='input'><span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>,
+                  <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Cache/GTiff"</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"MAX"</span>, <span class='st'>"MIN"</span>))
 
-<span class='co'># Run the function for MAX and MIN temperature using 1 core, will work on Win</span>
-<span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='st'>"MAX"</span>)
-<span class='co'># }</span><div class='input'>
+<span class='co'># Run the function for MAX and MIN temperature using a single core</span>
+<span class='kw pkg'>future</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/future/topics/plan'>plan</a></span>(<span class='no'>sequential</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(first, envir = parent.frame(), enclos = baseenv()): object 'sequential' not found</span></div><div class='input'><span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='st'>"MAX"</span>)</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

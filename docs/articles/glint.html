@@ -97,17 +97,17 @@
 <h2 class="hasAnchor">
 <a href="#using-get_dem" class="anchor"></a>Using get_DEM</h2>
 <p>Get a digital elevation model (DEM) from WorldClim data, aggregate to 0.5 arc degrees and crop at -60/60 degrees latitude and return a spatial object in the current R session.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_DEM.html">make_DEM</a></span>()</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_DEM.html">make_DEM</a></span>()</code></pre></div>
 <p>Get a digital elevation model (DEM) from WorldClim data and aggregate to 0.5 arc degrees.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_DEM.html">make_DEM</a></span>()</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_DEM.html">make_DEM</a></span>()</code></pre></div>
 <p>Get a digital elevation model (DEM) from WorldClim data, aggregate to 15 arc minutes and crop at -60/60 degrees latitude and save a GeoTIFF file of the resulting DEM to local disk.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_DEM.html">make_DEM</a></span>(<span class="dt">resolution =</span> <span class="fl">0.25</span>, <span class="dt">dsn =</span> <span class="st">"~/GSOD"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DEM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_DEM.html">make_DEM</a></span>(<span class="dt">resolution =</span> <span class="fl">0.25</span>, <span class="dt">dsn =</span> <span class="st">"~/GSOD"</span>)</code></pre></div>
 </div>
 <div id="using-get_gsod" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-get_gsod" class="anchor"></a>Using get_GSOD</h2>
 <p>Get GSOD data for 1998 to 2000.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">gsod &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_GSOD_set.html">make_GSOD_set</a></span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">2000</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gsod &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_GSOD_set.html">make_GSOD_set</a></span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">2000</span>)</code></pre></div>
 </div>
 <div id="using-interpolate_gsod-with-a-list-of-data-frames" class="section level2">
 <h2 class="hasAnchor">
@@ -124,14 +124,14 @@
 <div id="example-2-using-in-memory-data-only" class="section level1">
 <h1 class="hasAnchor">
 <a href="#example-2-using-in-memory-data-only" class="anchor"></a>Example 2: Using In-Memory Data Only</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Create a list of GSOD files</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">gsod_list &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_GSOD_set.html">make_GSOD_set</a></span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">1999</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># Get and aggregate the raster digital elevation model</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">dem &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_DEM.html">make_DEM</a></span>()</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co"># Run the function for MAX and MIN temperature</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">lapply</span>(<span class="dt">X =</span> gsod_list, <span class="dt">FUN =</span> interpolate_GSOD, <span class="dt">dem =</span> dem, <span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">"MAX"</span>, <span class="st">"MIN"</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a list of GSOD files</span>
+gsod_list &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_GSOD_set.html">make_GSOD_set</a></span>(<span class="dt">years =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">1999</span>)
+
+<span class="co"># Get and aggregate the raster digital elevation model</span>
+dem &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_DEM.html">make_DEM</a></span>()
+
+<span class="co"># Run the function for MAX and MIN temperature</span>
+<span class="kw">lapply</span>(<span class="dt">X =</span> gsod_list, <span class="dt">FUN =</span> interpolate_GSOD, <span class="dt">dem =</span> dem, <span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">"MAX"</span>, <span class="st">"MIN"</span>))</code></pre></div>
 </div>
   </div>
 
