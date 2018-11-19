@@ -58,7 +58,7 @@ test_that(".validate_resolution errors if wrong value is entered", {
 
   resolution <- NULL
   agg <- .validate_resolution(resolution)
-  expect_equal(agg, 12)
+  expect_equal(agg, 6)
 
   resolution <- 9
   expect_error(.validate_resolution(resolution))

@@ -48,6 +48,9 @@ interpolate_GSOD <- function(file_list = NULL,
   vars <- .validate_vars(vars)
   file_list <- .validate_files(file_list)
 
+  # CRAN note avoidance
+  TMAX <- TMIN <- RHUM <-NULL
+
   # Import GSOD data
   GSOD <-
     data.table::fread(file_list)
