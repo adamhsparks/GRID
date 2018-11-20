@@ -17,12 +17,12 @@ Depends:
     R (>= 3.2.0)
 License: MIT + file LICENSE
 Imports:
+    curl,
     fst,
     fields,
     future.apply,
     grDevices,
     GSODR,
-    readr,
     raster,
     stats,
     utils
