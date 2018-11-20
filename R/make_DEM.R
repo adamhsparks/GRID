@@ -1,7 +1,7 @@
 
 #' Get and Aggregate a Digital Elevation Model for Use in Interpolating \acronym{GSOD} Data
 #'
-#' Fetches a digital elevation model (\acronym{DEM}) from WorldClim data, crops
+#' Fetches a digital elevation model \acronym{DEM} from 'WorldClim' data, crops
 #' and aggregates to a larger spatial resolution and crops at -60/60 degrees
 #' latitude for use with other weather data that provide rainfall, \emph{e.g.}
 #' \acronym{NASA} \acronym{POWER} at 0.5 arc degrees or \acronym{TRMM} at 0.25
@@ -16,8 +16,9 @@
 #' \acronym{DEM} exists, it will be overwritten with the new one of the same
 #' resolution. If a new resolution is specified, a new file will be created.
 #'
-#' @return A `[raster::raster()]` object of a digital elevation model cropped to
-#' -60/60 degrees latitude and aggregated by the requested factor.
+#' @return A `raster::raster()` object of a digital elevation model cropped to
+#' -60/60 degrees latitude and aggregated by the requested factor and optionally
+#' a data file written to local disk as a GeoTIFF object.
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #'
@@ -33,13 +34,16 @@
 
 make_DEM <- function(resolution = NULL, dsn = NULL) {
 
-  dsn <- .validate_dsn(dsn)
+  dsn <- if (!is.null(dsn)) {
+    .validate_dsn(dsn)
+  }
+
   agg <- .validate_resolution(resolution)
 
   # set up workspace
   tf.zip <- tempfile()
 
-  utils::download.file(
+  curl::curl_download(
     "http://biogeo.ucdavis.edu/data/climate/worldclim/1_4/grid/cur/alt_5m_bil.zip",
     destfile = tf.zip,
     mode = "wb"
