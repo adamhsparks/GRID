@@ -82,12 +82,12 @@ data set. It is suggested to use a computer dedicated just to this task, while i
 will run on a fairly modest desktop, the computer may become unresponsive while
 performing this operation.
 
-## Example Creating a Set of Global GeoTIFF Files from 1983 to 2016
+## Example Creating a Set of Global GeoTIFF Files from 1983 to 2010
 
 ### Step 1: Download the GSOD data
 
 ```{r get_GSOD, eval=FALSE, message='hide', results='hide'}
-years <- as.list(seq(from = 1983, to = 1984, by = 1))
+years <- as.list(seq(from = 1983, to = 2010, by = 1))
 lapply(X = years, FUN = make_GSOD_set, dsn = "/mnt/GSOD")
 ```
 
