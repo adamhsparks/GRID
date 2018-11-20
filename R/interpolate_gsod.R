@@ -49,11 +49,11 @@ interpolate_GSOD <- function(file_list = NULL,
   file_list <- .validate_files(file_list)
 
   # CRAN note avoidance
-  TMAX <- TMIN <- RHUM <-NULL
+  MAX <- MIN <- RH <- NULL
 
   # Import GSOD data
   GSOD <-
-    data.table::fread(file_list)
+    fst::read_fst(file_list)
 
   # Create a list of data frames by YDAY
   GSOD <- split(GSOD, as.factor(GSOD$YDAY))
@@ -70,7 +70,7 @@ interpolate_GSOD <- function(file_list = NULL,
     TEMP <- NULL
   }
 
-  if ("TMAX" %in% vars) {
+  if ("MAX" %in% vars) {
     MAX <- .create_stack(
       GSOD = GSOD,
       wvar = "MAX",
@@ -81,7 +81,7 @@ interpolate_GSOD <- function(file_list = NULL,
     MAX <- NULL
   }
 
-  if ("TMIN" %in% vars) {
+  if ("MIN" %in% vars) {
     MIN <- .create_stack(
       GSOD = GSOD,
       wvar = "MIN",
@@ -92,7 +92,7 @@ interpolate_GSOD <- function(file_list = NULL,
     MIN <- NULL
   }
 
-  if ("RHUM" %in% vars) {
+  if ("RH" %in% vars) {
     RH <- .create_stack(
       GSOD = GSOD,
       wvar = "RH",

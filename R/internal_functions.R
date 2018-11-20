@@ -169,9 +169,11 @@
   } else if (is.null(resolution)) {
     agg <- 6
   } else {
-    agg <- dplyr::case_when(resolution == 0.25 ~ 3,
-                            resolution == 0.5 ~ 6,
-                            resolution == 1 ~ 12)
+    resolution <- as.character(resolution)
+    agg <- switch(resolution,
+                  "0.25" = 3,
+                  "0.5" = 6,
+                  "1" = 12)
   }
 }
 #' Validate User Entered Weather Variables
@@ -229,8 +231,8 @@
   YEAR <- weather$YEAR[1]
 
   # create file name
-  fname <- paste0("GSOD_", YEAR, ".bz2")
+  fname <- paste0("GSOD_", YEAR)
 
   # write a compressed CSV file to disk in the specified location
-  readr::write_csv(weather, path = file.path(dsn, fname), na = "NA")
+  fst::write_fst(weather, path = file.path(dsn, fname), 100)
 }

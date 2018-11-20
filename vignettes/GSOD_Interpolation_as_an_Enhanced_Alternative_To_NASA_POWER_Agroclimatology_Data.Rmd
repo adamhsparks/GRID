@@ -86,42 +86,29 @@ performing this operation.
 
 ### Step 1: Download the GSOD data
 
-```{r get_GSOD, eval=FALSE, message='hide', results='hide'}
+```{r get_GSOD, eval=TRUE, message='hide', results='hide'}
+future::plan("multisession")
 years <- as.list(seq(from = 1983, to = 1984, by = 1))
 lapply(X = years, FUN = make_GSOD_set, dsn = "/mnt/GSOD")
 ```
 
 ### Step 2: Download the Digital Elevation Model and Aggregate to 0.5 Degree
 
-```{r get_DEM, eval=FALSE, message='hide', results='hide'}
+```{r get_DEM, eval=TRUE, message='hide', results='hide'}
 DEM <- make_DEM(dsn = "/mnt/DEM")
 ```
 ### Step 3: Interpolate the GSOD Data from On-disk Files
 
-```{r list_GSOD_files, eval=FALSE, message='hide', results='hide'}
+```{r list_GSOD_files, eval=TRUE, message='hide', results='hide'}
 file_list <- list.files("/mnt/GSOD", full.names = TRUE)
 ```
 
-For a Unix-type operating system, it is possible to run the process in parallel
-to reduce the time necessary to generate all variables. This example shows how
-to run the function and save GTiff files in "~/Cache/GTiff" using threeq cores.
+Since `future::plan()` was already set to `multisession` previously, that will
+apply here and the interpolation will automatically be done in parallel.
 
-```{r interpolate_2_cores,  eval=FALSE, message='hide', results='hide'}
+```{r interpolate,  eval=TRUE, message='hide', results='hide'}
 GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = DEM,
-               dsn = "/mnt/Cache/GTiff", vars = c("MAX", "MIN"), cores = 3)
-```
-
-#### Using a Single Core on Windows
-
-If a Windows operating system is detected, the function will automatically
-default to using a single core for the processes as Windows does not support
-the parallel procedures that it uses. No need to specify the cores here, will
-default to one. If set to higher than one, it will automatically reset to one to
-run.
-
-```{r interpolate_windows,  eval=FALSE, message='hide', results='hide'}
-GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = dem,
-dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
+               dsn = "/mnt/Cache/GTiff", vars = c("TMAX", "TMIN"))
 ```
 
 ******

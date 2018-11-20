@@ -48,7 +48,6 @@ gsod <- make_GSOD_set(years = 1998:2000)
 
 ## Using interpolate_gsod with a list of data frames
 
-
 ## Using interpolate_gsod with a list of CSV files
 
 # Example 1: Saving all Files to Local Disk
