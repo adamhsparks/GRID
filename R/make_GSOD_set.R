@@ -1,13 +1,13 @@
 
 #' Make a Data Set of \acronym{GSOD} Data Suitable for Interpolation
 #'
-#' This function can be wrapped in an `[base::lapply()]` function to
+#' This function can be wrapped in an `base::lapply()` function to
 #' retrieve and save multiple years of \acronym{GSOD} data for interpolation,
 #' though it may be used to retrieve GSOD data and interpolate files on-the-fly.
-#' See `[utils::vignette("glint")]` for more details and examples.
+#' See `utils::vignette("glint")` for more details and examples.
 #'
 #' @details This function will get \acronym{GSOD} data using
-#' `[GSODR::get_GSOD()]` and save a CSV file containing only the
+#' `GSODR::get_GSOD()` and save a CSV file containing only the
 #' following fields to use in interpolating a global surface between 60 and -60
 #' degrees latitude.
 #' \describe{
@@ -16,7 +16,7 @@
 #' \item{LON}{Longitude in decimal degrees.}
 #' \item{LAT}{Latitude in decimal degrees.}
 #' \item{ELEV_M_SRTM_90m}{Elevation in metres corrected for possible errors,
-#' derived from the \acronym{CGIAR-CSI} \acronym{SRTM} 90m database (Jarvis et
+#' derived from the \acronym{CGIAR-CSI} \acronym{SRTM} 90 m database (Jarvis et
 #' al. 2008).}
 #' \item{YEAR}{The year (YYYY).}
 #' \item{YDAY}{Sequential day of year.}
@@ -30,15 +30,17 @@
 #'
 #' @param years A numeric vector of years of \acronym{GSOD} data to get for
 #' interpolation.  Defaults to current year.
-#' @param dsn Optional.  A filepath where resulting CSV files are to be saved on
-#' local disk. If unspecified a tidy data frame is returned in the R session.
+#' @param dsn Optional. A filepath where resulting \pkg{fst} files are to be
+#' saved on local disk. If unspecified a tidy data frame is returned in the
+#' \R session.
 #'
 #' @references Jarvis, A., Reuter, H. I., Nelson, A., Guevara, E. (2008)
 #' Hole-filled SRTM for the globe Version 4, available from the CGIAR-CSI SRTM
 #' 90m Database (<http://srtm.csi.cgiar.org>)
 #'
-#' @return A `[base::list()]` of `[base::data.frame]` objects containing
-#' \acronym{GSOD} data suitable for interpolation using `[interpolate_gsod()]`
+#' @return A `base::list()` of `base::data.frame` objects containing
+#' \acronym{GSOD} data suitable for interpolation using `interpolate_gsod()`
+#' and optionally data files written to disk in `fst::fst()` format.
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #'
@@ -89,8 +91,28 @@ make_GSOD_set <- function(years = NULL, dsn = NULL) {
   # if dsn is specifed write data frames to files, see internal_functions.R
   # for .write_gsod()
   if (!is.null(dsn)) {
-    lapply(X =  weather, FUN = .write_GSOD, dsn = dsn)
+    future.apply::future_lapply(X =  weather,
+                                FUN = .write_GSOD,
+                                dsn = dsn)
   }
-
   return(weather)
+}
+
+#' Write a Compressed 'fst' File to Disk
+#'
+#' Writes compressed fst files of weather data to disk.
+#' @param weather A data set from the 'NCEI' 'GSOD' 'FTP' server that is slimmed
+#' down to only variables necessary for interpolation and Temp, Max, Min and RH
+#' to save disk space
+#' @param dsn User supplied value of directory to write files to
+#' @noRd
+.write_GSOD <- function(weather, dsn) {
+  # create YEAR object for naming object out
+  YEAR <- weather$YEAR[1]
+
+  # create file name
+  fname <- paste0("GSOD_", YEAR)
+
+  # write a compressed CSV file to disk in the specified location
+  fst::write_fst(weather, path = file.path(dsn, fname), 100)
 }
