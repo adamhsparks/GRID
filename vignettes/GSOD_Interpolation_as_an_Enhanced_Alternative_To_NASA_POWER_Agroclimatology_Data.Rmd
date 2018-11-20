@@ -87,6 +87,7 @@ performing this operation.
 ### Step 1: Download the GSOD data
 
 ```{r get_GSOD, eval=FALSE, message='hide', results='hide'}
+future::plan(multisession)
 years <- as.list(seq(from = 1983, to = 2010, by = 1))
 lapply(X = years, FUN = make_GSOD_set, dsn = "/mnt/GSOD")
 ```
