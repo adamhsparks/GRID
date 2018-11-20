@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Interpolate <acronym>GSOD</acronym> Data to a Gridded Surface — interpolate_GSOD" />
 
-<meta property="og:description" content="This function is designed to be wrapped in an [base::lapply()]
+<meta property="og:description" content="This function is designed to be wrapped in an base::lapply()
 function to process multiple years of GSOD data for interpolation,
 though a single year may be used." />
 <meta name="twitter:card" content="summary" />
@@ -124,7 +124,7 @@ though a single year may be used." />
 
     <div class="ref-description">
     
-    <p>This function is designed to be wrapped in an <code>[base::lapply()]</code>
+    <p>This function is designed to be wrapped in an <code><a href='http://www.rdocumentation.org/packages/base/topics/lapply'>base::lapply()</a></code>
 function to process multiple years of <acronym>GSOD</acronym> data for interpolation,
 though a single year may be used.</p>
     
@@ -138,17 +138,18 @@ though a single year may be used.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file_list</th>
-      <td><p>A <code>[base::list()]</code> of data frames or <code>CSV</code> files of
-GSOD data created by <code><a href='make_GSOD_set.html'>make_GSOD_set()</a></code>.</p></td>
+      <td><p>A <code><a href='http://www.rdocumentation.org/packages/base/topics/list'>base::list()</a></code> of data frames or <code>fst</code> files of
+<acronym>GSOD</acronym> data created by <code><a href='make_GSOD_set.html'>make_GSOD_set()</a></code>.</p></td>
     </tr>
     <tr>
       <th>dem</th>
       <td><p>Digital elevation model that has been fetched and processed using
-<code>get_DEM()</code>.</p></td>
+<code><a href='make_DEM.html'>make_DEM()</a></code>.</p></td>
     </tr>
     <tr>
       <th>dsn</th>
-      <td><p>Optional. Directory where resulting GeoTIFF files are to be saved.</p></td>
+      <td><p>Optional. Directory where resulting 'NetCDF' files are to be
+saved.</p></td>
     </tr>
     <tr>
       <th>vars</th>
@@ -159,23 +160,27 @@ GSOD data created by <code><a href='make_GSOD_set.html'>make_GSOD_set()</a></cod
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>[raster::stack()]</code> of daily interpolated weather variables.</p>
+    <p>A <code><a href='http://www.rdocumentation.org/packages/raster/topics/stack'>raster::stack()</a></code> of daily interpolated weather variables and optionally
+'NetCDF' files written to local disk.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Get and aggregate the raster digital elevation model</span>
-<span class='no'>dem</span> <span class='kw'>&lt;-</span> <span class='fu'>get_DEM</span>()</div><div class='output co'>#&gt; <span class='error'>Error in get_DEM(): could not find function "get_DEM"</span></div><div class='input'>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># Get and aggregate the raster digital elevation model</span>
+<span class='no'>dem</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='make_DEM.html'>make_DEM</a></span>()
+
 <span class='co'># Create a list of GSOD files</span>
 <span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'>list.files</span>(<span class='st'>"~/Data/GSOD"</span>, <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='co'># Run the function for MAX and MIN temperature on a *nix system using parallel</span>
-<span class='co'># processing</span>
-<span class='kw pkg'>future</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/future/topics/plan'>plan</a></span>(<span class='no'>multisession</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(first, envir = parent.frame(), enclos = baseenv()): object 'multisession' not found</span></div><div class='input'><span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>,
+<span class='co'># Run the function for MAX and MIN temperature using parallel processing</span>
+<span class='kw pkg'>future</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/future/topics/plan'>plan</a></span>(<span class='st'>"multisession"</span>)
+<span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>,
                   <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"~/Cache/GTiff"</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"MAX"</span>, <span class='st'>"MIN"</span>))
 
 <span class='co'># Run the function for MAX and MIN temperature using a single core</span>
-<span class='kw pkg'>future</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/future/topics/plan'>plan</a></span>(<span class='no'>sequential</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(first, envir = parent.frame(), enclos = baseenv()): object 'sequential' not found</span></div><div class='input'><span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='st'>"MAX"</span>)</div><div class='input'>
-</div></pre>
+<span class='kw pkg'>future</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/future/topics/plan'>plan</a></span>(<span class='st'>"sequential"</span>)
+<span class='no'>GRID</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>files</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>interpolate_GSOD</span>, <span class='kw'>dem</span> <span class='kw'>=</span> <span class='no'>dem</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='st'>"MAX"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

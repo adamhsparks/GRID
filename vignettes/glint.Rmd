@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(glint)
 ```
 
-## Using get_DEM
+## Using make_DEM
 
 Get a digital elevation model (DEM) from WorldClim data, aggregate to 0.5 arc
 degrees and crop at -60/60 degrees latitude and return a spatial object in the

@@ -10,22 +10,24 @@ make_GSOD_set(years = NULL, dsn = NULL)
 \item{years}{A numeric vector of years of \acronym{GSOD} data to get for
 interpolation.  Defaults to current year.}
 
-\item{dsn}{Optional.  A filepath where resulting CSV files are to be saved on
-local disk. If unspecified a tidy data frame is returned in the R session.}
+\item{dsn}{Optional. A filepath where resulting \pkg{fst} files are to be
+saved on local disk. If unspecified a tidy data frame is returned in the
+\R session.}
 }
 \value{
-A \code{[base::list()]} of \code{[base::data.frame]} objects containing
-\acronym{GSOD} data suitable for interpolation using \code{[interpolate_gsod()]}
+A \code{base::list()} of \code{base::data.frame} objects containing
+\acronym{GSOD} data suitable for interpolation using \code{interpolate_gsod()}
+and optionally data files written to disk in \code{fst::fst()} format.
 }
 \description{
-This function can be wrapped in an \code{[base::lapply()]} function to
+This function can be wrapped in an \code{base::lapply()} function to
 retrieve and save multiple years of \acronym{GSOD} data for interpolation,
 though it may be used to retrieve GSOD data and interpolate files on-the-fly.
-See \code{[utils::vignette("glint")]} for more details and examples.
+See \code{utils::vignette("glint")} for more details and examples.
 }
 \details{
 This function will get \acronym{GSOD} data using
-\code{[GSODR::get_GSOD()]} and save a CSV file containing only the
+\code{GSODR::get_GSOD()} and save a CSV file containing only the
 following fields to use in interpolating a global surface between 60 and -60
 degrees latitude.
 \describe{
@@ -34,7 +36,7 @@ station and link with \pkg{GSODR} data for station metadata.}
 \item{LON}{Longitude in decimal degrees.}
 \item{LAT}{Latitude in decimal degrees.}
 \item{ELEV_M_SRTM_90m}{Elevation in metres corrected for possible errors,
-derived from the \acronym{CGIAR-CSI} \acronym{SRTM} 90m database (Jarvis et
+derived from the \acronym{CGIAR-CSI} \acronym{SRTM} 90 m database (Jarvis et
 al. 2008).}
 \item{YEAR}{The year (YYYY).}
 \item{YDAY}{Sequential day of year.}

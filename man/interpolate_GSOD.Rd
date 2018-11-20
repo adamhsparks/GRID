@@ -8,44 +8,44 @@ interpolate_GSOD(file_list = NULL, dem = NULL, dsn = NULL,
   vars = NULL)
 }
 \arguments{
-\item{file_list}{A \code{[base::list()]} of data frames or \code{CSV} files of
-GSOD data created by \code{make_GSOD_set()}.}
+\item{file_list}{A \code{base::list()} of data frames or \code{fst} files of
+\acronym{GSOD} data created by \code{make_GSOD_set()}.}
 
 \item{dem}{Digital elevation model that has been fetched and processed using
-\code{get_DEM()}.}
+\code{make_DEM()}.}
 
-\item{dsn}{Optional. Directory where resulting GeoTIFF files are to be saved.}
+\item{dsn}{Optional. Directory where resulting 'NetCDF' files are to be
+saved.}
 
 \item{vars}{Weather variables to interpolate. Possible values are
 \code{TEMP}, \code{MAX}, \code{MIN} and \code{RH}. Defaults to \code{TEMP}.}
 }
 \value{
-A \code{[raster::stack()]} of daily interpolated weather variables.
+A \code{raster::stack()} of daily interpolated weather variables and optionally
+'NetCDF' files written to local disk.
 }
 \description{
-This function is designed to be wrapped in an \code{[base::lapply()]}
+This function is designed to be wrapped in an \code{base::lapply()}
 function to process multiple years of \acronym{GSOD} data for interpolation,
 though a single year may be used.
 }
 \examples{
 \donttest{
 # Get and aggregate the raster digital elevation model
-dem <- get_DEM()
+dem <- make_DEM()
 
 # Create a list of GSOD files
 files <- list.files("~/Data/GSOD", full.names = TRUE)
 
-# Run the function for MAX and MIN temperature on a *nix system using parallel
-# processing
-future::plan(multisession)
+# Run the function for MAX and MIN temperature using parallel processing
+future::plan("multisession")
 GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem,
 		  dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
 
 # Run the function for MAX and MIN temperature using a single core
-future::plan(sequential)
+future::plan("sequential")
 GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
 }
-
 }
 \author{
 \email{adamhsparks@gmail.com}

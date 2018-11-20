@@ -10,6 +10,7 @@ vignette: >
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(glint)
 ```
 
 # Introduction
@@ -86,7 +87,7 @@ k
 
 ### Step 1: Download the GSOD data
 
-```{r get_GSOD, eval=TRUE, message='hide', results='hide'}
+```{r get_GSOD, eval=FALSE, message='hide', results='hide'}
 future::plan("multisession")
 years <- as.list(seq(from = 1983, to = 1984, by = 1))
 lapply(X = years, FUN = make_GSOD_set, dsn = "/mnt/GSOD")
@@ -94,22 +95,22 @@ lapply(X = years, FUN = make_GSOD_set, dsn = "/mnt/GSOD")
 
 ### Step 2: Download the Digital Elevation Model and Aggregate to 0.5 Degree
 
-```{r get_DEM, eval=TRUE, message='hide', results='hide'}
+```{r make_DEM, eval=FALSE, message='hide', results='hide'}
 DEM <- make_DEM(dsn = "/mnt/DEM")
 ```
 
 ### Step 3: Interpolate the GSOD Data from On-disk Files
 
-```{r list_GSOD_files, eval=TRUE, message='hide', results='hide'}
+```{r list_GSOD_files, eval=FALSE, message='hide', results='hide'}
 file_list <- list.files("/mnt/GSOD", full.names = TRUE)
 ```
 
 Since `future::plan()` was already set to `multisession` previously, that will
 apply here and the interpolation will automatically be done in parallel.
 
-```{r interpolate,  eval=TRUE, message='hide', results='hide'}
+```{r interpolate, eval=FALSE, message='hide', results='hide'}
 GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = DEM,
-               dsn = "/mnt/Cache/GTiff", vars = c("TMAX", "TMIN"))
+               dsn = "/mnt/Cache/GTiff", vars = c("MAX", "MIN"))
 ```
 
 ******

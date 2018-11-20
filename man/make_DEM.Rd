@@ -18,11 +18,12 @@ saved. If unspecified a spatial object is returned in the R session. If a
 resolution. If a new resolution is specified, a new file will be created.}
 }
 \value{
-A \code{[raster::raster()]} object of a digital elevation model cropped to
--60/60 degrees latitude and aggregated by the requested factor.
+A \code{raster::raster()} object of a digital elevation model cropped to
+-60/60 degrees latitude and aggregated by the requested factor and optionally
+a data file written to local disk as a GeoTIFF object.
 }
 \description{
-Fetches a digital elevation model (\acronym{DEM}) from WorldClim data, crops
+Fetches a digital elevation model \acronym{DEM} from 'WorldClim' data, crops
 and aggregates to a larger spatial resolution and crops at -60/60 degrees
 latitude for use with other weather data that provide rainfall, \emph{e.g.}
 \acronym{NASA} \acronym{POWER} at 0.5 arc degrees or \acronym{TRMM} at 0.25
