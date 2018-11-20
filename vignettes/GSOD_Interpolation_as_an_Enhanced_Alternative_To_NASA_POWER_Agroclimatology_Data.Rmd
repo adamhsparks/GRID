@@ -27,7 +27,7 @@ The _glint_ package makes this process as simple as possible. Described below ar
 the steps that the package uses internally to create gridded weather data from
 the GSOD data.
 
-## Downloading GSOD Data
+i## Downloading GSOD Data
 
 _glint_ offers customised functionality to download GSOD data, `get_GSOD()`
 using functionality from the [_GSODR_](https://ropensci.github.io/GSODR/)
@@ -44,7 +44,7 @@ variables that _glint_ can interpolate are:
 
 * RH - Mean daily relative humidity.
 
-## Downloading the Digital Elevation Model
+#k# Downloading the Digital Elevation Model
 
 _glint_ offers customised functionality, `make_DEM()` to download a digital
 elevation model based on the Shuttle Radar Topography Mission (SRTM) from
@@ -81,8 +81,8 @@ This is an extremely processor and time-intensive process for the entire global
 data set. It is suggested to use a computer dedicated just to this task, while it
 will run on a fairly modest desktop, the computer may become unresponsive while
 performing this operation.
-
-## Example Creating a Set of Global GeoTIFF Files from 1983 to 2016
+k
+## Example Creating a Set of Global GeoTIFF Files from 1983 to 2010
 
 ### Step 1: Download the GSOD data
 
@@ -97,6 +97,7 @@ lapply(X = years, FUN = make_GSOD_set, dsn = "/mnt/GSOD")
 ```{r get_DEM, eval=TRUE, message='hide', results='hide'}
 DEM <- make_DEM(dsn = "/mnt/DEM")
 ```
+
 ### Step 3: Interpolate the GSOD Data from On-disk Files
 
 ```{r list_GSOD_files, eval=TRUE, message='hide', results='hide'}
