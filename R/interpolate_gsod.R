@@ -1,42 +1,42 @@
 
 #' Interpolate \acronym{GSOD} Data to a Gridded Surface
 #'
-#' This function is designed to be wrapped in an `[base::lapply()]`
+#' This function is designed to be wrapped in an `base::lapply()`
 #' function to process multiple years of \acronym{GSOD} data for interpolation,
 #' though a single year may be used.
 #'
-#' @param file_list A `[base::list()]` of data frames or `CSV` files of
-#' GSOD data created by `make_GSOD_set()`.
+#' @param file_list A `base::list()` of data frames or `fst` files of
+#' \acronym{GSOD} data created by `make_GSOD_set()`.
 #' @param dem Digital elevation model that has been fetched and processed using
-#' `get_DEM()`.
-#' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
+#' `make_DEM()`.
+#' @param dsn Optional. Directory where resulting 'NetCDF' files are to be
+#' saved.
 #' @param vars Weather variables to interpolate. Possible values are
 #' `TEMP`, `MAX`, `MIN` and `RH`. Defaults to `TEMP`.
 #'
 #' @return
-#' A `[raster::stack()]` of daily interpolated weather variables.
+#' A `raster::stack()` of daily interpolated weather variables and optionally
+#' 'NetCDF' files written to local disk.
 #'
 #' @author \email{adamhsparks@@gmail.com}
 #'
 #' @examples
 #' \donttest{
 #' # Get and aggregate the raster digital elevation model
-#' dem <- get_DEM()
+#' dem <- make_DEM()
 #'
 #' # Create a list of GSOD files
 #' files <- list.files("~/Data/GSOD", full.names = TRUE)
 #'
-#' # Run the function for MAX and MIN temperature on a *nix system using parallel
-#' # processing
-#' future::plan(multisession)
+#' # Run the function for MAX and MIN temperature using parallel processing
+#' future::plan("multisession")
 #' GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem,
 #' 		  dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
 #'
 #' # Run the function for MAX and MIN temperature using a single core
-#' future::plan(sequential)
+#' future::plan("sequential")
 #' GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
 #' }
-#'
 #' @export interpolate_GSOD
 
 interpolate_GSOD <- function(file_list = NULL,
@@ -105,7 +105,7 @@ interpolate_GSOD <- function(file_list = NULL,
   }
 
   # remove any null vars
-  out <- list(TEMP, TMAX, TMIN, RHUM)
+  out <- list(TEMP, MAX, MIN, RH)
   out <- out[unlist(lapply(out, length) != 0)]
 
   # create final stack of vars
@@ -120,4 +120,113 @@ interpolate_GSOD <- function(file_list = NULL,
                                 names(out)))
 
   return(out)
+}
+
+#' Create a Raster Stack Object of Weather Variables
+#'
+#' Creates raster stacks of weather variables
+#'
+#' @param GSOD A list of GSOD dataframes `split` by day
+#' @param wvar Weather variable to interpolate
+#' @param dem Digital elevation model that has been fetched and processed using
+#' `make_DEM()`.
+#' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
+#' if not otherwise specified.
+#'
+#' @noRd
+.create_stack <- function(GSOD, wvar, dem, dsn) {
+
+  Y <- future.apply::future_lapply(
+    X = GSOD,
+    FUN = .interpolate_raster,
+    wvar = wvar,
+    dem = dem,
+    dsn = dsn
+  )
+  Y <- .stack_lists(X = Y, wvar = wvar)
+  return(Y)
+}
+
+#' Create a Stack From Lists of Raster Objects
+#'
+#' Called from `.create_stack()` at the end of the function to create a raster
+#' stack of layers from lists resulting from using `future_lapply()`
+#'
+#' @param X A list of interpolated weather variable surfaces
+#' @param wvar Interpolated weather variable
+#' @noRd
+.stack_lists <- function(X, wvar) {
+  X <- raster::stack(X[seq_along(X)])
+  X <- stats::setNames(X,
+                       paste0(wvar, "_", 1:raster::nlayers(X)))
+}
+
+#' @noRd
+.validate_files <- function(file_list) {
+  if (is.null(file_list)) {
+    stop("You must supply a list of GSOD data files for interpolation")
+  } else if (typeof(file_list[[1]]) == "character") {
+    file_list <- file_list
+  }
+}
+
+
+#' Create an Interpolated Surface of a Weather Variable
+#'
+#' Called from `.create_stack()`, does the heavy lifting of checking for
+#' outliers and then interpolating the data
+#'
+#' @param GSOD A list of GSOD dataframes `split` by day
+#' @param wvar Weather variable to interpolate
+#' @param dem Digital elevation model that has been fetched and processed using
+#' `make_DEM()`.
+#' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
+#'
+#' @noRd
+.interpolate_raster <- function(GSOD, wvar, dsn, dem) {
+  # create data frame for individual weather vars for interpolation
+  y <-
+    data.frame(GSOD["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"],
+               GSOD[wvar])
+
+  # remove any NA values from the data, the interpolation will not work with
+  # any NAs present for any field.
+  y <- stats::na.omit(y)
+
+  # remove outliers
+  bxs <- grDevices::boxplot.stats(y[, 4])
+  y <- y[!y[, 4] %in% bxs$out,]
+
+  # create interpolation data set
+  y_vals <- y[, 4]
+  names(y_vals) <- NULL
+
+  # create thin plate spline object
+  tps_y <-
+    fields::Tps(y[, c("LON", "LAT", "ELEV_M_SRTM_90m")],
+                y_vals, lon.lat = TRUE)
+
+  # interpolate thin plate spline object
+  tps_pred <- raster::interpolate(dem, tps_y, xyOnly = FALSE)
+
+  # if a dsn is provided write to local disk, else return in memory
+  if (!is.null(dsn)) {
+    # write to disk with "YYYY_YDAY.tiff" as the name
+    raster::writeRaster(
+      tps_pred,
+      filename = paste0(dsn,
+                        "/",
+                        wvar,
+                        "_",
+                        GSOD[1, 5],
+                        "_", GSOD[1, 6],
+                        ".tiff"),
+      format = "CDF",
+      dataType = "INT2S",
+      force_v4 = TRUE,
+      compression = 7,
+      overwrite = TRUE
+    )
+  }
+  return(tps_pred)
 }
