@@ -15,12 +15,12 @@ library(glint)
 
 ## Using make_DEM
 
-Get a digital elevation model (DEM) from WorldClim data, aggregate to 0.5 arc
+Get a digital elevation model (DEM) from WorldClim data, aggregate to 1 arc
 degrees and crop at -60/60 degrees latitude and return a spatial object in the
 current R session.
 
 ```{r R_DEM, eval=FALSE}
-DEM <- make_DEM()
+DEM <- make_DEM(resolution = 1)
 ```
 
 Get a digital elevation model (DEM) from WorldClim data and aggregate to 0.5 arc
