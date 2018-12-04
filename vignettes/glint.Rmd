@@ -27,7 +27,7 @@ Get a digital elevation model (DEM) from WorldClim data and aggregate to 0.5 arc
 degrees.
 
 ```{r dsn_DEM, eval=FALSE}
-DEM <- make_DEM()
+DEM <- make_DEM(resolution = 0.5)
 ```
 
 Get a digital elevation model (DEM) from WorldClim data, aggregate to 15 arc
