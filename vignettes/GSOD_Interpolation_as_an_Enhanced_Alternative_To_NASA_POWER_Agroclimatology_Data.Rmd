@@ -57,8 +57,9 @@ data, which could provide rainfall),
 * 0.5 degree (matching [NASA - POWER](https://power.larc.nasa.gov/) data,
 which can provide rainfall),
 
-* 0.25 degree (matching [CHIRPS](http://chg.geog.ucsb.edu/data/chirps/) data,
-which can provide rainfall)
+* 0.25 degree (matching historical
+[CHIRPS](http://chg.geog.ucsb.edu/data/chirps/) data, which can provide
+rainfall)
 
 ## Interpolating the GSOD Data
 
@@ -82,14 +83,14 @@ This is an extremely processor and time-intensive process for the entire global
 data set. It is suggested to use a computer dedicated just to this task, while it
 will run on a fairly modest desktop, the computer may become unresponsive while
 performing this operation.
-k
-## Example Creating a Set of Global GeoTIFF Files from 1983 to 2010
+
+# Example Creating a Set of Global GeoTIFF Files from 1983 to 2015
 
 ### Step 1: Download the GSOD data
 
 ```{r get_GSOD, eval=FALSE, message='hide', results='hide'}
 future::plan("multisession")
-years <- as.list(seq(from = 1983, to = 1984, by = 1))
+years <- as.list(seq(from = 1983, to = 2015, by = 1))
 lapply(X = years, FUN = make_GSOD_set, dsn = "/mnt/GSOD")
 ```
 
