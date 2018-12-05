@@ -113,6 +113,6 @@ make_GSOD_set <- function(years = NULL, dsn = NULL) {
   # create file name
   fname <- paste0("GSOD_", YEAR)
 
-  # write a compressed CSV file to disk in the specified location
+  # write a compressed 'fst' file to disk in the specified location
   fst::write_fst(weather, path = file.path(dsn, fname), 100)
 }
