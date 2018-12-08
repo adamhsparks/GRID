@@ -3,20 +3,20 @@
 #'
 #' This function is designed to be wrapped in an `base::lapply()`
 #' function to process multiple years of \acronym{GSOD} data for interpolation,
-#' though a single year may be used.
+#' though a single year may be used. Output is written to a MonetDB database.
 #'
 #' @param file_list A `base::list()` of data frames or `fst` files of
 #' \acronym{GSOD} data created by `make_GSOD_set()`.
 #' @param dem Digital elevation model that has been fetched and processed using
 #' `make_DEM()`.
-#' @param dsn Optional. Directory where resulting 'NetCDF' files are to be
-#' saved.
+#' @param dsn A DBIConnection object, as returned by dbConnect().
+#' @param db_name A character string specifying the unquoted DBMS table name.
 #' @param vars Weather variables to interpolate. Possible values are
 #' `TEMP`, `MAX`, `MIN` and `RH`. Defaults to `TEMP`.
 #'
 #' @return
-#' A `raster::stack()` of daily interpolated weather variables and optionally
-#' 'NetCDF' files written to local disk.
+#' A `raster::stack()` of daily interpolated weather variables and writes
+#' values to a MonetDB database.
 #'
 #' @author \email{adamhsparks@@gmail.com}
 #'
@@ -126,8 +126,8 @@ interpolate_GSOD <- function(file_list = NULL,
 #'
 #' Creates raster stacks of weather variables
 #'
-#' @param GSOD A list of GSOD dataframes `split` by day
-#' @param wvar Weather variable to interpolate
+#' @param GSOD A list of GSOD dataframes `split` by day.
+#' @param wvar Weather variable to interpolate.
 #' @param dem Digital elevation model that has been fetched and processed using
 #' `make_DEM()`.
 #' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
@@ -152,8 +152,8 @@ interpolate_GSOD <- function(file_list = NULL,
 #' Called from `.create_stack()` at the end of the function to create a raster
 #' stack of layers from lists resulting from using `future_lapply()`
 #'
-#' @param X A list of interpolated weather variable surfaces
-#' @param wvar Interpolated weather variable
+#' @param X A list of interpolated weather variable surfaces.
+#' @param wvar Interpolated weather variable.
 #' @noRd
 .stack_lists <- function(X, wvar) {
   X <- raster::stack(X[seq_along(X)])
@@ -176,14 +176,14 @@ interpolate_GSOD <- function(file_list = NULL,
 #' Called from `.create_stack()`, does the heavy lifting of checking for
 #' outliers and then interpolating the data
 #'
-#' @param GSOD A list of GSOD dataframes `split` by day
-#' @param wvar Weather variable to interpolate
+#' @param GSOD A list of GSOD dataframes `split` by day.
+#' @param wvar Weather variable to interpolate.
 #' @param dem Digital elevation model that has been fetched and processed using
 #' `make_DEM()`.
-#' @param dsn Optional. Directory where resulting GeoTIFF files are to be saved.
-#'
+#' @param dsn A DBIConnection object, as returned by dbConnect().
+#' @param db_name A character string specifying the unquoted DBMS table name. 
 #' @noRd
-.interpolate_raster <- function(GSOD, wvar, dsn, dem) {
+.interpolate_raster <- function(GSOD, wvar, dsn, db_name, dem) {
   # create data frame for individual weather vars for interpolation
   y <-
     data.frame(GSOD["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"],
@@ -209,24 +209,11 @@ interpolate_GSOD <- function(file_list = NULL,
   # interpolate thin plate spline object
   tps_pred <- raster::interpolate(dem, tps_y, xyOnly = FALSE)
 
-  # if a dsn is provided write to local disk, else return in memory
+  # if a dsn is provided write to database, else return in memory
   if (!is.null(dsn)) {
-    # write to disk with "YYYY_YDAY.tiff" as the name
-    raster::writeRaster(
-      tps_pred,
-      filename = paste0(dsn,
-                        "/",
-                        wvar,
-                        "_",
-                        GSOD[1, 5],
-                        "_", GSOD[1, 6],
-                        ".tiff"),
-      format = "CDF",
-      dataType = "INT2S",
-      force_v4 = TRUE,
-      compression = 7,
-      overwrite = TRUE
-    )
+	  # convert the raster object to 
+	  tps_pred <- raster::rasterToPoints(tps_pred)
+	  DBI::dbWriteTable(conn = dsn, name = db_name, value = tps_pred)
   }
   return(tps_pred)
 }

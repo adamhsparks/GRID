@@ -14,20 +14,21 @@ interpolate_GSOD(file_list = NULL, dem = NULL, dsn = NULL,
 \item{dem}{Digital elevation model that has been fetched and processed using
 \code{make_DEM()}.}
 
-\item{dsn}{Optional. Directory where resulting 'NetCDF' files are to be
-saved.}
+\item{dsn}{A DBIConnection object, as returned by dbConnect().}
 
 \item{vars}{Weather variables to interpolate. Possible values are
 \code{TEMP}, \code{MAX}, \code{MIN} and \code{RH}. Defaults to \code{TEMP}.}
+
+\item{db_name}{A character string specifying the unquoted DBMS table name.}
 }
 \value{
-A \code{raster::stack()} of daily interpolated weather variables and optionally
-'NetCDF' files written to local disk.
+A \code{raster::stack()} of daily interpolated weather variables and writes
+values to a MonetDB database.
 }
 \description{
 This function is designed to be wrapped in an \code{base::lapply()}
 function to process multiple years of \acronym{GSOD} data for interpolation,
-though a single year may be used.
+though a single year may be used. Output is written to a MonetDB database.
 }
 \examples{
 \donttest{
