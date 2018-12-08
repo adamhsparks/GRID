@@ -115,4 +115,7 @@ make_GSOD_set <- function(years = NULL, dsn = NULL) {
 
   # write a compressed 'fst' file to disk in the specified location
   fst::write_fst(weather, path = file.path(dsn, fname), 100)
+
+  gsod_files <- list.files(tempdir(), pattern = ".gz$|.tar$", full.names = TRUE)
+  on.exit(unlink(gsod_files, recursive = TRUE))
 }
