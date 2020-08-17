@@ -73,7 +73,7 @@ any variable requested.
 Once the GSOD data are cleaned, thin plate splining, the `Tps()` function, from
  _fields_ is used to create an object that can then be used to create
 an interpolated surface of temperatures using the SRTM DEM with the
-`interpolate()` function from _raster_.
+`interpolate()` function from _terra_.
 
 The data are then returned in a list of raster stacks by weather variable in the
 R session or saved to disk in GeoTIFF file format in an INT2S format with LZW

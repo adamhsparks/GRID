@@ -4,7 +4,7 @@
 \alias{make_GSOD_set}
 \title{Make a Data Set of \acronym{GSOD} Data Suitable for Interpolation}
 \usage{
-make_GSOD_set(years = NULL, dsn = NULL)
+make_GSOD_set(years, dsn = NULL)
 }
 \arguments{
 \item{years}{A numeric vector of years of \acronym{GSOD} data to get for
@@ -51,13 +51,13 @@ Missing = NA;}
 \examples{
 \donttest{
 # Get one year of GSOD data
-gsod_1998 <- make_GSOD_set(years = 1998)
+#gsod_1998 <- make_GSOD_set(years = 1998)
 }
 
 \donttest{
 # Get multiple years of GSOD data and save to disk
-years <- as.list(seq(from = 1983, to = 2017, by = 1))
-lapply(X = years, FUN = make_GSOD_set, dsn = "~/Data/GSOD")
+#years <- as.list(seq(from = 1983, to = 2017, by = 1))
+#lapply(X = years, FUN = make_GSOD_set, dsn = "~/Data/GSOD")
 }
 }
 \references{

@@ -12,7 +12,7 @@ lapply(X = years, FUN = make_GSOD_set, dsn = "/mnt/GSOD")
 # create DEM files
 DEM <- make_DEM(resolution = 0.5, dsn = "/mnt/DEM")
 
-# interpolate the temperature surfaces and save in Monetdb
-GRID <- lapply(X = file_list, FUN = interpolate_GSOD, dem = DEM,
+# interpolate the temperature surfaces and save in `fst`
+GRID <- lapply(X = x, FUN = interpolate_GSOD, dem = DEM,
                dsn = "/mnt/Cache/GTiff", vars = c("MAX", "MIN"))
 

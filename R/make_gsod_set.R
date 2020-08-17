@@ -47,21 +47,23 @@
 #' @examples
 #' \donttest{
 #' # Get one year of GSOD data
-#' gsod_1998 <- make_GSOD_set(years = 1998)
+#' #gsod_1998 <- make_GSOD_set(years = 1998)
 #' }
 #'
 #' \donttest{
 #' # Get multiple years of GSOD data and save to disk
-#' years <- as.list(seq(from = 1983, to = 2017, by = 1))
-#' lapply(X = years, FUN = make_GSOD_set, dsn = "~/Data/GSOD")
+#' #years <- as.list(seq(from = 1983, to = 2017, by = 1))
+#' #lapply(X = years, FUN = make_GSOD_set, dsn = "~/Data/GSOD")
 #' }
 #' @export make_GSOD_set
 
-make_GSOD_set <- function(years = NULL, dsn = NULL) {
+make_GSOD_set <- function(years, dsn = NULL) {
   # check user inputs, see internal_functions.R for these functions
   year_list <- .validate_year(years)
-  dsn <- .validate_dsn(dsn)
 
+  if (!is.null(dsn)) {
+    dsn <- .validate_dsn(dsn)
+  }
   # get GSOD data from NCEI server
   weather <- GSODR::get_GSOD(years = year_list,
                              max_missing = 5,
@@ -83,12 +85,12 @@ make_GSOD_set <- function(years = NULL, dsn = NULL) {
 
   # remove any stations lacking elevation data,
   # they cannot be used in calculations
-  weather <- weather[!is.na(weather$ELEV_M_SRTM_90m),]
+  weather <- weather[!is.na(weather$ELEV_M_SRTM_90m), ]
 
   # create a list of data frames to return
   weather <- split(weather, weather$YEAR)
 
-  # if dsn is specifed write data frames to files, see internal_functions.R
+  # if dsn is specified write data frames to files, see internal_functions.R
   # for .write_gsod()
   if (!is.null(dsn)) {
     future.apply::future_lapply(X =  weather,
@@ -116,6 +118,7 @@ make_GSOD_set <- function(years = NULL, dsn = NULL) {
   # write a compressed 'fst' file to disk in the specified location
   fst::write_fst(weather, path = file.path(dsn, fname), 100)
 
-  gsod_files <- list.files(tempdir(), pattern = ".gz$|.tar$", full.names = TRUE)
+  gsod_files <-
+    list.files(tempdir(), pattern = ".gz$|.tar$", full.names = TRUE)
   on.exit(unlink(gsod_files, recursive = TRUE))
 }

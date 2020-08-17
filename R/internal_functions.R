@@ -57,8 +57,10 @@
 #' @noRd
 .validate_resolution <- function(resolution) {
   if (any(resolution %notin% c(NULL, 0.25, 0.5, 1))) {
-    stop("The resolution you have specified is not valid.\n",
-         "It should be one of: 1, 0.5 or 0.25.")
+    stop(
+      "The resolution you have specified is not valid.\n",
+      "It should be one of: 1, 0.5 or 0.25."
+    )
   } else if (is.null(resolution)) {
     agg <- 6
   } else {

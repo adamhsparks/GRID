@@ -2,49 +2,52 @@
 % Please edit documentation in R/interpolate_gsod.R
 \name{interpolate_GSOD}
 \alias{interpolate_GSOD}
-\title{Interpolate \acronym{GSOD} Data to a Gridded Surface}
+\title{Interpolate GSOD data to a gridded surface}
 \usage{
-interpolate_GSOD(file_list = NULL, dem = NULL, dsn = NULL, vars = NULL)
+interpolate_GSOD(x, dem, dsn, fname, vars = NULL)
 }
 \arguments{
-\item{file_list}{A \code{base::list()} of data frames or \code{fst} files of
-\acronym{GSOD} data created by \code{make_GSOD_set()}.}
+\item{x}{A \code{base::list()} of data frames or \code{fst} files of \acronym{GSOD}
+data created by \code{make_GSOD_set()}.}
 
 \item{dem}{Digital elevation model that has been fetched and processed using
 \code{make_DEM()}.}
 
-\item{dsn}{A DBIConnection object, as returned by dbConnect().}
+\item{dsn}{Optional. A file path where resulting \pkg{fst} files are to be
+saved on local disk. If unspecified a tidy data frame is returned in the
+\R session.}
+
+\item{fname}{Optional. A file name for the data to be saved as a \code{fst::fst()}
+compressed file object on local disk.}
 
 \item{vars}{Weather variables to interpolate. Possible values are
 \code{TEMP}, \code{MAX}, \code{MIN} and \code{RH}. Defaults to \code{TEMP}.}
-
-\item{db_name}{A character string specifying the unquoted DBMS table name.}
 }
 \value{
-A \code{raster::stack()} of daily interpolated weather variables and writes
-values to a MonetDB database.
+A \code{terra::SpatRaster()} of daily interpolated weather variables and
+optionally writes values to a \code{fst::fst()} compressed file.
 }
 \description{
 This function is designed to be wrapped in an \code{base::lapply()}
 function to process multiple years of \acronym{GSOD} data for interpolation,
-though a single year may be used. Output is written to a MonetDB database.
+though a single year may be used. Output is written to a \code{fst::fst} file.
 }
 \examples{
 \donttest{
 # Get and aggregate the raster digital elevation model
-dem <- make_DEM()
+#dem <- make_DEM()
 
 # Create a list of GSOD files
-files <- list.files("~/Data/GSOD", full.names = TRUE)
+#files <- list.files("~/Data/GSOD", full.names = TRUE)
 
 # Run the function for MAX and MIN temperature using parallel processing
-future::plan("multisession")
-GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem,
-		  dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
+#future::plan("multisession")
+#GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem,
+# dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
 
 # Run the function for MAX and MIN temperature using a single core
-future::plan("sequential")
-GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
+#future::plan("sequential")
+#GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
 }
 }
 \author{

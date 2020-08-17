@@ -1,5 +1,5 @@
 
-#' Get and Aggregate a Digital Elevation Model for Use in Interpolating \acronym{GSOD} Data
+#' Get and aggregate a digital elevation model for use in interpolating GSOD data
 #'
 #' Fetches a digital elevation model \acronym{DEM} from 'WorldClim' data, crops
 #' and aggregates to a larger spatial resolution and crops at -60/60 degrees
@@ -16,7 +16,7 @@
 #' \acronym{DEM} exists, it will be overwritten with the new one of the same
 #' resolution. If a new resolution is specified, a new file will be created.
 #'
-#' @return A `raster::raster()` object of a digital elevation model cropped to
+#' @return A `terra::SpatRaster()` object of a digital elevation model cropped to
 #' -60/60 degrees latitude and aggregated by the requested factor and optionally
 #' a data file written to local disk as a GeoTIFF object.
 #'
@@ -26,14 +26,13 @@
 #'
 #' \donttest{
 #' # Get DEM and aggregate to 0.5 arc degree, saving it to a local "~/Data/DEM"
-#' directory.
+#' # directory.
 #'
-#' DEM <- make_DEM(dsn = "~/Data/DEM")
+#' #DEM <- make_DEM(dsn = "~/Data/DEM")
 #' }
 #' @export make_DEM
 
 make_DEM <- function(resolution = NULL, dsn = NULL) {
-
   dsn <- if (!is.null(dsn)) {
     .validate_dsn(dsn)
   }
@@ -50,28 +49,26 @@ make_DEM <- function(resolution = NULL, dsn = NULL) {
   )
   utils::unzip(tf.zip, exdir = tempdir()) # unzip downloaded file
   z <-
-    raster::raster(paste0(tempdir(), "/alt.bil"))
-  raster::dataType(z) <- "INT2S"
+    terra::rast(paste0(tempdir(), "/alt.bil"))
 
   # crop SRTM data at -60/60 for agroclimatology only
-  z <- raster::crop(z,
-                    c(
-                      xmin = -180,
-                      xmax = 180,
-                      ymin = -60,
-                      ymax = 60
-                    )
-  )
+  z <- terra::crop(z,
+                   c(
+                     xmin = -180,
+                     xmax = 180,
+                     ymin = -60,
+                     ymax = 60
+                   ))
 
   # aggregate the SRTM data
-  z <- raster::aggregate(z, fact = agg)
+  z <- terra::aggregate(z, fact = agg)
 
   # set -9999 to NA
   z[z == -9999] <- NA
 
   # if dsn is specified, write a raster file to disk
   if (!is.null(dsn)) {
-    raster::writeRaster(
+    terra::writeRaster(
       z,
       filename = paste0(dsn, "/", "SRTM_DEM_", resolution, ".tiff"),
       format = "GTiff",

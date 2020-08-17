@@ -23,8 +23,8 @@ Imports:
     future.apply,
     grDevices,
     GSODR,
-    raster,
     stats,
+    terra,
     utils
 Suggests:
     covr,

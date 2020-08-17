@@ -1,62 +1,67 @@
 
-#' Interpolate \acronym{GSOD} Data to a Gridded Surface
+#' Interpolate GSOD data to a gridded surface
 #'
 #' This function is designed to be wrapped in an `base::lapply()`
 #' function to process multiple years of \acronym{GSOD} data for interpolation,
-#' though a single year may be used. Output is written to a MonetDB database.
+#' though a single year may be used. Output is written to a `fst::fst` file.
 #'
-#' @param file_list A `base::list()` of data frames or `fst` files of
-#' \acronym{GSOD} data created by `make_GSOD_set()`.
+#' @param x A `base::list()` of data frames or `fst` files of \acronym{GSOD}
+#'  data created by `make_GSOD_set()`.
 #' @param dem Digital elevation model that has been fetched and processed using
 #' `make_DEM()`.
-#' @param dsn A DBIConnection object, as returned by dbConnect().
-#' @param db_name A character string specifying the unquoted DBMS table name.
+#' @param dsn Optional. A file path where resulting \pkg{fst} files are to be
+#' saved on local disk. If unspecified a tidy data frame is returned in the
+#' \R session.
+#' @param fname Optional. A file name for the data to be saved as a `fst::fst()`
+#' compressed file object on local disk.
 #' @param vars Weather variables to interpolate. Possible values are
 #' `TEMP`, `MAX`, `MIN` and `RH`. Defaults to `TEMP`.
 #'
 #' @return
-#' A `raster::stack()` of daily interpolated weather variables and writes
-#' values to a MonetDB database.
+#' A `terra::SpatRaster()` of daily interpolated weather variables and
+#' optionally writes values to a `fst::fst()` compressed file.
 #'
 #' @author \email{adamhsparks@@gmail.com}
 #'
 #' @examples
 #' \donttest{
 #' # Get and aggregate the raster digital elevation model
-#' dem <- make_DEM()
+#' #dem <- make_DEM()
 #'
 #' # Create a list of GSOD files
-#' files <- list.files("~/Data/GSOD", full.names = TRUE)
+#' #files <- list.files("~/Data/GSOD", full.names = TRUE)
 #'
 #' # Run the function for MAX and MIN temperature using parallel processing
-#' future::plan("multisession")
-#' GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem,
-#' 		  dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
+#' #future::plan("multisession")
+#' #GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem,
+#' # dsn = "~/Cache/GTiff", vars = c("MAX", "MIN"))
 #'
 #' # Run the function for MAX and MIN temperature using a single core
-#' future::plan("sequential")
-#' GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
+#' #future::plan("sequential")
+#' #GRID <- lapply(X = files, FUN = interpolate_GSOD, dem = dem, vars = "MAX")
 #' }
 #' @export interpolate_GSOD
 
-interpolate_GSOD <- function(file_list = NULL,
-                             dem = NULL,
-                             dsn = NULL,
+interpolate_GSOD <- function(x,
+                             dem,
+                             dsn,
+                             fname,
                              vars = NULL) {
-  # validate user inputs, see `internal_functions.R` for these
+  # validate user inputs, see `internal_functions.R` or below for these
   dsn <- .validate_dsn(dsn)
   vars <- .validate_vars(vars)
-  file_list <- .validate_files(file_list)
+  if (class(x[1]) != c("data.table", "data.frame")) {
+    x <- .validate_x(x)
+    # Import GSOD data
+    x <-
+      fst::read_fst(x)
+  }
 
   # CRAN note avoidance
   MAX <- MIN <- RH <- NULL
 
-  # Import GSOD data
-  GSOD <-
-    fst::read_fst(file_list)
-
   # Create a list of data frames by YDAY
-  GSOD <- split(GSOD, as.factor(GSOD$YDAY))
+  GSOD <- split(x, as.factor(x$YDAY))
 
   # Apply function for each `wvar` that is specified
   if ("TEMP" %in% vars) {
@@ -109,20 +114,22 @@ interpolate_GSOD <- function(file_list = NULL,
   out <- out[unlist(lapply(out, length) != 0)]
 
   # create final stack of vars
-  out <- raster::stack(out)
+  out <- c(out)
 
   # assign GSOD_YYYY to list objects before returning list
   out <- stats::setNames(out,
-                         paste0(substr(file_list,
-                                       nchar(file_list) - 13 + 1,
-                                       nchar(file_list) - 5 + 1),
-                                "_",
-                                names(out)))
+                         paste0(substr(
+                           x,
+                           nchar(x) - 13 + 1,
+                           nchar(x) - 5 + 1
+                         ),
+                         "_",
+                         names(out)))
 
   return(out)
 }
 
-#' Create a Raster Stack Object of Weather Variables
+#' Create a terra SpatRaster object of weather variables
 #'
 #' Creates raster stacks of weather variables
 #'
@@ -135,7 +142,6 @@ interpolate_GSOD <- function(file_list = NULL,
 #'
 #' @noRd
 .create_stack <- function(GSOD, wvar, dem, dsn) {
-
   Y <- future.apply::future_lapply(
     X = GSOD,
     FUN = .interpolate_raster,
@@ -147,7 +153,7 @@ interpolate_GSOD <- function(file_list = NULL,
   return(Y)
 }
 
-#' Create a Stack From Lists of Raster Objects
+#' Create a stack from lists of terra SpatRaster class objects
 #'
 #' Called from `.create_stack()` at the end of the function to create a raster
 #' stack of layers from lists resulting from using `future_lapply()`
@@ -156,17 +162,17 @@ interpolate_GSOD <- function(file_list = NULL,
 #' @param wvar Interpolated weather variable.
 #' @noRd
 .stack_lists <- function(X, wvar) {
-  X <- raster::stack(X[seq_along(X)])
+  X <- c(X[seq_along(X)])
   X <- stats::setNames(X,
-                       paste0(wvar, "_", 1:raster::nlayers(X)))
+                       paste0(wvar, "_", 1:terra::nlyr(X)))
 }
 
 #' @noRd
-.validate_files <- function(file_list) {
-  if (is.null(file_list)) {
-    stop("You must supply a list of GSOD data files for interpolation")
-  } else if (typeof(file_list[[1]]) == "character") {
-    file_list <- file_list
+.validate_x <- function(x) {
+  if (is.null(x)) {
+    stop("You must supply a list of GSOD data files or objects for interpolation")
+  } else if (typeof(x[[1]]) == "character") {
+    x <- x
   }
 }
 
@@ -180,10 +186,11 @@ interpolate_GSOD <- function(file_list = NULL,
 #' @param wvar Weather variable to interpolate.
 #' @param dem Digital elevation model that has been fetched and processed using
 #' `make_DEM()`.
-#' @param dsn A DBIConnection object, as returned by dbConnect().
-#' @param db_name A character string specifying the unquoted DBMS table name. 
+#' @param dsn Optional. A filepath where resulting \pkg{fst} files are to be
+#' saved on local disk. If unspecified a tidy data frame is returned in the
+#' \R session.
 #' @noRd
-.interpolate_raster <- function(GSOD, wvar, dsn, db_name, dem) {
+.interpolate_raster <- function(GSOD, wvar, dsn, fname, dem) {
   # create data frame for individual weather vars for interpolation
   y <-
     data.frame(GSOD["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"],
@@ -207,13 +214,13 @@ interpolate_GSOD <- function(file_list = NULL,
                 y_vals, lon.lat = TRUE)
 
   # interpolate thin plate spline object
-  tps_pred <- raster::interpolate(dem, tps_y, xyOnly = FALSE)
+  tps_pred <- terra::interpolate(dem, tps_y, xyOnly = FALSE)
 
-  # if a dsn is provided write to database, else return in memory
+  # if a dsn is provided write to database as numeric values, else return in memory
   if (!is.null(dsn)) {
-	  # convert the raster object to 
-	  tps_pred <- raster::rasterToPoints(tps_pred)
-	  DBI::dbWriteTable(conn = dsn, name = db_name, value = tps_pred)
+    # convert the raster object to point values
+    tps_pred <- terra::as.points(tps_pred)
+    fst::write_fst(tps_pred, path = file.path(dsn, fname), 100)
   }
   return(tps_pred)
 }

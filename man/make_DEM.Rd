@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_dem.R
 \name{make_DEM}
 \alias{make_DEM}
-\title{Get and Aggregate a Digital Elevation Model for Use in Interpolating \acronym{GSOD} Data}
+\title{Get and aggregate a digital elevation model for use in interpolating GSOD data}
 \usage{
 make_DEM(resolution = NULL, dsn = NULL)
 }
@@ -18,7 +18,7 @@ saved. If unspecified a spatial object is returned in the R session. If a
 resolution. If a new resolution is specified, a new file will be created.}
 }
 \value{
-A \code{raster::raster()} object of a digital elevation model cropped to
+A \code{terra::SpatRaster()} object of a digital elevation model cropped to
 -60/60 degrees latitude and aggregated by the requested factor and optionally
 a data file written to local disk as a GeoTIFF object.
 }
@@ -33,9 +33,9 @@ arc degrees. Mainly for use in crop modelling exercises.
 
 \donttest{
 # Get DEM and aggregate to 0.5 arc degree, saving it to a local "~/Data/DEM"
-directory.
+# directory.
 
-DEM <- make_DEM(dsn = "~/Data/DEM")
+#DEM <- make_DEM(dsn = "~/Data/DEM")
 }
 }
 \author{
