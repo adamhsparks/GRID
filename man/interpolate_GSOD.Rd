@@ -4,7 +4,7 @@
 \alias{interpolate_GSOD}
 \title{Interpolate GSOD data to a gridded surface}
 \usage{
-interpolate_GSOD(x, dem, dsn, fname, vars = NULL)
+interpolate_GSOD(x, dem, dsn = NULL, fname, vars = NULL, dates = NULL)
 }
 \arguments{
 \item{x}{A \code{base::list()} of data frames or \code{fst} files of \acronym{GSOD}
@@ -22,6 +22,12 @@ compressed file object on local disk.}
 
 \item{vars}{Weather variables to interpolate. Possible values are
 \code{TEMP}, \code{MAX}, \code{MIN} and \code{RH}. Defaults to \code{TEMP}.}
+
+\item{dates}{Optional. A vector of dates to optionally filter and
+interpolate. If left \code{NULL}, the default, all days of the year are
+interpolated and returned. Values should be entered as a complete
+date in ISO 8601 format, \emph{e.g.} \verb{"2017-07-15} or a vector, \emph{e.g.}
+\code{c("2017-07-15", "2017-05-01", "2017-02-15")}.}
 }
 \value{
 A \code{terra::SpatRaster()} of daily interpolated weather variables and

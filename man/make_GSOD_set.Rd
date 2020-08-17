@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_gsod_set.R
 \name{make_GSOD_set}
 \alias{make_GSOD_set}
-\title{Make a Data Set of \acronym{GSOD} Data Suitable for Interpolation}
+\title{Make a data set of GSOD data suitable for interpolation}
 \usage{
 make_GSOD_set(years, dsn = NULL)
 }

@@ -18,9 +18,9 @@ saved. If unspecified a spatial object is returned in the R session. If a
 resolution. If a new resolution is specified, a new file will be created.}
 }
 \value{
-A \code{terra::SpatRaster()} object of a digital elevation model cropped to
--60/60 degrees latitude and aggregated by the requested factor and optionally
-a data file written to local disk as a GeoTIFF object.
+A \code{terra::SpatRaster()} object of a digital elevation model cropped
+to -60/60 degrees latitude and aggregated by the requested factor and
+optionally a data file written to local disk as a GeoTIFF object.
 }
 \description{
 Fetches a digital elevation model \acronym{DEM} from 'WorldClim' data, crops
