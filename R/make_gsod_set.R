@@ -1,5 +1,5 @@
 
-#' Make a Data Set of \acronym{GSOD} Data Suitable for Interpolation
+#' Make a data set of GSOD data suitable for interpolation
 #'
 #' This function can be wrapped in an `base::lapply()` function to
 #' retrieve and save multiple years of \acronym{GSOD} data for interpolation,
@@ -61,10 +61,9 @@ make_GSOD_set <- function(years, dsn = NULL) {
   # check user inputs, see internal_functions.R for these functions
   year_list <- .validate_year(years)
 
-  if (!is.null(dsn)) {
-    dsn <- .validate_dsn(dsn)
-  }
-  # get GSOD data from NCEI server
+  dsn <- .validate_dsn(dsn)
+
+    # get GSOD data from NCEI server
   weather <- GSODR::get_GSOD(years = year_list,
                              max_missing = 5,
                              agroclimatology = TRUE)
@@ -73,9 +72,9 @@ make_GSOD_set <- function(years, dsn = NULL) {
   # this saves more than 1/2 the space of the full original data in storage
   weather <-
     weather[, c("STNID",
-                "LON",
-                "LAT",
-                "ELEV_M_SRTM_90m",
+                "LONGITUDE",
+                "LATITUDE",
+                "ELEVATION",
                 "YEAR",
                 "YDAY",
                 "TEMP",
@@ -85,7 +84,7 @@ make_GSOD_set <- function(years, dsn = NULL) {
 
   # remove any stations lacking elevation data,
   # they cannot be used in calculations
-  weather <- weather[!is.na(weather$ELEV_M_SRTM_90m), ]
+  weather <- weather[!is.na(weather$ELEVATION), ]
 
   # create a list of data frames to return
   weather <- split(weather, weather$YEAR)
@@ -113,7 +112,7 @@ make_GSOD_set <- function(years, dsn = NULL) {
   YEAR <- weather$YEAR[1]
 
   # create file name
-  fname <- paste0("GSOD_", YEAR)
+  fname <- paste0("GSOD_", YEAR, ".fst")
 
   # write a compressed 'fst' file to disk in the specified location
   fst::write_fst(weather, path = file.path(dsn, fname), 100)
