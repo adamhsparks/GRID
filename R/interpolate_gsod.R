@@ -16,6 +16,11 @@
 #' compressed file object on local disk.
 #' @param vars Weather variables to interpolate. Possible values are
 #' `TEMP`, `MAX`, `MIN` and `RH`. Defaults to `TEMP`.
+#' @param dates Optional. A vector of dates to optionally filter and
+#'  interpolate. If left `NULL`, the default, all days of the year are
+#'  interpolated and returned. Values should be entered as a complete
+#'  date in ISO 8601 format, *e.g.* `"2017-07-15` or a vector, *e.g.*
+#'  `c("2017-07-15", "2017-05-01", "2017-02-15")`.
 #'
 #' @return
 #' A `terra::SpatRaster()` of daily interpolated weather variables and
@@ -44,24 +49,35 @@
 
 interpolate_GSOD <- function(x,
                              dem,
-                             dsn,
+                             dsn = NULL,
                              fname,
-                             vars = NULL) {
+                             vars = NULL,
+                             dates = NULL) {
   # validate user inputs, see `internal_functions.R` or below for these
   dsn <- .validate_dsn(dsn)
   vars <- .validate_vars(vars)
-  if (class(x[1]) != c("data.table", "data.frame")) {
+  dates <- .validate_dates(dates)
+
+  # if x is a list of files then validate and import
+  if (is.character(x[[1]])) {
     x <- .validate_x(x)
     # Import GSOD data
     x <-
-      fst::read_fst(x)
+      fst::read_fst(x, as.data.table = TRUE)
   }
 
   # CRAN note avoidance
   MAX <- MIN <- RH <- NULL
 
+  if (!is.null(dates)) {
+    x <- subset(x, YDAY %in% dates)
+  }
+
+  # If we have a full data.frame of all days.
   # Create a list of data frames by YDAY
-  GSOD <- split(x, as.factor(x$YDAY))
+  if (unique(x$YDAY > 1)) {
+    GSOD <- split(x, as.factor(x$YDAY))
+  }
 
   # Apply function for each `wvar` that is specified
   if ("TEMP" %in% vars) {
@@ -118,13 +134,11 @@ interpolate_GSOD <- function(x,
 
   # assign GSOD_YYYY to list objects before returning list
   out <- stats::setNames(out,
-                         paste0(substr(
-                           x,
-                           nchar(x) - 13 + 1,
-                           nchar(x) - 5 + 1
-                         ),
-                         "_",
-                         names(out)))
+                         paste0(substr(x,
+                                       nchar(x) - 13 + 1,
+                                       nchar(x) - 5 + 1),
+                                "_",
+                                names(out)))
 
   return(out)
 }
@@ -176,6 +190,44 @@ interpolate_GSOD <- function(x,
   }
 }
 
+#' @noRd
+.validate_dates <- function(dates) {
+  if (!is.null(dates)) {
+    # I stole this from my own nasapower package #
+    dates <- as.list(dates)
+
+    # check dates as entered by user
+    date_format <- function(x) {
+      tryCatch(
+        # try to parse the date format using lubridate
+        x <- lubridate::parse_date_time(x,
+                                        c(
+                                          "Ymd",
+                                          "dmY",
+                                          "mdY",
+                                          "BdY",
+                                          "Bdy",
+                                          "bdY",
+                                          "bdy"
+                                        )),
+        warning = function(c) {
+          stop(call. = FALSE,
+               "\n",
+               x,
+               " is not a valid entry for date. Enter as YYYY-MM-DD.\n")
+        }
+      )
+      as.Date(x)
+      x <- format(x, "%j")
+      return(x)
+    }
+
+    # apply function to reformat/check dates
+    dates <- lapply(X = dates, FUN = date_format)
+    dates <- unlist(lapply(dates, as.numeric))
+  }
+  # end stealing
+}
 
 #' Create an Interpolated Surface of a Weather Variable
 #'
@@ -202,7 +254,7 @@ interpolate_GSOD <- function(x,
 
   # remove outliers
   bxs <- grDevices::boxplot.stats(y[, 4])
-  y <- y[!y[, 4] %in% bxs$out,]
+  y <- y[!y[, 4] %in% bxs$out, ]
 
   # create interpolation data set
   y_vals <- y[, 4]
@@ -216,7 +268,8 @@ interpolate_GSOD <- function(x,
   # interpolate thin plate spline object
   tps_pred <- terra::interpolate(dem, tps_y, xyOnly = FALSE)
 
-  # if a dsn is provided write to database as numeric values, else return in memory
+  # if a dsn is provided write to database as numeric values, else return
+  # in-memory
   if (!is.null(dsn)) {
     # convert the raster object to point values
     tps_pred <- terra::as.points(tps_pred)
