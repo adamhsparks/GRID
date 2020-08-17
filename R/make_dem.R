@@ -16,9 +16,9 @@
 #' \acronym{DEM} exists, it will be overwritten with the new one of the same
 #' resolution. If a new resolution is specified, a new file will be created.
 #'
-#' @return A `terra::SpatRaster()` object of a digital elevation model cropped to
-#' -60/60 degrees latitude and aggregated by the requested factor and optionally
-#' a data file written to local disk as a GeoTIFF object.
+#' @return A `terra::SpatRaster()` object of a digital elevation model cropped
+#' to -60/60 degrees latitude and aggregated by the requested factor and
+#' optionally a data file written to local disk as a GeoTIFF object.
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #'
@@ -33,9 +33,7 @@
 #' @export make_DEM
 
 make_DEM <- function(resolution = NULL, dsn = NULL) {
-  dsn <- if (!is.null(dsn)) {
-    .validate_dsn(dsn)
-  }
+  dsn <- .validate_dsn(dsn)
 
   agg <- .validate_resolution(resolution)
 
