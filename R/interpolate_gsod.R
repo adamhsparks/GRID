@@ -70,7 +70,7 @@ interpolate_GSOD <- function(x,
   }
 
   # CRAN note avoidance
-  MAX <- MIN <- RH <- NULL
+  MAX <- MIN <- RH <- YDAY <- NULL
 
   if (!is.null(dates)) {
     x <- subset(x, YDAY %in% dates)
