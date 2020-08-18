@@ -185,15 +185,6 @@ interpolate_GSOD <- function(x,
 }
 
 #' @noRd
-.validate_x <- function(x) {
-  if (is.null(x)) {
-    stop("You must supply a list of GSOD data files or objects for interpolation")
-  } else if (typeof(x[[1]]) == "character") {
-    x <- x
-  }
-}
-
-#' @noRd
 .validate_dates <- function(dates) {
   if (!is.null(dates)) {
     # I stole this from my own nasapower package #
