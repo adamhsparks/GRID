@@ -10,3 +10,6 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^\.Rprofile$
+^\.ccache$
+^\.github$
+^tic\.R$
