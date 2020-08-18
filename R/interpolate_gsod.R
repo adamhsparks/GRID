@@ -54,14 +54,17 @@ interpolate_GSOD <- function(x,
                              vars = NULL,
                              dates = NULL) {
   # validate user inputs, see `internal_functions.R` or below for these
-  dsn <- .validate_dsn(dsn)
+
   vars <- .validate_vars(vars)
   dates <- .validate_dates(dates)
 
   # if x is a list of files then validate and import
-  if (is.character(x[[1]])) {
-    x <- .validate_x(x)
-    # Import GSOD data
+  if (is.null(x)) {
+    stop("You must supply a list of GSOD data files or objects for interpolation")
+  }
+
+  # if x is not a set of in-memory objects, import the fst files
+  if (is.character(x)) {
     x <-
       fst::read_fst(x, as.data.table = TRUE)
   }
