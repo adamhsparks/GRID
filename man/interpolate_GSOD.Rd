@@ -2,7 +2,7 @@
 % Please edit documentation in R/interpolate_gsod.R
 \name{interpolate_GSOD}
 \alias{interpolate_GSOD}
-\title{Interpolate GSOD data to a gridded surface}
+\title{Interpolate GSOD data to a daily gridded surface}
 \usage{
 interpolate_GSOD(x, dem, dsn = NULL, fname, vars = NULL, dates = NULL)
 }
@@ -11,7 +11,7 @@ interpolate_GSOD(x, dem, dsn = NULL, fname, vars = NULL, dates = NULL)
 data created by \code{make_GSOD_set()}.}
 
 \item{dem}{Digital elevation model that has been fetched and processed using
-\code{make_DEM()}.}
+\code{glint::make_DEM()}.}
 
 \item{dsn}{Optional. A file path where resulting \pkg{fst} files are to be
 saved on local disk. If unspecified a tidy data frame is returned in the
@@ -24,8 +24,8 @@ compressed file object on local disk.}
 \code{TEMP}, \code{MAX}, \code{MIN} and \code{RH}. Defaults to \code{TEMP}.}
 
 \item{dates}{Optional. A vector of dates to optionally filter and
-interpolate. If left \code{NULL}, the default, all days of the year are
-interpolated and returned. Values should be entered as a complete
+interpolate. If left \code{NULL}, the default, all days of the specified year(s)
+are interpolated and returned. Values should be entered as a complete
 date in ISO 8601 format, \emph{e.g.} \verb{"2017-07-15} or a vector, \emph{e.g.}
 \code{c("2017-07-15", "2017-05-01", "2017-02-15")}.}
 }

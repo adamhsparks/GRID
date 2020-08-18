@@ -10,7 +10,7 @@ make_GSOD_set(years, dsn = NULL)
 \item{years}{A numeric vector of years of \acronym{GSOD} data to get for
 interpolation.  Defaults to current year.}
 
-\item{dsn}{Optional. A filepath where resulting \pkg{fst} files are to be
+\item{dsn}{Optional. A file path where resulting \pkg{fst} files are to be
 saved on local disk. If unspecified a tidy data frame is returned in the
 \R session.}
 }
@@ -33,11 +33,9 @@ degrees latitude.
 \describe{
 \item{STNID}{A unique station id number that can be used to identify the
 station and link with \pkg{GSODR} data for station metadata.}
-\item{LON}{Longitude in decimal degrees.}
-\item{LAT}{Latitude in decimal degrees.}
-\item{ELEV_M_SRTM_90m}{Elevation in metres corrected for possible errors,
-derived from the \acronym{CGIAR-CSI} \acronym{SRTM} 90 m database (Jarvis et
-al. 2008).}
+\item{LONGITUDE}{Longitude in decimal degrees.}
+\item{LATITUDE}{Latitude in decimal degrees.}
+\item{ELEVATION}{Elevation in metres.}
 \item{YEAR}{The year (YYYY).}
 \item{YDAY}{Sequential day of year.}
 \item{TEMP}{Mean daily temperature in degrees C to tenths. Missing = NA.}
@@ -59,11 +57,6 @@ Missing = NA;}
 #years <- as.list(seq(from = 1983, to = 2017, by = 1))
 #lapply(X = years, FUN = make_GSOD_set, dsn = "~/Data/GSOD")
 }
-}
-\references{
-Jarvis, A., Reuter, H. I., Nelson, A., Guevara, E. (2008)
-Hole-filled SRTM for the globe Version 4, available from the CGIAR-CSI SRTM
-90m Database (\url{http://srtm.csi.cgiar.org})
 }
 \author{
 Adam H. Sparks, \email{adamhsparks@gmail.com}
