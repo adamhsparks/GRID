@@ -228,35 +228,35 @@ interpolate_GSOD <- function(x,
 #' Called from `.create_stack()`, does the heavy lifting of checking for
 #' outliers and then interpolating the data
 #'
-#' @param GSOD A list of GSOD dataframes `split` by day.
+#' @param GSOD A list of GSOD data frames `split` by day.
 #' @param wvar Weather variable to interpolate.
 #' @param dem Digital elevation model that has been fetched and processed using
 #' `make_DEM()`.
-#' @param dsn Optional. A filepath where resulting \pkg{fst} files are to be
+#' @param dsn Optional. A file path where resulting \pkg{fst} files are to be
 #' saved on local disk. If unspecified a tidy data frame is returned in the
 #' \R session.
 #' @noRd
 .interpolate_raster <- function(GSOD, wvar, dsn, fname, dem) {
+
   # create data frame for individual weather vars for interpolation
-  y <-
-    data.frame(GSOD["LON"], GSOD["LAT"], GSOD["ELEV_M_SRTM_90m"],
-               GSOD[wvar])
+  columns <- c("LONGITUDE", "LATITUDE", "ELEVATION", wvar)
+  y <- GSOD[, columns, with = FALSE]
 
   # remove any NA values from the data, the interpolation will not work with
   # any NAs present for any field.
   y <- stats::na.omit(y)
 
   # remove outliers
-  bxs <- grDevices::boxplot.stats(y[, 4])
-  y <- y[!y[, 4] %in% bxs$out, ]
+  bxs <- grDevices::boxplot.stats(unlist(y[, wvar, with = FALSE]))
+  y <- y[!y[, wvar, with = FALSE] %in% bxs$out,]
 
   # create interpolation data set
-  y_vals <- y[, 4]
+  y_vals <- y[, wvar, with = FALSE]
   names(y_vals) <- NULL
 
   # create thin plate spline object
   tps_y <-
-    fields::Tps(y[, c("LON", "LAT", "ELEV_M_SRTM_90m")],
+    fields::Tps(y[, c("LONGITUDE", "LATITUDE", "ELEVATION")],
                 y_vals, lon.lat = TRUE)
 
   # interpolate thin plate spline object
