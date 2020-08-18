@@ -23,6 +23,7 @@ Imports:
     future.apply,
     grDevices,
     GSODR,
+    lubridate,
     stats,
     terra,
     utils
