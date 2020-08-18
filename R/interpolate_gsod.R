@@ -1,5 +1,5 @@
 
-#' Interpolate GSOD data to a gridded surface
+#' Interpolate GSOD data to a daily gridded surface
 #'
 #' This function is designed to be wrapped in an `base::lapply()`
 #' function to process multiple years of \acronym{GSOD} data for interpolation,
@@ -8,7 +8,7 @@
 #' @param x A `base::list()` of data frames or `fst` files of \acronym{GSOD}
 #'  data created by `make_GSOD_set()`.
 #' @param dem Digital elevation model that has been fetched and processed using
-#' `make_DEM()`.
+#' `glint::make_DEM()`.
 #' @param dsn Optional. A file path where resulting \pkg{fst} files are to be
 #' saved on local disk. If unspecified a tidy data frame is returned in the
 #' \R session.
@@ -17,8 +17,8 @@
 #' @param vars Weather variables to interpolate. Possible values are
 #' `TEMP`, `MAX`, `MIN` and `RH`. Defaults to `TEMP`.
 #' @param dates Optional. A vector of dates to optionally filter and
-#'  interpolate. If left `NULL`, the default, all days of the year are
-#'  interpolated and returned. Values should be entered as a complete
+#'  interpolate. If left `NULL`, the default, all days of the specified year(s)
+#'  are interpolated and returned. Values should be entered as a complete
 #'  date in ISO 8601 format, *e.g.* `"2017-07-15` or a vector, *e.g.*
 #'  `c("2017-07-15", "2017-05-01", "2017-02-15")`.
 #'
